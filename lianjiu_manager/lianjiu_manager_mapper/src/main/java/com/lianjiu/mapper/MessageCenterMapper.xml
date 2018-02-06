@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.MessageCenterMapper">
+	<resultMap id="messageCenterResultMap" type="com.lianjiu.model.MessageCenter">
+		<id column="message_id" property="messageId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="message_content" property="messageContent"
+			jdbcType="VARCHAR" />
+		<result column="message_status" property="messageStatus"
+			jdbcType="TINYINT" />
+		<result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+		<result column="message_cretaed" property="messageCretaed"
+			jdbcType="TIMESTAMP" />
+		<result column="message_updated" property="messageUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="remarks" property="remarks" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="messageCenterResultMap"
+		parameterType="java.lang.String">select * from message_center where message_id =
+		#{messageId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from message_center
+		where message_id = #{messageId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.MessageCenter">
+		insert into message_center (message_id, user_id, message_content,
+		message_status, category_id, message_cretaed,
+		message_updated, remarks)
+		values (#{messageId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{messageContent,jdbcType=VARCHAR},
+		#{messageStatus,jdbcType=TINYINT}, #{categoryId,jdbcType=VARCHAR}, #{messageCretaed,jdbcType=TIMESTAMP},
+		#{messageUpdated,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.MessageCenter">
+		insert into message_center
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="messageId != null">
+				message_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="messageContent != null">
+				message_content,
+			</if>
+			<if test="messageStatus != null">
+				message_status,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="messageCretaed != null">
+				message_cretaed,
+			</if>
+			<if test="messageUpdated != null">
+				message_updated,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="messageId != null">
+				#{messageId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="messageContent != null">
+				#{messageContent,jdbcType=VARCHAR},
+			</if>
+			<if test="messageStatus != null">
+				#{messageStatus,jdbcType=TINYINT},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=VARCHAR},
+			</if>
+			<if test="messageCretaed != null">
+				#{messageCretaed,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messageUpdated != null">
+				#{messageUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.MessageCenter">
+		update message_center
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="messageContent != null">
+				message_content = #{messageContent,jdbcType=VARCHAR},
+			</if>
+			<if test="messageStatus != null">
+				message_status = #{messageStatus,jdbcType=TINYINT},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=VARCHAR},
+			</if>
+			<if test="messageCretaed != null">
+				message_cretaed = #{messageCretaed,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messageUpdated != null">
+				message_updated = #{messageUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where message_id = #{messageId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.MessageCenter">
+		update message_center
+		set user_id = #{userId,jdbcType=VARCHAR},
+		message_content = #{messageContent,jdbcType=VARCHAR},
+		message_status = #{messageStatus,jdbcType=TINYINT},
+		category_id = #{categoryId,jdbcType=VARCHAR},
+		message_cretaed = #{messageCretaed,jdbcType=TIMESTAMP},
+		message_updated = #{messageUpdated,jdbcType=TIMESTAMP},
+		remarks = #{remarks,jdbcType=VARCHAR}
+		where message_id = #{messageId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND message_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.messageId != null">AND message_id =#{model.messageId}</if>
+				<if test="model.userId != null">AND user_id =#{model.userId}</if>
+				<if test="model.messageContent != null">AND message_content =#{model.messageContent}</if>
+				<if test="model.messageStatus != null">AND message_status =#{model.messageStatus}</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.messageCretaed != null">AND message_cretaed =#{model.messageCretaed}</if>
+				<if test="model.messageUpdated != null">AND message_updated =#{model.messageUpdated}</if>
+				<if test="model.remarks != null">AND remarks =#{model.remarks}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="messageCenterResultMap">
+		select * from message_center
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.SysUserMapper">
+	<!--重映射 -->
+	<resultMap id="sysUserResultMap" type="com.lianjiu.model.SysUser">
+		<id column="sysuser_id" property="sysuserId" jdbcType="VARCHAR" />
+		<result column="sysuser_password" property="sysuserPassword"
+			jdbcType="VARCHAR" />
+		<result column="sysuser_phone" property="sysuserPhone"
+			jdbcType="INTEGER" />
+		<result column="sysuser_name" property="sysuserName" jdbcType="VARCHAR" />
+		<result column="sysuser_type" property="sysuserType" jdbcType="VARCHAR" />
+		<result column="sysuser_login_ip" property="sysuserLoginIp"
+			jdbcType="VARCHAR" />
+		<result column="sysuser_officeId" property="sysuserOfficeid"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!--通过主键删除所有 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		sys_user
+		where sysuser_id = #{sysuserId,jdbcType=VARCHAR}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.SysUser">
+		insert into sys_user
+		(sysuser_id, sysuser_password, sysuser_phone,
+		sysuser_name,
+		sysuser_type, sysuser_login_ip,
+		sysuser_officeId)
+		values
+		(#{sysuserId,jdbcType=VARCHAR}, #{sysuserPassword,jdbcType=VARCHAR},
+		#{sysuserPhone,jdbcType=INTEGER},
+		#{sysuserName,jdbcType=VARCHAR},
+		#{sysuserType,jdbcType=VARCHAR}, #{sysuserLoginIp,jdbcType=VARCHAR},
+		#{sysuserOfficeid,jdbcType=VARCHAR})
+	</insert>
+	<!--条件插入 -->
+	<insert id="insertSelective" parameterType="com.lianjiu.model.SysUser">
+		insert into sys_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sysuserId != null">
+				sysuser_id,
+			</if>
+			<if test="sysuserPassword != null">
+				sysuser_password,
+			</if>
+			<if test="sysuserPhone != null">
+				sysuser_phone,
+			</if>
+			<if test="sysuserName != null">
+				sysuser_name,
+			</if>
+			<if test="sysuserType != null">
+				sysuser_type,
+			</if>
+			<if test="sysuserLoginIp != null">
+				sysuser_login_ip,
+			</if>
+			<if test="sysuserOfficeid != null">
+				sysuser_officeId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sysuserId != null">
+				#{sysuserId,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserPassword != null">
+				#{sysuserPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserPhone != null">
+				#{sysuserPhone,jdbcType=INTEGER},
+			</if>
+			<if test="sysuserName != null">
+				#{sysuserName,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserType != null">
+				#{sysuserType,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserLoginIp != null">
+				#{sysuserLoginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserOfficeid != null">
+				#{sysuserOfficeid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!--通过主键条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.SysUser">
+		update sys_user
+		<set>
+			<if test="sysuserPassword != null">
+				sysuser_password = #{sysuserPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserPhone != null">
+				sysuser_phone = #{sysuserPhone,jdbcType=INTEGER},
+			</if>
+			<if test="sysuserName != null">
+				sysuser_name = #{sysuserName,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserType != null">
+				sysuser_type = #{sysuserType,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserLoginIp != null">
+				sysuser_login_ip = #{sysuserLoginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="sysuserOfficeid != null">
+				sysuser_officeId = #{sysuserOfficeid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sysuser_id = #{sysuserId,jdbcType=VARCHAR}
+	</update>
+	<!--通过主键更新 -->
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.SysUser">
+		update sys_user
+		set sysuser_password = #{sysuserPassword,jdbcType=VARCHAR},
+		sysuser_phone = #{sysuserPhone,jdbcType=INTEGER},
+		sysuser_name =
+		#{sysuserName,jdbcType=VARCHAR},
+		sysuser_type =
+		#{sysuserType,jdbcType=VARCHAR},
+		sysuser_login_ip =
+		#{sysuserLoginIp,jdbcType=VARCHAR},
+		sysuser_officeId =
+		#{sysuserOfficeid,jdbcType=VARCHAR}
+		where sysuser_id =
+		#{sysuserId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and sysuserId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND sysuser_id=#{sysuserId}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.sysuserId != null and model.sysuserId.length()>0">
+					AND sysuser_id=#{model.sysuserId}
+				</if>
+				<if
+					test="model.sysuserPassword != null and model.sysuserPassword.length()>0">
+					AND sysuser_password=#{model.sysuserPassword}
+				</if>
+				<if test="model.sysuserPhone != null and model.sysuserPhone.length()>0">
+					AND sysuser_phone=#{model.sysuserPhone}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="sysUserResultMap">
+		select * from sys_user
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

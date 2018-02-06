@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.content.AdHotTopicMapper">
+	<resultMap id="BaseResultMap" type="com.lianjiu.model.AdHotTopic">
+		<id column="top_id" property="topId" jdbcType="VARCHAR" />
+		<result column="top_title" property="topTitle" jdbcType="VARCHAR" />
+		<result column="top_remark" property="topRemark" jdbcType="VARCHAR" />
+		<result column="top_content" property="topContent" jdbcType="VARCHAR" />
+		<result column="top_keyword" property="topKeyword" jdbcType="VARCHAR" />
+		<result column="top_order" property="topOrder" jdbcType="VARCHAR" />
+		<result column="top_picture" property="topPicture" jdbcType="VARCHAR" />
+		<result column="top_pic_link" property="topPicLink" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+		<result column="act_size" property="actSize" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		top_id, top_title, top_remark, top_content, top_keyword,
+		top_order,
+		top_picture,
+		top_pic_link, add_time, add_person, act_size,
+		category_id
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_topic
+		where top_id = #{topId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectElectronicList" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_topic
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdHotTopic">
+		update ad_hot_topic
+		<set>
+			<if test="topTitle != null">
+				top_title = #{topTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="topRemark != null">
+				top_remark = #{topRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="topContent != null ">
+				top_content = #{topContent,jdbcType=VARCHAR},
+			</if>
+			<if test="topKeyword != null ">
+				top_keyword = #{topKeyword,jdbcType=VARCHAR},
+			</if>
+			<if test="topOrder != null">
+				top_order = #{topOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="topPicture != null ">
+				top_picture = #{topPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="topPicLink != null">
+				top_pic_link = #{topPicLink,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null ">
+				add_time = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addPerson != null">
+				add_person = #{addPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="actSize != null">
+				act_size = #{actSize,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null ">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where top_id = #{topId,jdbcType=VARCHAR}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ad_hot_topic
+		where top_id = #{topId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insertAdHotTopic" parameterType="com.lianjiu.model.AdHotTopic">
+		insert into ad_hot_topic (top_id, top_title, top_remark,
+		top_content, top_keyword, top_order,
+		top_picture, top_pic_link, add_time,
+		add_person, act_size, category_id
+		)
+		values (#{topId,jdbcType=VARCHAR}, #{topTitle,jdbcType=VARCHAR},
+		#{topRemark,jdbcType=VARCHAR},
+		#{topContent,jdbcType=VARCHAR}, #{topKeyword,jdbcType=VARCHAR}, #{topOrder,jdbcType=VARCHAR},
+		#{topPicture,jdbcType=VARCHAR}, #{topPicLink,jdbcType=VARCHAR},
+		#{addTime,jdbcType=TIMESTAMP},
+		#{addPerson,jdbcType=VARCHAR}, #{actSize,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT}
+		)
+	</insert>
+	
+	<select id="vagueQuery" resultMap="BaseResultMap">
+		select * from ad_hot_topic
+		<where>
+			<if test="adHotTopic.topTitle != null and adHotTopic.topTitle != ''">
+				and top_title LIKE CONCAT('%',#{adHotTopic.topTitle},'%')
+			</if>
+			<if test="cratedStart != null and cratedStart != '' and cratedOver != null and cratedOver != '' ">
+				and add_time between #{cratedStart} and #{cratedOver}
+			</if>
+		</where>
+		ORDER BY add_time DESC
+	</select>
+	
+</mapper>

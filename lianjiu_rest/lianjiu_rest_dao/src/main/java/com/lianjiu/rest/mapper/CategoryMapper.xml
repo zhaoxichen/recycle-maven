@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.CategoryMapper">
+	<resultMap id="categoryResultMap" type="com.lianjiu.model.Category">
+		<!--重映射 -->
+		<id column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="category_parent_id" property="categoryParentId"
+			jdbcType="BIGINT" />
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="category_image" property="categoryImage"
+			jdbcType="VARCHAR" />
+		<result column="category_retrieve_type" property="categoryRetrieveType"
+			jdbcType="BIT" />
+		<result column="category_status" property="categoryStatus"
+			jdbcType="INTEGER" />
+		<result column="category_sort_order" property="categorySortOrder"
+			jdbcType="INTEGER" />
+		<result column="category_is_parent" property="categoryIsParent"
+			jdbcType="BIT" />
+		<result column="category_param_template_id" property="categoryParamTemplateId"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!--通过主键删除所有 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		category
+		where category_id = #{categoryId,jdbcType=BIGINT}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.Category">
+		insert into category
+		(category_id, category_parent_id, category_name,
+		category_image,
+		category_retrieve_type, category_status,
+		category_sort_order,
+		category_is_parent, category_param_template_id,
+		category_created,
+		category_updated)
+		values (#{categoryId,jdbcType=BIGINT},
+		#{categoryParentId,jdbcType=BIGINT},
+		#{categoryName,jdbcType=VARCHAR},
+		#{categoryImage,jdbcType=VARCHAR},
+		#{categoryRetrieveType,jdbcType=BIT},
+		#{categoryStatus,jdbcType=INTEGER},
+		#{categorySortOrder,jdbcType=INTEGER},
+		#{categoryIsParent,jdbcType=BIT},
+		#{categoryParamTemplateId,jdbcType=VARCHAR},
+		#{categoryCreated,jdbcType=TIMESTAMP},
+		#{categoryUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<!--条件插入 -->
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Category">
+		insert into category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="categoryParentId != null">
+				category_parent_id,
+			</if>
+			<if test="categoryName != null">
+				category_name,
+			</if>
+			<if test="categoryImage != null">
+				category_image,
+			</if>
+			<if test="categoryRetrieveType != null">
+				category_retrieve_type,
+			</if>
+			<if test="categoryStatus != null">
+				category_status,
+			</if>
+			<if test="categorySortOrder != null">
+				category_sort_order,
+			</if>
+			<if test="categoryIsParent != null">
+				category_is_parent,
+			</if>
+			<if test="categoryParamTemplateId != null">
+				category_param_template_id,
+			</if>
+			<if test="categoryCreated != null">
+				category_created,
+			</if>
+			<if test="categoryUpdated != null">
+				category_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="categoryParentId != null">
+				#{categoryParentId,jdbcType=BIGINT},
+			</if>
+			<if test="categoryName != null">
+				#{categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryImage != null">
+				#{categoryImage,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryRetrieveType != null">
+				#{categoryRetrieveType,jdbcType=BIT},
+			</if>
+			<if test="categoryStatus != null">
+				#{categoryStatus,jdbcType=INTEGER},
+			</if>
+			<if test="categorySortOrder != null">
+				#{categorySortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="categoryIsParent != null">
+				#{categoryIsParent,jdbcType=BIT},
+			</if>
+			<if test="categoryParamTemplateId != null">
+				#{categoryParamTemplateId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryCreated != null">
+				#{categoryCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="categoryUpdated != null">
+				#{categoryUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<!--通过主键条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Category">
+		update category
+		<set>
+			<if test="categoryParentId != null">
+				category_parent_id = #{categoryParentId,jdbcType=BIGINT},
+			</if>
+			<if test="categoryName != null">
+				category_name = #{categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryImage != null">
+				category_image = #{categoryImage,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryRetrieveType != null">
+				category_retrieve_type =
+				#{categoryRetrieveType,jdbcType=BIT},
+			</if>
+			<if test="categoryStatus != null">
+				category_status = #{categoryStatus,jdbcType=INTEGER},
+			</if>
+			<if test="categorySortOrder != null">
+				category_sort_order =
+				#{categorySortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="categoryIsParent != null">
+				category_is_parent = #{categoryIsParent,jdbcType=BIT},
+			</if>
+			<if test="categoryParamTemplateId != null">
+				category_param_template_id =
+				#{categoryParamTemplateId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryCreated != null">
+				category_created = #{categoryCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="categoryUpdated != null">
+				category_updated = #{categoryUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where category_id = #{categoryId,jdbcType=BIGINT}
+	</update>
+	<!--通过主键更新所有 -->
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Category">
+		update category
+		set category_parent_id = #{categoryParentId,jdbcType=BIGINT},
+		category_name = #{categoryName,jdbcType=VARCHAR},
+		category_image =
+		#{categoryImage,jdbcType=VARCHAR},
+		category_retrieve_type =
+		#{categoryRetrieveType,jdbcType=BIT},
+		category_status =
+		#{categoryStatus,jdbcType=INTEGER},
+		category_sort_order =
+		#{categorySortOrder,jdbcType=INTEGER},
+		category_is_parent =
+		#{categoryIsParent,jdbcType=BIT},
+		category_param_template_id =
+		#{categoryParamTemplateId,jdbcType=VARCHAR},
+		category_created =
+		#{categoryCreated,jdbcType=TIMESTAMP},
+		category_updated =
+		#{categoryUpdated,jdbcType=TIMESTAMP}
+		where category_id =
+		#{categoryId,jdbcType=BIGINT}
+	</update>
+	<!--sql片段 -->
+	<!--统计数量 -->
+	<sql id="sql_count">select count(*) as totalItems</sql>
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and categoryId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND category_id=#{categoryId}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.categoryId != null and model.categoryId.length()>0">
+					AND category_id=#{model.categoryId}
+				</if>
+				<if test="model.categoryName != null and model.categoryName.length()>0">
+					AND category_name=#{model.categoryName}
+				</if>
+				<if test="model.categoryParentId != null">
+					AND category_parent_id=#{model.categoryParentId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="categoryResultMap">
+		select * from category
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<!--通过父分类id查询 -->
+	<select id="selectByParentId" parameterType="Long" resultMap="categoryResultMap">
+		select * from category where
+		category_parent_id=#{value}
+		ORDER BY
+		category_created
+	</select>
+	<!--通过父分类id查询id -->
+	<select id="selectCidsByPid" resultType="Long">
+		select category_id from
+		category where
+		category_parent_id=#{value}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="Long"
+		resultMap="categoryResultMap">
+		select * from category where
+		category_id=#{value}
+	</select>
+	<!--统计 同一个parentId -->
+	<select id="countByParentId" parameterType="Long" resultType="java.lang.Long">
+		<include refid="sql_count" />
+		from category where category_parent_id=#{value}
+	</select>
+	<!--根据分类名称查询id -->
+	<select id="selectByCategoryName" parameterType="String"
+		resultType="java.lang.Long">
+		select category_id
+		from category where category_name =
+		#{value}
+	</select>
+	<!--轻量级映射 -->
+	<resultMap id="categoryInfoResultMap" type="com.lianjiu.rest.model.CategoryInfo">
+		<!--重映射 -->
+		<id column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="category_parent_id" property="categoryParentId"
+			jdbcType="BIGINT" />
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="category_image" property="categoryImage"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!--根据父id查询 -->
+	<select id="selectCategoryInfoByPId" parameterType="Long"
+		resultMap="categoryInfoResultMap">
+		select * from category where
+		category_parent_id=#{value}
+	</select>
+	<!--多父id查询 -->
+	<select id="selectCategoryInfoByPIds" resultMap="categoryInfoResultMap">
+		select * from category where
+		category_parent_id
+		in
+		<foreach collection="list" item="categoryId" index="index"
+			open="(" close=")" separator=",">
+			#{categoryId}
+		</foreach>
+	</select>
+	<!--多条件过滤 -->
+	<select id="selectParentIdByFilter" resultType="java.lang.Long">
+		select category_id from category where
+		category_parent_id
+		in
+		<foreach collection="categoryIdList" item="categoryId" index="index"
+			open="(" close=")" separator=",">
+			#{categoryId}
+		</foreach>
+		and category_name
+		in
+		<foreach collection="brandList" item="brand" index="index"
+			open="(" close=")" separator=",">
+			#{brand}
+		</foreach>
+	</select>
+	<!--根据分类名称获取分类id -->
+	<select id="selectCidByCategoryName" parameterType="java.lang.String"
+		resultType="java.lang.Long">
+		select category_id from category where
+		category_name=#{value}
+	</select>
+	<select id="selectCidsByCategoryName" parameterType="java.lang.String"
+		resultType="java.lang.Long">
+		select category_id from category where
+		category_name
+		in
+		<foreach collection="brandList" item="brand" index="index"
+			open="(" close=")" separator=",">
+			#{brand}
+		</foreach>
+	</select>
+
+	<!--根据分类id获取分类名称 -->
+	<select id="selectCategoryByName" parameterType="java.lang.Long"
+		resultType="java.lang.String">
+		select category_name from category where
+		category_id=#{value}
+	</select>
+	<!--通过主键查询父级id -->
+	<select id="selectParentIdByPrimaryKey" parameterType="java.lang.Long"
+		resultType="java.lang.Long">
+		select category_parent_id from category where
+		category_id=#{value}
+	</select>
+
+</mapper>

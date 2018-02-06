@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersRepairSchemeMapper">
+	<resultMap id="ordersRepairSchemeResultMap" type="com.lianjiu.model.OrdersRepairScheme">
+		<id column="or_re_scheme_id" property="orReSchemeId" jdbcType="VARCHAR" />
+		<result column="or_repair_id" property="orRepairId" jdbcType="VARCHAR" />
+		<result column="product_repair_id" property="productRepairId"
+			jdbcType="VARCHAR" />
+		<result column="product_repair_name" property="productRepairName"
+			jdbcType="VARCHAR" />
+		<result column="or_repair_picture" property="orRepairPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_re_scheme_created" property="orReSchemeCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_re_scheme_updated" property="orReSchemeUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_repair_scheme" property="orRepairScheme"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersRepairSchemeResultMap"
+		parameterType="java.lang.String">
+		select * from orders_repair_scheme where or_re_scheme_id
+		=
+		#{orReSchemeId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_repair_scheme
+		where or_re_scheme_id =
+		#{orReSchemeId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersRepairScheme">
+		insert into
+		orders_repair_scheme (or_re_scheme_id, or_repair_id,
+		product_repair_id,
+		product_repair_name, or_repair_picture,
+		or_re_scheme_created,
+		or_re_scheme_updated, or_repair_scheme
+		)
+		values
+		(#{orReSchemeId,jdbcType=VARCHAR}, #{orRepairId,jdbcType=VARCHAR},
+		#{productRepairId,jdbcType=VARCHAR},
+		#{productRepairName,jdbcType=VARCHAR},
+		#{orRepairPicture,jdbcType=VARCHAR},
+		#{orReSchemeCreated,jdbcType=TIMESTAMP},
+		#{orReSchemeUpdated,jdbcType=TIMESTAMP},
+		#{orRepairScheme,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersRepairScheme">
+		insert into orders_repair_scheme
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orReSchemeId != null">
+				or_re_scheme_id,
+			</if>
+			<if test="orRepairId != null">
+				or_repair_id,
+			</if>
+			<if test="productRepairId != null">
+				product_repair_id,
+			</if>
+			<if test="productRepairName != null">
+				product_repair_name,
+			</if>
+			<if test="orRepairPicture != null">
+				or_repair_picture,
+			</if>
+			<if test="orReSchemeCreated != null">
+				or_re_scheme_created,
+			</if>
+			<if test="orReSchemeUpdated != null">
+				or_re_scheme_updated,
+			</if>
+			<if test="orRepairScheme != null">
+				or_repair_scheme,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orReSchemeId != null">
+				#{orReSchemeId,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairId != null">
+				#{orRepairId,jdbcType=VARCHAR},
+			</if>
+			<if test="productRepairId != null">
+				#{productRepairId,jdbcType=VARCHAR},
+			</if>
+			<if test="productRepairName != null">
+				#{productRepairName,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairPicture != null">
+				#{orRepairPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="orReSchemeCreated != null">
+				#{orReSchemeCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orReSchemeUpdated != null">
+				#{orReSchemeUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairScheme != null">
+				#{orRepairScheme,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersRepairScheme">
+		update orders_repair_scheme
+		<set>
+			<if test="orRepairId != null">
+				or_repair_id = #{orRepairId,jdbcType=VARCHAR},
+			</if>
+			<if test="productRepairId != null">
+				product_repair_id = #{productRepairId,jdbcType=VARCHAR},
+			</if>
+			<if test="productRepairName != null">
+				product_repair_name =
+				#{productRepairName,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairPicture != null">
+				or_repair_picture = #{orRepairPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="orReSchemeCreated != null">
+				or_re_scheme_created =
+				#{orReSchemeCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orReSchemeUpdated != null">
+				or_re_scheme_updated =
+				#{orReSchemeUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairScheme != null">
+				or_repair_scheme =
+				#{orRepairScheme,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_re_scheme_id = #{orReSchemeId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersRepairScheme">
+		update
+		orders_repair_scheme
+		set or_repair_id = #{orRepairId,jdbcType=VARCHAR},
+		product_repair_id = #{productRepairId,jdbcType=VARCHAR},
+		product_repair_name = #{productRepairName,jdbcType=VARCHAR},
+		or_repair_picture = #{orRepairPicture,jdbcType=VARCHAR},
+		or_re_scheme_created = #{orReSchemeCreated,jdbcType=TIMESTAMP},
+		or_re_scheme_updated = #{orReSchemeUpdated,jdbcType=TIMESTAMP}
+		where
+		or_re_scheme_id = #{orReSchemeId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_re_scheme_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orReSchemeId != null">AND or_re_scheme_id =#{model.orReSchemeId}</if>
+				<if test="model.orRepairId != null">AND or_repair_id =#{model.orRepairId}</if>
+				<if test="model.productRepairId != null">AND product_repair_id =#{model.productRepairId}</if>
+				<if test="model.productRepairName != null">AND product_repair_name =#{model.productRepairName}</if>
+				<if test="model.orRepairPicture != null">AND or_repair_picture =#{model.orRepairPicture}</if>
+				<if test="model.orReSchemeCreated != null">AND or_re_scheme_created =#{model.orReSchemeCreated}
+				</if>
+				<if test="model.orReSchemeUpdated != null">AND or_re_scheme_updated =#{model.orReSchemeUpdated}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersRepairSchemeResultMap">
+		select * from orders_repair_scheme
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<select id="selectSchameByOrdersId" resultMap="ordersRepairSchemeResultMap"
+		parameterType="java.lang.String">
+		select
+		or_repair_id,product_repair_id,product_repair_name,or_repair_picture,or_repair_scheme
+		from orders_repair_scheme where or_repair_id
+		=
+		#{orRepairId,jdbcType=VARCHAR}
+	</select>
+
+	<update id="updateByOrdersId" parameterType="com.lianjiu.model.OrdersRepairScheme">
+		update
+		orders_repair_scheme
+		set
+		or_repair_picture = #{orRepairPicture,jdbcType=VARCHAR},
+		or_re_scheme_updated =
+		#{orReSchemeUpdated,jdbcType=TIMESTAMP}
+		where
+		or_repair_id = #{orRepairId}
+	</update>
+</mapper>

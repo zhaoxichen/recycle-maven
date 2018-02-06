@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.user.UserMapper">
+	<resultMap id="userResultMap" type="com.lianjiu.model.User">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="user_password" property="userPassword"
+			jdbcType="VARCHAR" />
+		<result column="user_nickname" property="userNickname"
+			jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_created" property="userCreated" jdbcType="TIMESTAMP" />
+		<result column="user_logined" property="userLogined" jdbcType="TIMESTAMP" />
+		<result column="user_details_id" property="userDetailsId"
+			jdbcType="VARCHAR" />
+		<result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
+		<result column="udetails_referrer" property="udetailsReferrer" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="userResultMap"
+		parameterType="java.lang.String">select * from user where user_id =
+		#{userId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.User">
+		insert into user (user_id,
+		username, user_password,
+		user_nickname, user_phone, user_created,
+		user_logined, user_details_id, user_photo,udetails_referrer
+		)
+		values
+		(#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+		#{userPassword,jdbcType=VARCHAR},
+		#{userNickname,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR}, #{userCreated,jdbcType=TIMESTAMP},
+		#{userLogined,jdbcType=TIMESTAMP}, #{userDetailsId,jdbcType=VARCHAR},
+		#{userPhoto,jdbcType=VARCHAR},
+		#{udetailsReferrer,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="userPassword != null">
+				user_password,
+			</if>
+			<if test="userNickname != null">
+				user_nickname,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="userCreated != null">
+				user_created,
+			</if>
+			<if test="userLogined != null">
+				user_logined,
+			</if>
+			<if test="userDetailsId != null">
+				user_details_id,
+			</if>
+			<if test="userPhoto != null">
+				user_photo,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassword != null">
+				#{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userNickname != null">
+				#{userNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userCreated != null">
+				#{userCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userLogined != null">
+				#{userLogined,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userDetailsId != null">
+				#{userDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoto != null">
+				#{userPhoto,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.User">
+		update user
+		<set>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassword != null">
+				user_password = #{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userNickname != null">
+				user_nickname = #{userNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userCreated != null">
+				user_created = #{userCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userLogined != null">
+				user_logined = #{userLogined,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userDetailsId != null">
+				user_details_id = #{userDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoto != null">
+				user_photo = #{userPhoto,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsReferrer != null">
+				udetails_referrer = #{udetailsReferrer,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.User">
+		update user
+		set
+		username = #{username,jdbcType=VARCHAR},
+		user_password =
+		#{userPassword,jdbcType=VARCHAR},
+		user_nickname =
+		#{userNickname,jdbcType=VARCHAR},
+		user_phone =
+		#{userPhone,jdbcType=VARCHAR},
+		user_created =
+		#{userCreated,jdbcType=TIMESTAMP},
+		user_logined =
+		#{userLogined,jdbcType=TIMESTAMP},
+		user_details_id =
+		#{userDetailsId,jdbcType=VARCHAR},
+		user_photo =
+		#{userPhoto,jdbcType=VARCHAR}
+		udetails_referrer =
+		#{udetailsReferrer,jdbcType=VARCHAR}
+		where user_id =
+		#{userId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND user_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.userId != null">AND user_id =#{model.userId}</if>
+				<if test="model.username != null">AND username =#{model.username}</if>
+				<if test="model.userPassword != null">AND user_password =#{model.userPassword}</if>
+				<if test="model.userNickname != null">AND user_nickname =#{model.userNickname}</if>
+				<if test="model.userPhone != null">AND user_phone =#{model.userPhone}</if>
+				<if test="model.userCreated != null">AND user_created =#{model.userCreated}</if>
+				<if test="model.userLogined != null">AND user_logined =#{model.userLogined}</if>
+				<if test="model.userDetailsId != null">AND user_details_id =#{model.userDetailsId}</if>
+				<if test="model.userPhoto != null">AND user_photo =#{model.userPhoto}</if>
+				<if test="model.udetailsReferrer != null">AND udetails_referrer =#{model.udetailsReferrer}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="userResultMap">
+		select * from user
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<select id="selectAllByUsername" parameterType="java.lang.String"
+		resultMap="userResultMap">
+		select * from user where username=#{username}
+	</select>
+	<select id="selectAllByUsernameCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from user where username=#{username}
+	</select>
+
+	<update id="updateLogined" parameterType="com.lianjiu.model.User">
+		update user
+		set
+		user_logined=#{userLogined} where username=#{username}
+	</update>
+	<update id="modifyPwd" parameterType="java.lang.String">
+		update user set
+		user_password=#{password} where user_id=#{userId}
+	</update>
+
+	<update id="updatePwd" parameterType="java.lang.String">
+		update user set
+		user_password=#{password} where user_phone=#{phone}
+	</update>
+
+	<select id="selectNickNameByUserId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select user_nickname from user where user_id = #{userId}
+	</select>
+	<select id="selectCountByphone" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from user where user_phone = #{phone}
+	</select>
+	<select id="selectUserByphone" parameterType="java.lang.String"
+		resultMap="userResultMap">
+		select * from user where username = #{phone}
+	</select>
+	<select id="selectUserByUserId" parameterType="java.lang.String"
+		resultMap="userResultMap">
+		select
+		user_id,username,user_phone,user_details_id,user_photo from user where
+		user_id =
+		#{userId}
+	</select>
+
+	<update id="relativePrice">
+		update wallet_lianjiu
+		set
+		wallet_money=#{price},
+		wallet_updated=#{date}
+		where
+		user_id=#{userId}
+	</update>
+
+	<select id="getUserMoneyCheck" resultType="java.lang.Integer">
+		select count(1) from
+		wallet_lianjiu where
+		user_id=#{userId}
+		and
+		cast(wallet_money as SIGNED
+		INTEGER)>= #{price}
+	</select>
+
+	<select id="getPhoneById" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select user_phone from user where user_id = #{userId}
+	</select>
+	<select id="getDetailsId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select user_details_id from user where user_id = #{userId}
+	</select>
+	<update id="updateUserPhone" parameterType="com.lianjiu.model.User">
+		update user
+		set
+		username = #{username},
+		user_phone=#{userPhone}
+		where
+		user_id=#{userId}
+	</update>
+	<select id="getPwdByPhone" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select user_password from user where user_phone = #{0}
+	</select>
+	<select id="getAllPhone" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select user_phone from user
+	</select>
+	<select id="getByQqNum" parameterType="java.lang.String"
+		resultMap="userResultMap">
+		SELECT
+		u.user_id,
+		u.username,
+		u.user_phone,
+		u.user_created,
+		u.user_logined,
+		u.user_details_id,
+		u.user_photo
+		FROM
+		`user` u
+		LEFT JOIN qq q ON u.user_id = q.user_id
+		WHERE
+		q.qq_num = #{qqNum}
+	</select>
+	<select id="getByWechatNum" parameterType="java.lang.String"
+		resultMap="userResultMap">
+		SELECT
+		u.user_id,
+		u.username,
+		u.user_phone,
+		u.user_created,
+		u.user_logined,
+		u.user_details_id,
+		u.user_photo
+		FROM
+		`user` u
+		LEFT JOIN wechat w ON u.user_id = w.user_id
+		WHERE
+		w.wechat_num = #{wechatNum}
+	</select>
+
+	<select id="getQphoneByNum" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select u.user_phone from user u
+		left join qq q
+		on u.user_id = q.user_id
+		where
+		q.qq_num = #{qqNum}
+	</select>
+	<select id="getWphoneByNum" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select u.user_phone from user u
+		left join wechat w
+		on u.user_id = w.user_id
+		where
+		w.wechat_num = #{wechatNum}
+	</select>
+	<!-- qq微信绑定更新昵称 -->
+	<update id="modifyNickById" parameterType="com.lianjiu.model.User">
+		update user set user_nickname = #{userNickname},user_logined = NOW() where
+		user_id = #{userId}
+	</update>
+	<!-- 获取用户价格 -->
+	<select id="getUserPrice" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select wallet_money from wallet_lianjiu where
+		user_id=#{userId}
+	</select>
+	<!-- ID -->
+	<select id="getIdByPhone" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select user_id from user where user_phone=#{phone}
+	</select>
+	<!--查询所有用户 -->
+	<resultMap id="userViewResultMap" type="com.lianjiu.model.vo.UserCustom">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_created" property="userCreated" jdbcType="TIMESTAMP" />
+		<result column="user_details_id" property="userDetailsId"
+			jdbcType="VARCHAR" />
+		<result column="wechat_nickname" property="wechatNickname"
+			jdbcType="VARCHAR" />
+		<result column="qq_nickname" property="qqNickname" jdbcType="VARCHAR" />
+		<result column="udetails_referrer" property="udetailsReferrer" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectAllUser" resultMap="userViewResultMap">
+		select
+		u.user_id,u.user_phone,u.user_created,u.user_details_id,u.udetails_referrer,
+		w.wechat_nickname,q.qq_nickname
+		from user u
+		LEFT JOIN wechat w
+		ON
+		u.user_id=w.user_id
+		LEFT JOIN qq q
+		ON u.user_id=q.user_id
+		ORDER BY u.user_created DESC
+	</select>
+	<!-- 用户详情 -->
+	<resultMap id="detailsResultMap" type="com.lianjiu.model.UserDetails">
+		<id column="udetails_id" property="udetailsId" jdbcType="VARCHAR" />
+		<result column="udetails_id_card" property="udetailsIdCard"
+			jdbcType="VARCHAR" />
+		<result column="udetails_user_address" property="udetailsUserAddress"
+			jdbcType="VARCHAR" />
+		<result column="udetails_realname_time" property="udetailsRealnameTime"
+			jdbcType="TIMESTAMP" />
+		<result column="udetails_card_no" property="udetailsCardNo"
+			jdbcType="VARCHAR" />
+		<result column="udetails_card_bank" property="udetailsCardBank"
+			jdbcType="VARCHAR" />
+		<result column="udetails_integral" property="udetailsIntegral"
+			jdbcType="INTEGER" />
+		<result column="udetails_account_balance" property="udetailsAccountBalance"
+			jdbcType="INTEGER" />
+		<result column="udetails_money_details" property="udetailsMoneyDetails"
+			jdbcType="VARCHAR" />
+		<result column="udetails_register_time" property="udetailsRegisterTime"
+			jdbcType="TIMESTAMP" />
+		<result column="udetails_equipment" property="udetailsEquipment"
+			jdbcType="VARCHAR" />
+		<result column="udetails_edition" property="udetailsEdition"
+			jdbcType="VARCHAR" />
+		<result column="udetails_referrer" property="udetailsReferrer"
+			jdbcType="VARCHAR" />
+		<result column="udetails_photo" property="udetailsPhoto"
+			jdbcType="VARCHAR" />
+		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_phonenum" property="userPhonenum"
+			jdbcType="INTEGER" />
+		<result column="user_openid" property="userOpenid" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByDetailsId" resultMap="detailsResultMap">
+		select * from
+		user_details where udetails_id = #{detailsId}
+	</select>
+	<select id="vagueQuery" resultMap="userViewResultMap">
+		select
+		u.user_id,u.user_phone,u.user_created,u.user_details_id,u.udetails_referrer,
+		w.wechat_nickname,q.qq_nickname
+		from user u
+		LEFT JOIN wechat w
+		ON
+		u.user_id=w.user_id
+		LEFT JOIN qq q
+		ON u.user_id=q.user_id
+		<where>
+			<if test="user.userId != null and user.userId != ''">
+				and u.user_id LIKE CONCAT('%',#{user.userId},'%')
+			</if>
+			<if test="user.userPhone != null and user.userPhone != ''">
+				and u.user_phone LIKE CONCAT('%',#{user.userPhone},'%')
+			</if>
+			<if test="cratedStart != null and cratedStart != '' and cratedOver != null and cratedOver != '' ">
+				and u.user_created between #{cratedStart} and #{cratedOver}
+			</if>
+		</where>
+		ORDER BY u.user_created DESC
+	</select>
+	<select id="getUserByReferrer" resultMap="userResultMap" parameterType="java.lang.String">
+		select user_id,user_phone,user_created,udetails_referrer from user 
+		<where>
+			udetails_referrer REGEXP '^[7-9]'
+			<if test="udetailsReferrer !=null and udetailsReferrer != ''">
+			and udetails_referrer = #{udetailsReferrer}
+			</if>
+			<if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+			and user_created BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		order by user_created desc
+	</select>
+</mapper>

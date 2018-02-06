@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.product.ProductBulkMapper">
+	<resultMap id="productBulkResultMap" type="com.lianjiu.model.ProductBulk">
+		<id column="bulk_id" property="bulkId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="bulk_name" property="bulkName" jdbcType="VARCHAR" />
+		<result column="bulk_handle_way" property="bulkHandleWay"
+			jdbcType="VARCHAR" />
+		<result column="bulk_volume" property="bulkVolume" jdbcType="TINYINT" />
+		<result column="bulk_created" property="bulkCreated" jdbcType="TIMESTAMP" />
+		<result column="bulk_updated" property="bulkUpdated" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productBulkResultMap"
+		parameterType="java.lang.String">select * from product_bulk where bulk_id =
+		#{bulkId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product_bulk
+		where bulk_id = #{bulkId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.ProductBulk">
+		insert into product_bulk
+		(bulk_id, category_id, bulk_name,
+		bulk_handle_way, bulk_volume,
+		bulk_created, bulk_updated)
+		values
+		(#{bulkId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{bulkName,jdbcType=VARCHAR},
+		#{bulkHandleWay,jdbcType=VARCHAR},
+		#{bulkVolume,jdbcType=TINYINT},
+		NOW(), NOW())
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductBulk">
+		update product_bulk
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="bulkName != null">
+				bulk_name = #{bulkName,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkHandleWay != null">
+				bulk_handle_way = #{bulkHandleWay,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkVolume != null">
+				bulk_volume = #{bulkVolume,jdbcType=TINYINT},
+			</if>
+			bulk_updated = NOW()
+		</set>
+		where bulk_id = #{bulkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="getBulkByCid" parameterType="java.lang.Long"
+		resultMap="productBulkResultMap">
+		select * from product_bulk where category_id = #{cid}
+	</select>
+
+	<select id="getAll" resultMap="productBulkResultMap">
+		select * from product_bulk
+	</select>
+	<resultMap id="productBulkSearchResultMap" type="com.lianjiu.rest.model.BulkVo">
+		<id column="bulk_id" property="bulkId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="bulk_name" property="bulkName" jdbcType="VARCHAR" />
+		<result column="bulk_volume" property="bulkVolume" jdbcType="TINYINT" />
+		<result column="price_single" property="priceSingle" jdbcType="VARCHAR" />
+		<result column="price_unit" property="priceUnit" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="selectBulkAll" parameterType="java.lang.String"
+		resultMap="productBulkSearchResultMap">
+		SELECT
+		p.bulk_id,p.category_id,p.bulk_name,p.bulk_volume,
+		price.price_single,price.price_unit,
+		0 bulkNum
+		FROM
+		product_bulk p
+		LEFT
+		JOIN
+		product_bulk_price price ON p.bulk_id = price.product_id
+		WHERE
+		price.price_created IN (
+		SELECT
+		max(price_created)
+		FROM
+		product_bulk_price
+		GROUP BY
+		product_id
+		)
+		ORDER BY p.bulk_created
+	</select>
+	<select id="selectBulkByKeyword" parameterType="java.lang.String"
+		resultMap="productBulkSearchResultMap">
+		SELECT
+		p.bulk_id,p.category_id,p.bulk_name,p.bulk_volume,
+		price.price_single,price.price_unit,
+		0 bulkNum
+		FROM
+		product_bulk p
+		LEFT
+		JOIN
+		product_bulk_price price ON p.bulk_id = price.product_id
+		WHERE
+		price.price_created IN (
+		SELECT
+		max(price_created)
+		FROM
+		product_bulk_price
+		GROUP BY
+		product_id
+		)
+		AND
+		p.bulk_name LIKE concat(
+		concat( '%', #{value}),'%')
+		ORDER BY p.bulk_created
+	</select>
+	<select id="selectOthersByKeyword" parameterType="java.lang.String"
+		resultMap="productBulkSearchResultMap">
+		SELECT
+		p.bulk_id,p.category_id,p.bulk_name,p.bulk_volume,
+		price.price_single,price.price_unit,
+		0 bulkNum
+		FROM
+		product_bulk p
+		LEFT
+		JOIN
+		product_bulk_price price ON p.bulk_id = price.product_id
+		WHERE
+		price.price_created IN (
+		SELECT
+		max(price_created)
+		FROM
+		product_bulk_price
+		GROUP BY
+		product_id
+		)
+		AND
+		p.bulk_name NOT LIKE concat(
+		concat( '%', #{value}),'%')
+		ORDER BY p.bulk_created
+	</select>
+
+	<!--基于分类 -->
+	<select id="selectBulkByCid" parameterType="java.lang.Long"
+		resultMap="productBulkSearchResultMap">
+		SELECT
+		p.bulk_id,p.category_id,p.bulk_name,p.bulk_volume,
+		price.price_single,price.price_unit,
+		0 bulkNum
+		FROM
+		product_bulk p
+		LEFT
+		JOIN
+		product_bulk_price price ON p.bulk_id = price.product_id
+		WHERE
+		price.is_current_price=1
+		AND
+		p.category_id = #{cid}
+		ORDER BY p.bulk_created
+	</select>
+	<select id="selectBulkByCidByKeyword" resultMap="productBulkSearchResultMap">
+		SELECT
+		p.bulk_id,p.category_id,p.bulk_name,p.bulk_volume,
+		price.price_single,price.price_unit,
+		0 bulkNum
+		FROM
+		product_bulk p
+		LEFT
+		JOIN
+		product_bulk_price price ON p.bulk_id = price.product_id
+		WHERE
+		price.is_current_price=1
+		AND
+		p.category_id = #{cid}
+		AND
+		p.bulk_name LIKE
+		concat(
+		concat( '%', #{keyword}),'%')
+		ORDER BY p.bulk_created
+	</select>
+	<select id="selectOthersByCidByKeyword" resultMap="productBulkSearchResultMap">
+		SELECT
+		p.bulk_id,p.category_id,p.bulk_name,p.bulk_volume,
+		price.price_single,price.price_unit,
+		0 bulkNum
+		FROM
+		product_bulk p
+		LEFT
+		JOIN
+		product_bulk_price price ON p.bulk_id = price.product_id
+		WHERE
+		price.is_current_price=1
+		AND
+		p.category_id = #{cid}
+		AND
+		p.bulk_name NOT
+		LIKE concat(
+		concat( '%', #{keyword}),'%')
+		ORDER BY p.bulk_created
+	</select>
+	<select id="getDetailedAddress" parameterType="java.lang.Long"
+		resultType="java.lang.String">
+		select bulk_address_name from product_bulk_address where
+		category_id=#{cid} LIMIT 0,1
+	</select>
+
+	<select id="addressCheck" parameterType="java.lang.Long"
+		resultType="int">
+		select count(1) from product_bulk_address where
+		category_id=#{cid}
+	</select>
+
+	<insert id="insertAddress">
+		INSERT into product_bulk_address
+		(bulk_address_id,
+		category_id,
+		bulk_address_name,
+		bulk_address_created,
+		bulk_address_updated)
+		values
+		(#{id},
+		#{cid},
+		#{address},
+		now(),
+		now())
+	</insert>
+
+	<update id="modifyAddress">
+		update product_bulk_address set
+		bulk_address_name=#{address},
+		bulk_address_updated=now() where
+		category_id=#{cid}
+	</update>
+	<!--通过产品编号获取分类编号 -->
+	<select id="getCidByPid" resultType="java.lang.Long"
+		parameterType="java.lang.String">
+		select category_id from product_bulk where bulk_id =
+		#{bulkId}
+	</select>
+</mapper>

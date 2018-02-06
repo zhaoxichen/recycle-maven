@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersRepairItemMapper">
+	<resultMap id="ordersRepairItemResultMap" type="com.lianjiu.model.OrdersRepairItem">
+		<id column="or_re_item_id" property="orReItemId" jdbcType="VARCHAR" />
+		<result column="or_re_item_name" property="orReItemName"
+			jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_re_item_function" property="orReItemFunction"
+			jdbcType="VARCHAR" />
+		<result column="or_re_item_scheme" property="orReItemScheme"
+			jdbcType="VARCHAR" />
+		<result column="or_re_item_color" property="orReItemColor"
+			jdbcType="VARCHAR" />
+		<result column="or_re_item_price" property="orReItemPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_re_item_created" property="orReItemCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_re_item_updated" property="orReItemUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_re_item_pictrue" property="orReItemPictrue"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersRepairItemResultMap"
+		parameterType="java.lang.String">
+		select * from orders_item_product_repair where or_re_item_id =
+		#{orReItemId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_item_product_repair
+		where or_re_item_id = #{orReItemId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersRepairItem">
+		insert into orders_item_product_repair
+		(or_re_item_id, or_re_item_name, orders_id,
+		or_re_item_function,
+		or_re_item_scheme, or_re_item_color,
+		or_re_item_price,
+		or_re_item_created, or_re_item_updated,
+		or_re_item_pictrue)
+		values
+		(#{orReItemId,jdbcType=VARCHAR}, #{orReItemName,jdbcType=VARCHAR},
+		#{ordersId,jdbcType=VARCHAR},
+		#{orReItemFunction,jdbcType=VARCHAR},
+		#{orReItemScheme,jdbcType=VARCHAR},
+		#{orReItemColor,jdbcType=VARCHAR},
+		#{orReItemPrice,jdbcType=VARCHAR},
+		#{orReItemCreated,jdbcType=TIMESTAMP},
+		#{orReItemUpdated,jdbcType=TIMESTAMP},
+		#{orReItemPictrue,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersRepairItem">
+		insert into orders_item_product_repair
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orReItemId != null">
+				or_re_item_id,
+			</if>
+			<if test="orReItemName != null">
+				or_re_item_name,
+			</if>
+			<if test="ordersId != null">
+				orders_id,
+			</if>
+			<if test="orReItemFunction != null">
+				or_re_item_function,
+			</if>
+			<if test="orReItemScheme != null">
+				or_re_item_scheme,
+			</if>
+			<if test="orReItemColor != null">
+				or_re_item_color,
+			</if>
+			<if test="orReItemPrice != null">
+				or_re_item_price,
+			</if>
+			<if test="orReItemCreated != null">
+				or_re_item_created,
+			</if>
+			<if test="orReItemUpdated != null">
+				or_re_item_updated,
+			</if>
+			<if test="orReItemPictrue != null">
+				or_re_item_pictrue,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orReItemId != null">
+				#{orReItemId,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemName != null">
+				#{orReItemName,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersId != null">
+				#{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemFunction != null">
+				#{orReItemFunction,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemScheme != null">
+				#{orReItemScheme,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemColor != null">
+				#{orReItemColor,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemPrice != null">
+				#{orReItemPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemCreated != null">
+				#{orReItemCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orReItemUpdated != null">
+				#{orReItemUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orReItemPictrue != null">
+				#{orReItemPictrue,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersRepairItem">
+		update orders_item_product_repair
+		<set>
+			<if test="orReItemName != null">
+				or_re_item_name = #{orReItemName,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersId != null">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemFunction != null">
+				or_re_item_function =
+				#{orReItemFunction,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemScheme != null">
+				or_re_item_scheme = #{orReItemScheme,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemColor != null">
+				or_re_item_color = #{orReItemColor,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemPrice != null">
+				or_re_item_price = #{orReItemPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orReItemCreated != null">
+				or_re_item_created =
+				#{orReItemCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orReItemUpdated != null">
+				or_re_item_updated =
+				#{orReItemUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orReItemPictrue != null">
+				or_re_item_pictrue =
+				#{orReItemPictrue,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_re_item_id = #{orReItemId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersRepairItem">
+		update
+		orders_item_product_repair
+		set or_re_item_name =
+		#{orReItemName,jdbcType=VARCHAR},
+		orders_id =
+		#{ordersId,jdbcType=VARCHAR},
+		or_re_item_function =
+		#{orReItemFunction,jdbcType=VARCHAR},
+		or_re_item_scheme =
+		#{orReItemScheme,jdbcType=VARCHAR},
+		or_re_item_color =
+		#{orReItemColor,jdbcType=VARCHAR},
+		or_re_item_price =
+		#{orReItemPrice,jdbcType=VARCHAR},
+		or_re_item_created =
+		#{orReItemCreated,jdbcType=TIMESTAMP},
+		or_re_item_updated =
+		#{orReItemUpdated,jdbcType=TIMESTAMP}
+		where or_re_item_id =
+		#{orReItemId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_re_item_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orReItemId != null">AND or_re_item_id =#{model.orReItemId}</if>
+				<if test="model.orReItemName != null">AND or_re_item_name =#{model.orReItemName}</if>
+				<if test="model.ordersId != null">AND orders_id =#{model.ordersId}</if>
+				<if test="model.orReItemFunction != null">AND or_re_item_function =#{model.orReItemFunction}</if>
+				<if test="model.orReItemScheme != null">AND or_re_item_scheme =#{model.orReItemScheme}</if>
+				<if test="model.orReItemColor != null">AND or_re_item_color =#{model.orReItemColor}</if>
+				<if test="model.orReItemPrice != null">AND or_re_item_price =#{model.orReItemPrice}</if>
+				<if test="model.orReItemCreated != null">AND or_re_item_created =#{model.orReItemCreated}</if>
+				<if test="model.orReItemUpdated != null">AND or_re_item_updated =#{model.orReItemUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersRepairItemResultMap">
+		select * from orders_item_product_repair
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

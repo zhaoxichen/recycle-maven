@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersFacefaceMapper">
+	<resultMap id="ordersFacefaceResultMap" type="com.lianjiu.model.OrdersFaceface">
+		<id column="or_faceface_id" property="orFacefaceId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="or_faceface_alliance_id" property="orFacefaceAllianceId"
+			jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="user_address_phone" property="userPhone"
+			jdbcType="VARCHAR" />
+		<result column="user_address_name" property="username"
+			jdbcType="VARCHAR" />
+		<result column="user_province" property="orFacefaceProvince"
+			jdbcType="VARCHAR" />
+		<result column="user_city" property="orFacefaceCity" jdbcType="VARCHAR" />
+		<result column="user_district" property="orFacefaceDistrict"
+			jdbcType="VARCHAR" />
+		<result column="user_location" property="orFacefaceLocation"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_faceface_status" property="orFacefaceStatus"
+			jdbcType="TINYINT" />
+		<result column="or_faceface_brothers_id" property="orFacefaceBrothersId"
+			jdbcType="VARCHAR" />
+		<result column="or_faceface_created" property="orFacefaceCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_faceface_updated" property="orFacefaceUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_ff_details_handler_tel" property="orFfDetailsHandlerTel"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersFacefaceResultMap"
+		parameterType="java.lang.String">
+		select * from orders_faceface o LEFT JOIN user_address a
+		ON o.address_id=a.user_address_id
+		where o.or_faceface_id =
+		#{orFacefaceId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_faceface
+		where or_faceface_id = #{orFacefaceId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersFaceface">
+		insert into orders_faceface
+		(or_faceface_id, category_id,
+		or_faceface_alliance_id,
+		user_id,
+		user_phone, username,
+		or_faceface_province, or_faceface_city,
+		or_faceface_district,
+		or_faceface_status, or_faceface_brothers_id,
+		or_faceface_created, or_faceface_updated,
+		or_faceface_location)
+		values
+		(#{orFacefaceId,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT},
+		#{orFacefaceAllianceId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+		#{orFacefaceProvince,jdbcType=VARCHAR},
+		#{orFacefaceCity,jdbcType=VARCHAR},
+		#{orFacefaceDistrict,jdbcType=VARCHAR},
+		#{orFacefaceStatus,jdbcType=TINYINT},
+		#{orFacefaceBrothersId,jdbcType=VARCHAR},
+		#{orFacefaceCreated,jdbcType=TIMESTAMP},
+		#{orFacefaceUpdated,jdbcType=TIMESTAMP},
+		#{orFacefaceLocation,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersFaceface">
+		insert into orders_faceface
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orFacefaceId != null">
+				or_faceface_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="orFacefaceAllianceId != null">
+				or_faceface_alliance_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="orFacefaceProvince != null">
+				or_faceface_province,
+			</if>
+			<if test="orFacefaceCity != null">
+				or_faceface_city,
+			</if>
+			<if test="orFacefaceDistrict != null">
+				or_faceface_district,
+			</if>
+			<if test="orFacefaceStatus != null">
+				or_faceface_status,
+			</if>
+			<if test="orFacefaceBrothersId != null">
+				or_faceface_brothers_id,
+			</if>
+			<if test="orFacefaceCreated != null">
+				or_faceface_created,
+			</if>
+			<if test="orFacefaceUpdated != null">
+				or_faceface_updated,
+			</if>
+			<if test="orFacefaceLocation != null">
+				or_faceface_location,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orFacefaceId != null">
+				#{orFacefaceId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orFacefaceAllianceId != null">
+				#{orFacefaceAllianceId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceProvince != null">
+				#{orFacefaceProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceCity != null">
+				#{orFacefaceCity,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceDistrict != null">
+				#{orFacefaceDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceStatus != null">
+				#{orFacefaceStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orFacefaceBrothersId != null">
+				#{orFacefaceBrothersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceCreated != null">
+				#{orFacefaceCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFacefaceUpdated != null">
+				#{orFacefaceUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFacefaceLocation != null">
+				#{orFacefaceLocation,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersFaceface">
+		update orders_faceface
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orFacefaceAllianceId != null">
+				or_faceface_alliance_id =
+				#{orFacefaceAllianceId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceProvince != null">
+				or_faceface_province =
+				#{orFacefaceProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceCity != null">
+				or_faceface_city = #{orFacefaceCity,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceDistrict != null">
+				or_faceface_district =
+				#{orFacefaceDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceStatus != null">
+				or_faceface_status =
+				#{orFacefaceStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orFacefaceBrothersId != null">
+				or_faceface_brothers_id =
+				#{orFacefaceBrothersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceCreated != null">
+				or_faceface_created =
+				#{orFacefaceCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFacefaceUpdated != null">
+				or_faceface_updated =
+				#{orFacefaceUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFacefaceLocation != null">
+				or_faceface_location =
+				#{orFacefaceLocation,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_faceface_id = #{orFacefaceId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersFaceface">
+		update
+		orders_faceface
+		set category_id = #{categoryId,jdbcType=BIGINT},
+		or_faceface_alliance_id = #{orFacefaceAllianceId,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		user_phone =
+		#{userPhone,jdbcType=VARCHAR},
+		username = #{username,jdbcType=VARCHAR},
+		or_faceface_province = #{orFacefaceProvince,jdbcType=VARCHAR},
+		or_faceface_city = #{orFacefaceCity,jdbcType=VARCHAR},
+		or_faceface_district = #{orFacefaceDistrict,jdbcType=VARCHAR},
+		or_faceface_status = #{orFacefaceStatus,jdbcType=TINYINT},
+		or_faceface_brothers_id = #{orFacefaceBrothersId,jdbcType=VARCHAR},
+		or_faceface_created = #{orFacefaceCreated,jdbcType=TIMESTAMP},
+		or_faceface_updated = #{orFacefaceUpdated,jdbcType=TIMESTAMP}
+		where
+		or_faceface_id = #{orFacefaceId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_faceface_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orFacefaceId != null and model.orFacefaceId != ''">
+					AND or_faceface_id = #{model.orFacefaceId}
+				</if>
+				<if test="model.categoryId != null">
+					AND category_id= #{model.categoryId}
+				</if>
+				<if
+					test="model.orFacefaceAllianceId != null and model.orFacefaceAllianceId != ''">
+					AND or_faceface_alliance_id= #{model.orFacefaceAllianceId}
+				</if>
+				<if test="model.userId != null and model.userId != ''">
+					AND
+					o.user_id= #{model.userId}
+				</if>
+				<if test="model.userPhone != null and model.userPhone != ''">
+					AND user_phone= #{model.userPhone}
+				</if>
+				<if test="model.username != null and model.username != ''">
+					AND username= #{model.username}
+				</if>
+				<if test="model.orFacefaceStatus != null">
+					AND or_faceface_status= #{model.orFacefaceStatus}
+				</if>
+				<if
+					test="model.orFacefaceBrothersId != null and model.orFacefaceBrothersId != ''">
+					AND or_faceface_brothers_id= #{model.orFacefaceBrothersId}
+				</if>
+				<if
+					test="model.orFacefaceCreated != null and model.orFacefaceCreated != ''">
+					AND or_faceface_created= #{model.orFacefaceCreated}
+				</if>
+				<if
+					test="model.orFacefaceUpdated != null and model.orFacefaceUpdated != ''">
+					AND or_faceface_updated= #{model.orFacefaceUpdated}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersFacefaceResultMap">
+		select * from orders_faceface o LEFT JOIN user_address a
+		ON
+		o.address_id=a.user_address_id
+		<include refid="sql_where" />
+		ORDER BY
+		or_faceface_created
+		DESC
+	</select>
+	<!-- 修改订单状态 -->
+	<update id="modifyOrdersStatus">
+		update
+		orders_faceface
+		set
+		or_faceface_status=
+		#{status},
+		or_faceface_created=NOW()
+		where
+		or_faceface_id = #{ordersId}
+	</update>
+	<!--订单过滤器 -->
+	<sql id="sql_filter">
+		<if test="model != null">
+			<where>
+				<if test="model.orFacefaceId != null and model.orFacefaceId != ''">
+					AND or_faceface_id = #{model.orFacefaceId}
+				</if>
+				<if test="model.categoryId != null">
+					AND category_id= #{model.categoryId}
+				</if>
+				<if
+					test="model.orFacefaceAllianceId != null and model.orFacefaceAllianceId != ''">
+					AND or_faceface_alliance_id= #{model.orFacefaceAllianceId}
+				</if>
+				<if test="model.userId != null and model.userId != ''">
+					AND
+					o.user_id= #{model.userId}
+				</if>
+				<if test="model.userPhone != null and model.userPhone != ''">
+					AND user_phone= #{model.userPhone}
+				</if>
+				<if test="model.username != null and model.username != ''">
+					AND a.user_address_name= #{model.username}
+				</if>
+				<if test="model.orFacefaceStatus != null">
+					AND or_faceface_status= #{model.orFacefaceStatus}
+				</if>
+				<if
+					test="model.orFacefaceBrothersId != null and model.orFacefaceBrothersId != ''">
+					AND or_faceface_brothers_id= #{model.orFacefaceBrothersId}
+				</if>
+				<if test="model.userPhone != null and model.userPhone != ''">
+					AND a.user_address_phone= #{model.userPhone}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchFilter" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersFacefaceResultMap">
+		select * from orders_faceface o LEFT JOIN user_address a
+		ON
+		o.address_id=a.user_address_id
+		<include refid="sql_filter" />
+		ORDER BY
+		or_faceface_created
+		DESC
+	</select>
+
+</mapper>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.user.AllianceBusinessMapper">
+	<resultMap id="allianceBusinessResultMap" type="com.lianjiu.model.AllianceBusiness">
+		<id column="alliance_business_id" property="allianceBusinessId"
+			jdbcType="VARCHAR" />
+		<result column="alliance_business_name" property="allianceBusinessName"
+			jdbcType="VARCHAR" />
+		<result column="alliance_business_password" property="allianceBusinessPassword"
+			jdbcType="VARCHAR" />
+		<result column="alliance_business_nickname" property="allianceBusinessNickname"
+			jdbcType="VARCHAR" />
+		<result column="alliance_business_phone" property="allianceBusinessPhone"
+			jdbcType="VARCHAR" />
+		<result column="alliance_business_details_id" property="allianceBusinessDetailsId"
+			jdbcType="VARCHAR" />
+		<result column="alliance_business_created" property="allianceBusinessCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="alliance_business_updated" property="allianceBusinessUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="alliance_business_logined" property="allianceBusinessLogined"
+			jdbcType="TIMESTAMP" />
+		<result column="alliance_service_token" property="allianceServiceToken"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="allianceBusinessResultMap"
+		parameterType="java.lang.String">select * from alliance_business where
+		alliance_business_id = #{allianceBusinessId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		alliance_business
+		where alliance_business_id =
+		#{allianceBusinessId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.AllianceBusiness">
+		insert into alliance_business
+		(alliance_business_id, alliance_business_name,
+		alliance_business_password, alliance_business_nickname,
+		alliance_business_phone, alliance_business_details_id,
+		alliance_business_created, alliance_business_updated,
+		alliance_business_logined)
+		values
+		(#{allianceBusinessId,jdbcType=VARCHAR},
+		#{allianceBusinessName,jdbcType=VARCHAR},
+		#{allianceBusinessPassword,jdbcType=VARCHAR},
+		#{allianceBusinessNickname,jdbcType=VARCHAR},
+		#{allianceBusinessPhone,jdbcType=VARCHAR},
+		#{allianceBusinessDetailsId,jdbcType=VARCHAR},
+		#{allianceBusinessCreated,jdbcType=TIMESTAMP},
+		#{allianceBusinessUpdated,jdbcType=TIMESTAMP},
+		#{allianceBusinessLogined,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.AllianceBusiness">
+		insert into alliance_business
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="allianceBusinessId != null">
+				alliance_business_id,
+			</if>
+			<if test="allianceBusinessName != null">
+				alliance_business_name,
+			</if>
+			<if test="allianceBusinessPassword != null">
+				alliance_business_password,
+			</if>
+			<if test="allianceBusinessNickname != null">
+				alliance_business_nickname,
+			</if>
+			<if test="allianceBusinessPhone != null">
+				alliance_business_phone,
+			</if>
+			<if test="allianceBusinessDetailsId != null">
+				alliance_business_details_id,
+			</if>
+			<if test="allianceBusinessCreated != null">
+				alliance_business_created,
+			</if>
+			<if test="allianceBusinessUpdated != null">
+				alliance_business_updated,
+			</if>
+			<if test="allianceBusinessLogined != null">
+				alliance_business_logined,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="allianceBusinessId != null">
+				#{allianceBusinessId,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessName != null">
+				#{allianceBusinessName,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessPassword != null">
+				#{allianceBusinessPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessNickname != null">
+				#{allianceBusinessNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessPhone != null">
+				#{allianceBusinessPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessDetailsId != null">
+				#{allianceBusinessDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessCreated != null">
+				#{allianceBusinessCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="allianceBusinessUpdated != null">
+				#{allianceBusinessUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="allianceBusinessLogined != null">
+				#{allianceBusinessLogined,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AllianceBusiness">
+		update alliance_business
+		<set>
+			<if test="allianceBusinessName != null">
+				alliance_business_name =
+				#{allianceBusinessName,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessPassword != null">
+				alliance_business_password =
+				#{allianceBusinessPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessNickname != null">
+				alliance_business_nickname =
+				#{allianceBusinessNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessPhone != null">
+				alliance_business_phone =
+				#{allianceBusinessPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessDetailsId != null">
+				alliance_business_details_id =
+				#{allianceBusinessDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="allianceBusinessCreated != null">
+				alliance_business_created =
+				#{allianceBusinessCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="allianceBusinessUpdated != null">
+				alliance_business_updated =
+				#{allianceBusinessUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="allianceBusinessLogined != null">
+				alliance_business_logined =
+				#{allianceBusinessLogined,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where alliance_business_id = #{allianceBusinessId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AllianceBusiness">
+		update
+		alliance_business
+		set alliance_business_name =
+		#{allianceBusinessName,jdbcType=VARCHAR},
+		alliance_business_password =
+		#{allianceBusinessPassword,jdbcType=VARCHAR},
+		alliance_business_nickname =
+		#{allianceBusinessNickname,jdbcType=VARCHAR},
+		alliance_business_phone =
+		#{allianceBusinessPhone,jdbcType=VARCHAR},
+		alliance_business_details_id =
+		#{allianceBusinessDetailsId,jdbcType=VARCHAR},
+		alliance_business_created =
+		#{allianceBusinessCreated,jdbcType=TIMESTAMP},
+		alliance_business_updated =
+		#{allianceBusinessUpdated,jdbcType=TIMESTAMP},
+		alliance_business_logined =
+		#{allianceBusinessLogined,jdbcType=TIMESTAMP}
+		where
+		alliance_business_id = #{allianceBusinessId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND alliance_business_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.allianceBusinessId != null">AND alliance_business_id =#{model.allianceBusinessId}
+				</if>
+				<if test="model.allianceBusinessName != null">AND alliance_business_name
+					=#{model.allianceBusinessName}
+				</if>
+				<if test="model.allianceBusinessPassword != null">AND alliance_business_password
+					=#{model.allianceBusinessPassword}
+				</if>
+				<if test="model.allianceBusinessNickname != null">AND alliance_business_nickname
+					=#{model.allianceBusinessNickname}
+				</if>
+				<if test="model.allianceBusinessPhone != null">AND alliance_business_phone
+					=#{model.allianceBusinessPhone}
+				</if>
+				<if test="model.allianceBusinessDetailsId != null">AND alliance_business_details_id
+					=#{model.allianceBusinessDetailsId}
+				</if>
+				<if test="model.allianceBusinessCreated != null">AND alliance_business_created
+					=#{model.allianceBusinessCreated}
+				</if>
+				<if test="model.allianceBusinessUpdated != null">AND alliance_business_updated
+					=#{model.allianceBusinessUpdated}
+				</if>
+				<if test="model.allianceBusinessLogined != null">AND alliance_business_logined
+					=#{model.allianceBusinessLogined}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="allianceBusinessResultMap">
+		select * from alliance_business
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

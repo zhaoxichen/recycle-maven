@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/lianjiuWorkspace.iml" filepath="$PROJECT_DIR$/.idea/lianjiuWorkspace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_common/lianjiu_common.iml" filepath="$PROJECT_DIR$/lianjiu_common/lianjiu_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager.iml" filepath="$PROJECT_DIR$/lianjiu_manager/lianjiu_manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_service/lianjiu_manager_service.iml" filepath="$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_service/lianjiu_manager_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_web/lianjiu_manager_web.iml" filepath="$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_web/lianjiu_manager_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order.iml" filepath="$PROJECT_DIR$/lianjiu_order/lianjiu_order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_service/lianjiu_order_service.iml" filepath="$PROJECT_DIR$/lianjiu_order/lianjiu_order_service/lianjiu_order_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_web/lianjiu_order_web.iml" filepath="$PROJECT_DIR$/lianjiu_order/lianjiu_order_web/lianjiu_order_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_parent/lianjiu_parent.iml" filepath="$PROJECT_DIR$/lianjiu_parent/lianjiu_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment.iml" filepath="$PROJECT_DIR$/lianjiu_payment/lianjiu_payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_dao/lianjiu_payment_dao.iml" filepath="$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_dao/lianjiu_payment_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_service/lianjiu_payment_service.iml" filepath="$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_service/lianjiu_payment_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_web/lianjiu_payment_web.iml" filepath="$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_web/lianjiu_payment_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest.iml" filepath="$PROJECT_DIR$/lianjiu_rest/lianjiu_rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_dao/lianjiu_rest_dao.iml" filepath="$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_dao/lianjiu_rest_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_model/lianjiu_rest_model.iml" filepath="$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_model/lianjiu_rest_model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_service/lianjiu_rest_service.iml" filepath="$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_service/lianjiu_rest_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_web/lianjiu_rest_web.iml" filepath="$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_web/lianjiu_rest_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_source_upload/lianjiu_source_upload.iml" filepath="$PROJECT_DIR$/lianjiu_source_upload/lianjiu_source_upload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_sso/lianjiu_sso.iml" filepath="$PROJECT_DIR$/lianjiu_sso/lianjiu_sso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_service/lianjiu_sso_service.iml" filepath="$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_service/lianjiu_sso_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_web/lianjiu_sso_web.iml" filepath="$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_web/lianjiu_sso_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_timer/lianjiu_timer.iml" filepath="$PROJECT_DIR$/lianjiu_timer/lianjiu_timer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_service/lianjiu_timer_service.iml" filepath="$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_service/lianjiu_timer_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_web/lianjiu_timer_web.iml" filepath="$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_web/lianjiu_timer_web.iml" />
+    </modules>
+  </component>
+</project>

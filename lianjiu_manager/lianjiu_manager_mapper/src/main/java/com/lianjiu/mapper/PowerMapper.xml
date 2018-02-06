@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.PowerMapper">
+	<resultMap id="powerResultMap" type="com.lianjiu.model.Power">
+		<id column="power_id" property="powerId" jdbcType="VARCHAR" />
+		<result column="power_name" property="powerName" jdbcType="VARCHAR" />
+		<result column="power_url" property="powerUrl" jdbcType="VARCHAR" />
+		<result column="power_created" property="powerCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="power_updated" property="powerUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="power_remarks" property="powerRemarks"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="powerResultMap"
+		parameterType="java.lang.String">select * from power where power_id =
+		#{powerId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from power
+		where power_id = #{powerId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Power">
+		insert into power (power_id,
+		power_name, power_url,
+		power_created, power_updated, power_remarks
+		)
+		values (#{powerId,jdbcType=VARCHAR}, #{powerName,jdbcType=VARCHAR},
+		#{powerUrl,jdbcType=VARCHAR},
+		#{powerCreated,jdbcType=TIMESTAMP},
+		#{powerUpdated,jdbcType=TIMESTAMP}, #{powerRemarks,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Power">
+		insert into power
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="powerId != null">
+				power_id,
+			</if>
+			<if test="powerName != null">
+				power_name,
+			</if>
+			<if test="powerUrl != null">
+				power_url,
+			</if>
+			<if test="powerCreated != null">
+				power_created,
+			</if>
+			<if test="powerUpdated != null">
+				power_updated,
+			</if>
+			<if test="powerRemarks != null">
+				power_remarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="powerId != null">
+				#{powerId,jdbcType=VARCHAR},
+			</if>
+			<if test="powerName != null">
+				#{powerName,jdbcType=VARCHAR},
+			</if>
+			<if test="powerUrl != null">
+				#{powerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="powerCreated != null">
+				#{powerCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="powerUpdated != null">
+				#{powerUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="powerRemarks != null">
+				#{powerRemarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Power">
+		update power
+		<set>
+			<if test="powerName != null">
+				power_name = #{powerName,jdbcType=VARCHAR},
+			</if>
+			<if test="powerUrl != null">
+				power_url = #{powerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="powerCreated != null">
+				power_created = #{powerCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="powerUpdated != null">
+				power_updated = #{powerUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="powerRemarks != null">
+				power_remarks = #{powerRemarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where power_id = #{powerId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Power">
+		update power
+		set
+		power_name = #{powerName,jdbcType=VARCHAR},
+		power_url =
+		#{powerUrl,jdbcType=VARCHAR},
+		power_created =
+		#{powerCreated,jdbcType=TIMESTAMP},
+		power_updated =
+		#{powerUpdated,jdbcType=TIMESTAMP},
+		power_remarks =
+		#{powerRemarks,jdbcType=VARCHAR}
+		where power_id =
+		#{powerId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND power_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.powerId != null">AND power_id =#{model.powerId}</if>
+				<if test="model.powerName != null">AND power_name =#{model.powerName}</if>
+				<if test="model.powerUrl != null">AND power_url =#{model.powerUrl}</if>
+				<if test="model.powerCreated != null">AND power_created =#{model.powerCreated}</if>
+				<if test="model.powerUpdated != null">AND power_updated =#{model.powerUpdated}</if>
+				<if test="model.powerRemarks != null">AND power_remarks =#{model.powerRemarks}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="powerResultMap">
+		select * from power
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

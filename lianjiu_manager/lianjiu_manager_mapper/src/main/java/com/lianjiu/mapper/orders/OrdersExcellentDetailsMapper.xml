@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersExcellentDetailsMapper">
+	<resultMap id="ordersExcellentDetailsResultMap" type="com.lianjiu.model.OrdersExcellentDetails">
+		<id column="or_exce_details_id" property="orExceDetailsId"
+			jdbcType="VARCHAR" />
+		<result column="or_excellent_id" property="orExcellentId"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_price" property="orExceDetailsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_lianjiuPay" property="orExceDetailsLianjiupay"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_othersPay" property="orExceDetailsOtherspay"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_expressNum" property="orExceDetailsExpressnum"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_product_name" property="orExceProductName"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_created" property="orExceDetailsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_exce_details_updated" property="orExceDetailsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_exce_product_param" property="orExceProductParam"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersExcellentDetailsResultMap"
+		parameterType="java.lang.String">
+		select * from orders_excellent_details where or_exce_details_id =
+		#{orExceDetailsId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from orders_excellent_details
+		where or_exce_details_id = #{orExceDetailsId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersExcellentDetails">
+		insert into orders_excellent_details (or_exce_details_id, or_excellent_id,
+		or_exce_details_price,
+		or_exce_details_lianjiuPay, or_exce_details_othersPay,
+		or_exce_details_expressNum, or_exce_product_name,
+		or_exce_details_created, or_exce_details_updated,
+		or_exce_product_param)
+		values (#{orExceDetailsId,jdbcType=VARCHAR},
+		#{orExcellentId,jdbcType=VARCHAR},
+		#{orExceDetailsPrice,jdbcType=VARCHAR},
+		#{orExceDetailsLianjiupay,jdbcType=VARCHAR},
+		#{orExceDetailsOtherspay,jdbcType=VARCHAR},
+		#{orExceDetailsExpressnum,jdbcType=VARCHAR},
+		#{orExceProductName,jdbcType=VARCHAR},
+		#{orExceDetailsCreated,jdbcType=TIMESTAMP},
+		#{orExceDetailsUpdated,jdbcType=TIMESTAMP},
+		#{orExceProductParam,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersExcellentDetails">
+		insert into orders_excellent_details
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orExceDetailsId != null">
+				or_exce_details_id,
+			</if>
+			<if test="orExcellentId != null">
+				or_excellent_id,
+			</if>
+			<if test="orExceDetailsPrice != null">
+				or_exce_details_price,
+			</if>
+			<if test="orExceDetailsLianjiupay != null">
+				or_exce_details_lianjiuPay,
+			</if>
+			<if test="orExceDetailsOtherspay != null">
+				or_exce_details_othersPay,
+			</if>
+			<if test="orExceDetailsExpressnum != null">
+				or_exce_details_expressNum,
+			</if>
+			<if test="orExceProductName != null">
+				or_exce_product_name,
+			</if>
+			<if test="orExceDetailsCreated != null">
+				or_exce_details_created,
+			</if>
+			<if test="orExceDetailsUpdated != null">
+				or_exce_details_updated,
+			</if>
+			<if test="orExceProductParam != null">
+				or_exce_product_param,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orExceDetailsId != null">
+				#{orExceDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExcellentId != null">
+				#{orExcellentId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsPrice != null">
+				#{orExceDetailsPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsLianjiupay != null">
+				#{orExceDetailsLianjiupay,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsOtherspay != null">
+				#{orExceDetailsOtherspay,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsExpressnum != null">
+				#{orExceDetailsExpressnum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceProductName != null">
+				#{orExceProductName,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsCreated != null">
+				#{orExceDetailsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceDetailsUpdated != null">
+				#{orExceDetailsUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceProductParam != null">
+				#{orExceProductParam,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersExcellentDetails">
+		update orders_excellent_details
+		<set>
+			<if test="orExcellentId != null">
+				or_excellent_id = #{orExcellentId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsPrice != null">
+				or_exce_details_price = #{orExceDetailsPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsLianjiupay != null">
+				or_exce_details_lianjiuPay = #{orExceDetailsLianjiupay,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsOtherspay != null">
+				or_exce_details_othersPay = #{orExceDetailsOtherspay,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsExpressnum != null">
+				or_exce_details_expressNum = #{orExceDetailsExpressnum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceProductName != null">
+				or_exce_product_name = #{orExceProductName,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsCreated != null">
+				or_exce_details_created = #{orExceDetailsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceDetailsUpdated != null">
+				or_exce_details_updated = #{orExceDetailsUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceProductParam != null">
+				or_exce_product_param = #{orExceProductParam,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_exce_details_id = #{orExceDetailsId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersExcellentDetails">
+		update orders_excellent_details
+		set or_excellent_id = #{orExcellentId,jdbcType=VARCHAR},
+		or_exce_details_price = #{orExceDetailsPrice,jdbcType=VARCHAR},
+		or_exce_details_lianjiuPay =
+		#{orExceDetailsLianjiupay,jdbcType=VARCHAR},
+		or_exce_details_othersPay = #{orExceDetailsOtherspay,jdbcType=VARCHAR},
+		or_exce_details_expressNum =
+		#{orExceDetailsExpressnum,jdbcType=VARCHAR},
+		or_exce_product_name = #{orExceProductName,jdbcType=VARCHAR},
+		or_exce_details_created = #{orExceDetailsCreated,jdbcType=TIMESTAMP},
+		or_exce_details_updated = #{orExceDetailsUpdated,jdbcType=TIMESTAMP}
+		where or_exce_details_id = #{orExceDetailsId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_exce_details_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orExceDetailsId != null">AND or_exce_details_id =#{model.orExceDetailsId}</if>
+				<if test="model.orExcellentId != null">AND or_excellent_id =#{model.orExcellentId}</if>
+				<if test="model.orExceDetailsPrice != null">AND or_exce_details_price =#{model.orExceDetailsPrice}
+				</if>
+				<if test="model.orExceDetailsLianjiupay != null">AND or_exce_details_lianjiuPay
+					=#{model.orExceDetailsLianjiupay}</if>
+				<if test="model.orExceDetailsOtherspay != null">AND or_exce_details_othersPay
+					=#{model.orExceDetailsOtherspay}</if>
+				<if test="model.orExceDetailsExpressnum != null">AND or_exce_details_expressNum
+					=#{model.orExceDetailsExpressnum}</if>
+				<if test="model.orExceProductName != null">AND or_exce_product_name =#{model.orExceProductName}
+				</if>
+				<if test="model.orExceDetailsCreated != null">AND or_exce_details_created
+					=#{model.orExceDetailsCreated}</if>
+				<if test="model.orExceDetailsUpdated != null">AND or_exce_details_updated
+					=#{model.orExceDetailsUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersExcellentDetailsResultMap">
+		select * from orders_excellent_details
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

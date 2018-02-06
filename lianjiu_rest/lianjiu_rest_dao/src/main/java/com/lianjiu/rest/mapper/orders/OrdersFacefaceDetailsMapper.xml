@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersFacefaceDetailsMapper">
+	<resultMap id="ordersFacefaceDetailsResultMap" type="com.lianjiu.model.OrdersFacefaceDetails">
+		<id column="or_ff_details_id" property="orFfDetailsId" jdbcType="VARCHAR" />
+		<result column="or_faceface_id" property="orFacefaceId"
+			jdbcType="VARCHAR" />
+		<result column="or_faceface_id" property="orFacefaceId"
+			jdbcType="VARCHAR" />
+		<result column="or_faceface_alliance_id" property="orFfDetailsAllianceId"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_details_price" property="orFfDetailsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_details_retr_price" property="orFfDetailsRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_details_payTime" property="orFfDetailsPaytime"
+			jdbcType="TIMESTAMP" />
+		<result column="or_ff_details_handler_id" property="orFfDetailsHandlerId"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_details_updated" property="orFfDetailsUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersFacefaceDetailsResultMap"
+		parameterType="java.lang.String">select * from orders_faceface_details where
+		or_ff_details_id = #{orFfDetailsId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_faceface_details
+		where or_ff_details_id =
+		#{orFfDetailsId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersFacefaceDetails">
+		insert into
+		orders_faceface_details (or_ff_details_id, or_faceface_id,
+		or_ff_details_price,
+		or_ff_details_retr_price, or_ff_details_payTime,
+		or_ff_details_handler_id, or_ff_details_updated
+		)
+		values
+		(#{orFfDetailsId,jdbcType=VARCHAR}, #{orFacefaceId,jdbcType=VARCHAR},
+		#{orFfDetailsPrice,jdbcType=VARCHAR},
+		#{orFfDetailsRetrPrice,jdbcType=VARCHAR},
+		#{orFfDetailsPaytime,jdbcType=TIMESTAMP},
+		#{orFfDetailsHandlerId,jdbcType=VARCHAR},
+		now()
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersFacefaceDetails">
+		insert into orders_faceface_details
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orFfDetailsId != null">
+				or_ff_details_id,
+			</if>
+			<if test="orFacefaceId != null">
+				or_faceface_id,
+			</if>
+			<if test="orFfDetailsPrice != null">
+				or_ff_details_price,
+			</if>
+			<if test="orFfDetailsRetrPrice != null">
+				or_ff_details_retr_price,
+			</if>
+			<if test="orFfDetailsPaytime != null">
+				or_ff_details_payTime,
+			</if>
+			<if test="orFfDetailsHandlerId != null">
+				or_ff_details_handler_id,
+			</if>
+			<if test="orFfDetailsUpdated != null">
+				or_ff_details_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orFfDetailsId != null">
+				#{orFfDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFacefaceId != null">
+				#{orFacefaceId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsPrice != null">
+				#{orFfDetailsPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsRetrPrice != null">
+				#{orFfDetailsRetrPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsPaytime != null">
+				#{orFfDetailsPaytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFfDetailsHandlerId != null">
+				#{orFfDetailsHandlerId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsUpdated != null">
+				now(),
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersFacefaceDetails">
+		update orders_faceface_details
+		<set>
+			<if test="orFacefaceId != null and orFacefaceId !=''">
+				or_faceface_id = #{orFacefaceId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsPrice != null and orFfDetailsPrice !=''">
+				or_ff_details_price =
+				#{orFfDetailsPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsRetrPrice != null and orFfDetailsRetrPrice !=''">
+				or_ff_details_retr_price =
+				#{orFfDetailsRetrPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsPaytime != null">
+				or_ff_details_payTime =
+				#{orFfDetailsPaytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFfDetailsHandlerId != null and orFfDetailsHandlerId !=''">
+				or_ff_details_handler_id =
+				#{orFfDetailsHandlerId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfDetailsUpdated != null">
+				or_ff_details_updated =
+				now(),
+			</if>
+		</set>
+		where or_ff_details_id = #{orFfDetailsId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersFacefaceDetails">
+		update
+		orders_faceface_details
+		set or_faceface_id =
+		#{orFacefaceId,jdbcType=VARCHAR},
+		or_ff_details_price =
+		#{orFfDetailsPrice,jdbcType=VARCHAR},
+		or_ff_details_retr_price =
+		#{orFfDetailsRetrPrice,jdbcType=VARCHAR},
+		or_ff_details_payTime =
+		#{orFfDetailsPaytime,jdbcType=TIMESTAMP},
+		or_ff_details_handler_id =
+		#{orFfDetailsHandlerId,jdbcType=VARCHAR},
+		or_ff_details_updated =
+		now()
+		where or_ff_details_id =
+		#{orFfDetailsId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_ff_details_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orFfDetailsId != null">
+					AND or_ff_details_id =#{model.orFfDetailsId}
+				</if>
+				<if test="model.orFacefaceId != null">
+					AND or_faceface_id =#{model.orFacefaceId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersFacefaceDetailsResultMap">
+		select * from orders_faceface_details
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<!-- 确认价格 -->
+	<update id="modifyVisitPrice" parameterType="com.lianjiu.model.OrdersFacefaceDetails">
+		update
+		orders_faceface o INNER JOIN orders_faceface_details od ON
+		o.or_faceface_id = od.or_faceface_id set
+		od.or_ff_details_retr_price
+		=#{orFfDetailsRetrPrice},
+		od.or_ff_details_updated = now(),
+		o.or_faceface_status = #{orFacefaceStatus},
+		o.or_faceface_updated =
+		now()
+		where
+		od.or_faceface_id =
+		#{orFacefaceId}
+	</update>
+
+	<select id="selectByFacefaceId" parameterType="java.lang.String"
+		resultMap="ordersFacefaceDetailsResultMap">
+		select * from orders_faceface_details where
+		or_faceface_id=#{orFacefaceId}
+	</select>
+	<!-- 加盟商修改回收价格 -->
+	<update id="modifyRetrPrice" parameterType="java.lang.String">
+		update
+		orders_faceface o INNER JOIN orders_faceface_details od ON
+		o.or_faceface_id = od.or_faceface_id set
+		od.or_ff_details_retr_price
+		=#{orFfDetailsRetrPrice},
+		o.or_faceface_status = 6
+		where
+		od.or_faceface_id =
+		#{orFacefaceId}
+	</update>
+	<select id="slectPriceByOrderNo" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select or_ff_details_retr_price from
+		orders_faceface_details where
+		or_faceface_id = #{0}
+	</select>
+	<select id="selectByOrdersId" resultMap="ordersFacefaceDetailsResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		o.or_faceface_alliance_id,
+		od.or_faceface_id,
+		od.or_ff_details_price,
+		od.or_ff_details_retr_price,
+		od.or_ff_details_payTime,
+		od.or_ff_details_handler_id
+		FROM
+		orders_faceface o
+		LEFT JOIN orders_faceface_details od ON o.or_faceface_id =
+		od.or_faceface_id
+		where
+		o.or_faceface_id = #{value}
+	</select>
+	<select id="getRetrPriceByOid" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select or_ff_details_retr_price from
+		orders_faceface_details where
+		or_faceface_id = #{orderId}
+	</select>
+</mapper>

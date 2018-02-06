@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersRemarksMapper">
+	<resultMap id="ordersRemarksResultMap" type="com.lianjiu.model.OrdersRemarks">
+		<id column="or_remarks_id" property="orRemarksId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="admin_username" property="adminUsername"
+			jdbcType="VARCHAR" />
+		<result column="or_remarks_created" property="orRemarksCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_remarks_updated" property="orRemarksUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_remarks_content" property="orRemarksContent"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersRemarksResultMap"
+		parameterType="java.lang.String">
+		select * from orders_remarks where or_remarks_id =
+		#{orRemarksId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_remarks
+		where or_remarks_id = #{orRemarksId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersRemarks">
+		insert into orders_remarks
+		(or_remarks_id, orders_id, admin_username,
+		or_remarks_created,
+		or_remarks_updated,
+		or_remarks_content)
+		values
+		(#{orRemarksId,jdbcType=VARCHAR}, #{ordersId,jdbcType=VARCHAR},
+		#{adminUsername,jdbcType=VARCHAR},
+		now(),
+		now(),
+		#{orRemarksContent,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersRemarks">
+		insert into orders_remarks
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orRemarksId != null">
+				or_remarks_id,
+			</if>
+			<if test="ordersId != null">
+				orders_id,
+			</if>
+			<if test="adminUsername != null">
+				admin_username,
+			</if>
+			<if test="orRemarksCreated != null">
+				or_remarks_created,
+			</if>
+			<if test="orRemarksUpdated != null">
+				or_remarks_updated,
+			</if>
+			<if test="orRemarksContent != null">
+				or_remarks_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orRemarksId != null">
+				#{orRemarksId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersId != null">
+				#{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="adminUsername != null">
+				#{adminUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="orRemarksCreated != null">
+				#{orRemarksCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRemarksUpdated != null">
+				now(),
+			</if>
+			<if test="orRemarksContent != null">
+				#{orRemarksContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersRemarks">
+		update orders_remarks
+		<set>
+			<if test="ordersId != null and ordersId !=''">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="adminUsername != null and adminUsername !=''">
+				admin_username = #{adminUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="orRemarksCreated != null">
+				or_remarks_created =
+				#{orRemarksCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRemarksUpdated != null">
+				or_remarks_updated =
+				now(),
+			</if>
+			<if test="orRemarksContent != null and orRemarksContent !=''">
+				or_remarks_content =
+				#{orRemarksContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_remarks_id = #{orRemarksId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersRemarks">
+		update
+		orders_remarks
+		set orders_id = #{ordersId,jdbcType=VARCHAR},
+		admin_username = #{adminUsername,jdbcType=VARCHAR},
+		or_remarks_created
+		= #{orRemarksCreated,jdbcType=TIMESTAMP},
+		or_remarks_updated =
+		now()
+		where or_remarks_id =
+		#{orRemarksId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_remarks_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orRemarksId != null">AND or_remarks_id =#{model.orRemarksId}</if>
+				<if test="model.ordersId != null">AND orders_id =#{model.ordersId}</if>
+				<if test="model.adminUsername != null">AND admin_username =#{model.adminUsername}</if>
+				<if test="model.orRemarksCreated != null">AND or_remarks_created =#{model.orRemarksCreated}</if>
+				<if test="model.orRemarksUpdated != null">AND or_remarks_updated =now()</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersRemarksResultMap">
+		select * from orders_remarks
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.ContentMapper">
+	<!--重映射 -->
+	<resultMap id="contentResultMap" type="com.lianjiu.model.Content">
+		<id column="content_id" property="contentId" jdbcType="BIGINT" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="content_title" property="contentTitle"
+			jdbcType="VARCHAR" />
+		<result column="content_sub_title" property="contentSubTitle"
+			jdbcType="VARCHAR" />
+		<result column="content_title_desc" property="contentTitleDesc"
+			jdbcType="VARCHAR" />
+		<result column="content_url" property="contentUrl" jdbcType="VARCHAR" />
+		<result column="content_ordering" property="contentOrdering"
+			jdbcType="TINYINT" />
+		<result column="content_image" property="contentImage"
+			jdbcType="VARCHAR" />
+		<result column="content_created" property="contentCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="content_updated" property="contentUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!--通过主键删除所有 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		content
+		where content_id = #{contentId,jdbcType=BIGINT}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.Content">
+		insert into content
+		(content_id, category_id, content_title,
+		content_sub_title,
+		content_title_desc, content_url,
+		content_ordering, content_image,
+		content_created,
+		content_updated, content_content)
+		values
+		(#{contentId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT},
+		#{contentTitle,jdbcType=VARCHAR},
+		#{contentSubTitle,jdbcType=VARCHAR},
+		#{contentTitleDesc,jdbcType=VARCHAR}, #{contentUrl,jdbcType=VARCHAR},
+		#{contentOrdering,jdbcType=TINYINT}, #{contentImage,jdbcType=VARCHAR},
+		#{contentCreated,jdbcType=TIMESTAMP},
+		#{contentUpdated,jdbcType=TIMESTAMP},
+		#{contentContent,jdbcType=LONGVARCHAR})
+	</insert>
+	<!--条件插入 -->
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Content">
+		insert into content
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="contentId != null">
+				content_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="contentTitle != null">
+				content_title,
+			</if>
+			<if test="contentSubTitle != null">
+				content_sub_title,
+			</if>
+			<if test="contentTitleDesc != null">
+				content_title_desc,
+			</if>
+			<if test="contentUrl != null">
+				content_url,
+			</if>
+			<if test="contentOrdering != null">
+				content_ordering,
+			</if>
+			<if test="contentImage != null">
+				content_image,
+			</if>
+			<if test="contentCreated != null">
+				content_created,
+			</if>
+			<if test="contentUpdated != null">
+				content_updated,
+			</if>
+			<if test="contentContent != null">
+				content_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="contentId != null">
+				#{contentId,jdbcType=BIGINT},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="contentTitle != null">
+				#{contentTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="contentSubTitle != null">
+				#{contentSubTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="contentTitleDesc != null">
+				#{contentTitleDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="contentUrl != null">
+				#{contentUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="contentOrdering != null">
+				#{contentOrdering,jdbcType=TINYINT},
+			</if>
+			<if test="contentImage != null">
+				#{contentImage,jdbcType=VARCHAR},
+			</if>
+			<if test="contentCreated != null">
+				#{contentCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="contentUpdated != null">
+				#{contentUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="contentContent != null">
+				#{contentContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!--通过主键条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Content">
+		update content
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="contentTitle != null">
+				content_title = #{contentTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="contentSubTitle != null">
+				content_sub_title = #{contentSubTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="contentTitleDesc != null">
+				content_title_desc =
+				#{contentTitleDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="contentUrl != null">
+				content_url = #{contentUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="contentOrdering != null">
+				content_ordering = #{contentOrdering,jdbcType=TINYINT},
+			</if>
+			<if test="contentImage != null">
+				content_image = #{contentImage,jdbcType=VARCHAR},
+			</if>
+			<if test="contentCreated != null">
+				content_created = #{contentCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="contentUpdated != null">
+				content_updated = #{contentUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="contentContent != null">
+				content_content = #{contentContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where content_id = #{contentId,jdbcType=BIGINT}
+	</update>
+	<!--sql片段 -->
+	<!--统计数量 -->
+	<sql id="sql_count">select count(*) as totalItems</sql>
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and contentId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND content_id=#{contentId}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.contentId != null and model.contentId.length()>0">
+					AND content_id=#{model.contentId}
+				</if>
+				<if test="model.categoryId != null and model.categoryId.length()>0">
+					AND category_id=#{model.categoryId}
+				</if>
+				<if test="model.contentTitle != null and model.contentTitle.length()>0">
+					AND content_title=#{model.contentTitle}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="contentResultMap">
+		select * from content
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

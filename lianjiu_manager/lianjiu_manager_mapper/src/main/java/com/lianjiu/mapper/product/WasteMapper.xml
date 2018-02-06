@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.product.WasteMapper">
+	<!--重映射 -->
+	<resultMap id="wasteResultMap" type="com.lianjiu.model.Waste">
+		<result column="waste_id" property="wasteId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="waste_name" property="wasteName" jdbcType="VARCHAR" />
+		<result column="waste_retrieve_way" property="wasteRetrieveWay"
+			jdbcType="VARCHAR" />
+		<result column="waste_volume" property="wasteVolume" jdbcType="VARCHAR" />
+		<result column="waste_image" property="wasteImage" jdbcType="VARCHAR" />
+		<result column="waste_created" property="wasteCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="waste_updated" property="wasteUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="wasteResultMap"
+		parameterType="java.lang.String">
+		select
+		from waste
+		where waste_id =
+		#{wasteId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from waste
+		where waste_id = #{wasteId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Waste">
+		insert into waste (waste_id,
+		user_id, category_id,
+		waste_name, waste_retrieve_way, waste_volume,
+		waste_image, waste_created, waste_updated
+		)
+		values
+		(#{wasteId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{wasteName,jdbcType=VARCHAR},
+		#{wasteRetrieveWay,jdbcType=VARCHAR},
+		#{wasteVolume,jdbcType=VARCHAR},
+		#{wasteImage,jdbcType=VARCHAR}, #{wasteCreated,jdbcType=TIMESTAMP},
+		#{wasteUpdated,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Waste">
+		insert into waste
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wasteId != null">
+				waste_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="wasteName != null">
+				waste_name,
+			</if>
+			<if test="wasteRetrieveWay != null">
+				waste_retrieve_way,
+			</if>
+			<if test="wasteVolume != null">
+				waste_volume,
+			</if>
+			<if test="wasteImage != null">
+				waste_image,
+			</if>
+			<if test="wasteCreated != null">
+				waste_created,
+			</if>
+			<if test="wasteUpdated != null">
+				waste_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wasteId != null">
+				#{wasteId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="wasteName != null">
+				#{wasteName,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteRetrieveWay != null">
+				#{wasteRetrieveWay,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteVolume != null">
+				#{wasteVolume,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteImage != null">
+				#{wasteImage,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteCreated != null">
+				#{wasteCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wasteUpdated != null">
+				#{wasteUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Waste">
+		update waste
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="wasteName != null">
+				waste_name = #{wasteName,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteRetrieveWay != null">
+				waste_retrieve_way =
+				#{wasteRetrieveWay,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteVolume != null">
+				waste_volume = #{wasteVolume,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteImage != null">
+				waste_image = #{wasteImage,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteCreated != null">
+				waste_created = #{wasteCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wasteUpdated != null">
+				waste_updated = #{wasteUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where waste_id = #{wasteId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Waste">
+		update waste
+		set
+		user_id = #{userId,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		waste_name =
+		#{wasteName,jdbcType=VARCHAR},
+		waste_retrieve_way =
+		#{wasteRetrieveWay,jdbcType=VARCHAR},
+		waste_volume =
+		#{wasteVolume,jdbcType=VARCHAR},
+		waste_image =
+		#{wasteImage,jdbcType=VARCHAR},
+		waste_created =
+		#{wasteCreated,jdbcType=TIMESTAMP},
+		waste_updated =
+		#{wasteUpdated,jdbcType=TIMESTAMP}
+		where waste_id =
+		#{wasteId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and wasteId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND waste_id=#{id}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.wasteId != null and model.wasteId.length()>0">
+					AND waste_id=#{model.wasteId}
+				</if>
+				<if test="model.userId != null and model.userId.length()>0">
+					AND user_id=#{model.userId}
+				</if>
+				<if test="model.categoryId != null">
+					AND category_id=#{model.categoryId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="wasteResultMap">
+		select * from waste
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		waste_created
+		DESC
+	</select>
+</mapper>

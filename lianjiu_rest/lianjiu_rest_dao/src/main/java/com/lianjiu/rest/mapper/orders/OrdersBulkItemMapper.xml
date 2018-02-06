@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersBulkItemMapper">
+	<resultMap id="ordersBulkItemResultMap" type="com.lianjiu.model.OrdersBulkItem">
+		<id column="bulk_item_id" property="bulkItemId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="bulk_item_name" property="bulkItemName"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_product_id" property="bulkItemProductId"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_price" property="bulkItemPrice"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_price_current" property="bulkItemPriceCurrent"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_account_price" property="bulkItemAccountPrice"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_account_retr_price" property="bulkItemAccountRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_num" property="bulkItemNum" jdbcType="VARCHAR" />
+		<result column="bulk_item_num_modify" property="bulkItemNumModify"
+			jdbcType="VARCHAR" />
+		<result column="bulk_item_unit" property="bulkItemUnit"
+			jdbcType="TINYINT" />
+		<result column="bulk_item_volume" property="bulkItemVolume"
+			jdbcType="TINYINT" />
+		<result column="bulk_item_created" property="bulkItemCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="bulk_item_updated" property="bulkItemUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersBulkItemResultMap"
+		parameterType="java.lang.String">select * from orders_bulk_item where bulk_item_id =
+		#{bulkItemId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_bulk_item
+		where bulk_item_id = #{bulkItemId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersBulkItem">
+		insert into orders_bulk_item
+		(bulk_item_id, orders_id, bulk_item_name,
+		bulk_item_product_id,
+		bulk_item_price,
+		bulk_item_account_price,
+		bulk_item_num,
+		bulk_item_num_modify,
+		bulk_item_unit, bulk_item_volume,
+		bulk_item_created,
+		bulk_item_updated)
+		values
+		(#{bulkItemId,jdbcType=VARCHAR}, #{ordersId,jdbcType=VARCHAR},
+		#{bulkItemName,jdbcType=VARCHAR},
+		#{bulkItemProductId,jdbcType=VARCHAR},
+		#{bulkItemPrice,jdbcType=VARCHAR},
+		#{bulkItemAccountPrice,jdbcType=VARCHAR},
+		#{bulkItemNum,jdbcType=VARCHAR},
+		#{bulkItemNum,jdbcType=VARCHAR},
+		#{bulkItemUnit,jdbcType=TINYINT}, #{bulkItemVolume,jdbcType=TINYINT},
+		NOW(),
+		NOW())
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersBulkItem">
+		update orders_bulk_item
+		<set>
+			<if test="ordersId != null">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemName != null">
+				bulk_item_name = #{bulkItemName,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemProductId != null">
+				bulk_item_product_id =
+				#{bulkItemProductId,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemPicture != null">
+				bulk_item_picture = #{bulkItemPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemPrice != null">
+				bulk_item_price = #{bulkItemPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemAccountPrice != null">
+				bulk_item_account_price =
+				#{bulkItemAccountPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemNum != null">
+				bulk_item_num = #{bulkItemNum,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemNumModify != null">
+				bulk_item_num_modify =
+				#{bulkItemNumModify,jdbcType=VARCHAR},
+			</if>
+			<if test="bulkItemUnit != null">
+				bulk_item_unit = #{bulkItemUnit,jdbcType=TINYINT},
+			</if>
+			<if test="bulkItemVolume != null">
+				bulk_item_volume = #{bulkItemVolume,jdbcType=TINYINT},
+			</if>
+			bulk_item_updated =
+			NOW()
+		</set>
+		where bulk_item_id = #{bulkItemId,jdbcType=VARCHAR}
+	</update>
+	<!-- 获取大宗订单详情 -->
+	<select id="selectItemByOrdersId" resultMap="ordersBulkItemResultMap">
+		select
+		bulk_item_id,bulk_item_product_id,bulk_item_name,orders_id,bulk_item_price,bulk_item_price_current,bulk_item_account_retr_price,
+		bulk_item_account_price,bulk_item_num,bulk_item_num_modify,bulk_item_unit,bulk_item_created
+		from orders_bulk_item where orders_id = #{ordersId}
+	</select>
+	<!-- 批量插入 -->
+	<insert id="addItemList" parameterType="java.util.List">
+		insert into orders_bulk_item (
+		bulk_item_id, orders_id, bulk_item_name,
+		bulk_item_product_id,
+		bulk_item_price,
+		bulk_item_price_current,
+		bulk_item_account_price,
+		bulk_item_account_retr_price,
+		bulk_item_num,
+		bulk_item_num_modify,
+		bulk_item_unit,
+		bulk_item_volume,bulk_item_product_cid,
+		bulk_item_created,
+		bulk_item_updated)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.bulkItemId,jdbcType=VARCHAR},
+			#{item.ordersId,jdbcType=VARCHAR},
+			#{item.bulkItemName,jdbcType=VARCHAR},
+			#{item.bulkItemProductId,jdbcType=VARCHAR},
+			#{item.bulkItemPrice,jdbcType=VARCHAR},
+			#{item.bulkItemPrice,jdbcType=VARCHAR},
+			#{item.bulkItemAccountPrice,jdbcType=VARCHAR},
+			#{item.bulkItemAccountPrice,jdbcType=VARCHAR},
+			#{item.bulkItemNum,jdbcType=VARCHAR},
+			#{item.bulkItemNum,jdbcType=VARCHAR},
+			#{item.bulkItemUnit,jdbcType=TINYINT},
+			#{item.bulkItemVolume,jdbcType=TINYINT},
+			#{item.bulkItemProductCid,jdbcType=BIGINT},
+			NOW(),
+			NOW())
+		</foreach>
+	</insert>
+	<select id="getCreatedById" resultType="java.util.Date">
+		select bulk_item_created
+		from orders_bulk_item where orders_id = #{ordersId}
+	</select>
+	<!--批量更新 -->
+	<update id="updateItemList" parameterType="java.util.List">
+		update orders_bulk_item
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="bulk_item_num_modify =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.bulkItemNumModify!=null">
+						when bulk_item_id=#{i.bulkItemId} then
+						#{i.bulkItemNumModify}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="bulk_item_price_current =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.bulkItemPriceCurrent != null">
+						when bulk_item_id=#{i.bulkItemId} then
+						#{i.bulkItemPriceCurrent,jdbcType=VARCHAR}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="bulk_item_account_retr_price =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.bulkItemAccountRetrPrice != null">
+						when bulk_item_id=#{i.bulkItemId} then
+						#{i.bulkItemAccountRetrPrice,jdbcType=VARCHAR}
+					</if>
+				</foreach>
+			</trim>
+			<trim prefix="bulk_item_updated =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					when
+					bulk_item_id=#{i.bulkItemId} then
+					NOW()
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+			bulk_item_id=#{i.bulkItemId}
+		</foreach>
+	</update>
+	<!--获取订单的商品编号 -->
+	<select id="getPidByOid" resultType="java.lang.String">
+		select bulk_item_product_id
+		from orders_bulk_item where orders_id = #{ordersId} limit 0,1
+	</select>
+</mapper>

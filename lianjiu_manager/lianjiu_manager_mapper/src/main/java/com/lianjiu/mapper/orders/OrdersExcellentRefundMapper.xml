@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersExcellentRefundMapper">
+	<resultMap id="ordersExcellentRefundResultMap" type="com.lianjiu.model.OrdersExcellentRefund">
+		<id column="or_exce_refund_id" property="orExceRefundId" jdbcType="VARCHAR" />
+		<result column="or_exce_refund_type" property="orExceRefundType"
+			jdbcType="TINYINT" />
+		<result column="or_excellent_id" property="orExcellentId"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_product_status" property="orExceProductStatus"
+			jdbcType="TINYINT" />
+		<result column="or_exce_refund_cause" property="orExceRefundCause"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_refund_money" property="orExceRefundMoney"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_refund_express" property="orExceRefundExpress"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_refund_expressNum" property="orExceRefundExpressnum"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_refund_created" property="orExceRefundCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_exce_refund_updated" property="orExceRefundUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_exce_refund_expressPic" property="orExceRefundExpresspic"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersExcellentRefundResultMap"
+		parameterType="java.lang.String">
+		select * from orders_excellent_refund where
+		or_exce_refund_id =
+		#{orExceRefundId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_excellent_refund
+		where or_exce_refund_id =
+		#{orExceRefundId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersExcellentRefund">
+		insert into
+		orders_excellent_refund (or_exce_refund_id, or_exce_refund_type,
+		or_excellent_id, or_exce_product_status, or_exce_refund_cause,
+		or_exce_refund_money, or_exce_refund_express,
+		or_exce_refund_expressNum, or_exce_refund_created,
+		or_exce_refund_updated, or_exce_refund_expressPic
+		)
+		values
+		(#{orExceRefundId,jdbcType=VARCHAR},
+		#{orExceRefundType,jdbcType=TINYINT},
+		#{orExcellentId,jdbcType=VARCHAR},
+		#{orExceProductStatus,jdbcType=TINYINT},
+		#{orExceRefundCause,jdbcType=VARCHAR},
+		#{orExceRefundMoney,jdbcType=VARCHAR},
+		#{orExceRefundExpress,jdbcType=VARCHAR},
+		#{orExceRefundExpressnum,jdbcType=VARCHAR},
+		#{orExceRefundCreated,jdbcType=TIMESTAMP},
+		#{orExceRefundUpdated,jdbcType=TIMESTAMP},
+		#{orExceRefundExpresspic,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersExcellentRefund">
+		insert into orders_excellent_refund
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orExceRefundId != null">
+				or_exce_refund_id,
+			</if>
+			<if test="orExceRefundType != null">
+				or_exce_refund_type,
+			</if>
+			<if test="orExcellentId != null">
+				or_excellent_id,
+			</if>
+			<if test="orExceProductStatus != null">
+				or_exce_product_status,
+			</if>
+			<if test="orExceRefundCause != null">
+				or_exce_refund_cause,
+			</if>
+			<if test="orExceRefundMoney != null">
+				or_exce_refund_money,
+			</if>
+			<if test="orExceRefundExpress != null">
+				or_exce_refund_express,
+			</if>
+			<if test="orExceRefundExpressnum != null">
+				or_exce_refund_expressNum,
+			</if>
+			<if test="orExceRefundCreated != null">
+				or_exce_refund_created,
+			</if>
+			<if test="orExceRefundUpdated != null">
+				or_exce_refund_updated,
+			</if>
+			<if test="orExceRefundExpresspic != null">
+				or_exce_refund_expressPic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orExceRefundId != null">
+				#{orExceRefundId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundType != null">
+				#{orExceRefundType,jdbcType=TINYINT},
+			</if>
+			<if test="orExcellentId != null">
+				#{orExcellentId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceProductStatus != null">
+				#{orExceProductStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orExceRefundCause != null">
+				#{orExceRefundCause,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundMoney != null">
+				#{orExceRefundMoney,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundExpress != null">
+				#{orExceRefundExpress,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundExpressnum != null">
+				#{orExceRefundExpressnum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundCreated != null">
+				#{orExceRefundCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceRefundUpdated != null">
+				#{orExceRefundUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceRefundExpresspic != null">
+				#{orExceRefundExpresspic,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersExcellentRefund">
+		update orders_excellent_refund
+		<set>
+			<if test="orExceRefundType != null">
+				or_exce_refund_type =
+				#{orExceRefundType,jdbcType=TINYINT},
+			</if>
+			<if test="orExcellentId != null">
+				or_excellent_id = #{orExcellentId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceProductStatus != null">
+				or_exce_product_status =
+				#{orExceProductStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orExceRefundCause != null">
+				or_exce_refund_cause =
+				#{orExceRefundCause,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundMoney != null">
+				or_exce_refund_money =
+				#{orExceRefundMoney,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundExpress != null">
+				or_exce_refund_express =
+				#{orExceRefundExpress,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundExpressnum != null">
+				or_exce_refund_expressNum =
+				#{orExceRefundExpressnum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceRefundCreated != null">
+				or_exce_refund_created =
+				#{orExceRefundCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceRefundUpdated != null">
+				or_exce_refund_updated =
+				#{orExceRefundUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExceRefundExpresspic != null">
+				or_exce_refund_expressPic =
+				#{orExceRefundExpresspic,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_exce_refund_id = #{orExceRefundId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersExcellentRefund">
+		update
+		orders_excellent_refund
+		set or_exce_refund_type =
+		#{orExceRefundType,jdbcType=TINYINT},
+		or_excellent_id =
+		#{orExcellentId,jdbcType=VARCHAR},
+		or_exce_product_status =
+		#{orExceProductStatus,jdbcType=TINYINT},
+		or_exce_refund_cause =
+		#{orExceRefundCause,jdbcType=VARCHAR},
+		or_exce_refund_money =
+		#{orExceRefundMoney,jdbcType=VARCHAR},
+		or_exce_refund_express =
+		#{orExceRefundExpress,jdbcType=VARCHAR},
+		or_exce_refund_expressNum =
+		#{orExceRefundExpressnum,jdbcType=VARCHAR},
+		or_exce_refund_created =
+		#{orExceRefundCreated,jdbcType=TIMESTAMP},
+		or_exce_refund_updated =
+		#{orExceRefundUpdated,jdbcType=TIMESTAMP}
+		where or_exce_refund_id =
+		#{orExceRefundId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_exce_refund_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orExceRefundId != null">AND or_exce_refund_id =#{model.orExceRefundId}</if>
+				<if test="model.orExceRefundType != null">AND or_exce_refund_type =#{model.orExceRefundType}</if>
+				<if test="model.orExcellentId != null">AND or_excellent_id =#{model.orExcellentId}</if>
+				<if test="model.orExceProductStatus != null">AND or_exce_product_status =#{model.orExceProductStatus}
+				</if>
+				<if test="model.orExceRefundCause != null">AND or_exce_refund_cause =#{model.orExceRefundCause}
+				</if>
+				<if test="model.orExceRefundMoney != null">AND or_exce_refund_money =#{model.orExceRefundMoney}
+				</if>
+				<if test="model.orExceRefundExpress != null">AND or_exce_refund_express =#{model.orExceRefundExpress}
+				</if>
+				<if test="model.orExceRefundExpressnum != null">AND or_exce_refund_expressNum
+					=#{model.orExceRefundExpressnum}
+				</if>
+				<if test="model.orExceRefundCreated != null">AND or_exce_refund_created =#{model.orExceRefundCreated}
+				</if>
+				<if test="model.orExceRefundUpdated != null">AND or_exce_refund_updated =#{model.orExceRefundUpdated}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersExcellentRefundResultMap">
+		select * from orders_excellent_refund
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<select id="selectRefoundList" resultMap="ordersExcellentRefundResultMap">
+		select * from
+		orders_excellent_refund where or_exce_product_status != 2
+	</select>
+	<update id="modifyStatus" parameterType="com.lianjiu.model.OrdersExcellentRefund">
+		update orders_excellent_refund 
+		set 
+		or_exce_product_status =#{orExceProductStatus},or_exce_refund_updated = #{orExceRefundUpdated}
+		where or_excellent_id = #{orExcellentId}
+	</update>
+
+</mapper>

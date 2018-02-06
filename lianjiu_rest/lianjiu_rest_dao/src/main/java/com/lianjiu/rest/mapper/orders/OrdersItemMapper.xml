@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersItemMapper">
+	<resultMap id="ordersItemResultMap" type="com.lianjiu.model.OrdersItem">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="TINYINT" />
+		<result column="or_items_account_price" property="orItemsAccountPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_volume" property="orItemsVolume"
+			jdbcType="BIGINT" />
+		<result column="or_items_priceUnit" property="orItemsPriceUnit"
+			jdbcType="BIGINT" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="VARCHAR" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_status" property="orItemsStatus"
+			jdbcType="INTEGER" />
+		<result column="or_items_user" property="orItemsUser" jdbcType="VARCHAR" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultInfoMap" type="com.lianjiu.rest.model.OrdersItemInfo">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="TINYINT" />
+		<result column="or_items_account_price" property="orItemsAccountPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="VARCHAR" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_status" property="orItemsStatus"
+			jdbcType="INTEGER" />
+		<result column="or_items_user" property="orItemsUser" jdbcType="VARCHAR" />
+		<result column="or_items_recycle_type" property="orItemsRecycleType"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultInfoMap1" type="com.lianjiu.rest.model.OrdersItemInfo">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="TINYINT" />
+		<result column="or_items_account_price" property="orItemsAccountPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="VARCHAR" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_status" property="orItemsStatus"
+			jdbcType="INTEGER" />
+		<result column="or_items_user" property="orItemsUser" jdbcType="VARCHAR" />
+		<result column="or_items_recycle_type" property="orItemsRecycleType"
+			jdbcType="VARCHAR" />
+		<result column="unit" property="unit" jdbcType="INTEGER" />
+		<result column="username" property="orItemsUser" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="itemVoResultMap" type="com.lianjiu.rest.model.ItemVo">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="VARCHAR" />
+		<result column="or_items_account_price" property="orItemsAccountPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="VARCHAR" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_status" property="orItemsStatus"
+			jdbcType="INTEGER" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<select id="selectByPrimaryKey" resultMap="ordersItemResultMap"
+		parameterType="java.lang.String">
+		select * from orders_item where or_items_id =
+		#{orItemsId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_item
+		where or_items_id = #{orItemsId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersItem">
+		insert into orders_item
+		(or_items_id, orders_id, or_items_type,
+		or_items_name,
+		or_items_product_id, or_items_stem_from,
+		or_items_account_price,
+		or_items_before_price,
+		or_items_price, or_items_picture,
+		or_items_orperater,
+		or_items_volume,
+		or_items_priceUnit,
+		or_items_num,
+		or_items_created,
+		or_items_updated,
+		or_items_status, or_items_param,
+		or_items_param_modify,or_items_recycle_type,or_items_buyway,category_id)
+		values
+		(#{orItemsId,jdbcType=VARCHAR},
+		#{ordersId,jdbcType=VARCHAR},
+		#{orItemsType,jdbcType=VARCHAR},
+		#{orItemsName,jdbcType=VARCHAR},
+		#{orItemsProductId,jdbcType=VARCHAR},
+		#{orItemsStemFrom,jdbcType=TINYINT},
+		#{orItemsAccountPrice,jdbcType=VARCHAR},
+		#{orItemsBeforePrice,jdbcType=VARCHAR},
+		#{orItemsPrice,jdbcType=VARCHAR}, #{orItemsPicture,jdbcType=VARCHAR},
+		#{orItemsOrperater,jdbcType=VARCHAR},
+		#{orItemsVolume,jdbcType=BIGINT},
+		#{orItemsPriceUnit,jdbcType=BIGINT},
+		#{orItemsNum,jdbcType=VARCHAR},
+		now(),
+		now(),
+		#{orItemsStatus,jdbcType=INTEGER},
+		#{orItemsParam,jdbcType=LONGVARCHAR},
+		#{orItemsParam,jdbcType=LONGVARCHAR},
+		#{orItemsRecycleType,jdbcType=VARCHAR},
+		#{orItemsBuyway,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersItem">
+		update orders_item
+		<set>
+			<if test="ordersId != null">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsType != null">
+				or_items_type = #{orItemsType,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsName != null">
+				or_items_name = #{orItemsName,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsProductId != null">
+				or_items_product_id =
+				#{orItemsProductId,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsStemFrom != null">
+				or_items_stem_from = #{orItemsStemFrom,jdbcType=TINYINT},
+			</if>
+			<if test="orItemsBeforePrice != null">
+				or_items_before_price =
+				#{orItemsBeforePrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsPrice != null">
+				or_items_price = #{orItemsPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsAccountPrice != null">
+				or_items_account_price =
+				#{orItemsAccountPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsPicture != null">
+				or_items_picture = #{orItemsPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsOrperater != null">
+				or_items_orperater =
+				#{orItemsOrperater,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsNum != null">
+				or_items_num = #{orItemsNum,jdbcType=BIGINT},
+			</if>
+			<if test="orItemsCreated != null">
+				or_items_created = #{orItemsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orItemsUpdated != null">
+				or_items_updated = #{orItemsUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orItemsParam != null">
+				or_items_param = #{orItemsParam,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="orItemsParamModify != null">
+				or_items_param_modify =
+				#{orItemsParamModify,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_items_id = #{orItemsId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_items_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orItemsId != null">AND or_items_id =#{model.orItemsId}</if>
+				<if test="model.ordersId != null">AND orders_id =#{model.ordersId}</if>
+				<if test="model.orItemsType != null">AND or_items_type =#{model.orItemsType}</if>
+				<if test="model.orItemsName != null">AND or_items_name =#{model.orItemsName}</if>
+				<if test="model.orItemsProductId != null">AND or_items_product_id =#{model.orItemsProductId}</if>
+				<if test="model.orItemsStemFrom != null">AND or_items_stem_from =#{model.orItemsStemFrom}</if>
+				<if test="model.orItemsBeforePrice != null">AND or_items_before_price =#{model.orItemsBeforePrice}
+				</if>
+				<if test="model.orItemsPrice != null">AND or_items_price =#{model.orItemsPrice}</if>
+				<if test="model.orItemsPicture != null">AND or_items_picture =#{model.orItemsPicture}</if>
+				<if test="model.orItemsOrperater != null">AND or_items_orperater =#{model.orItemsOrperater}</if>
+				<if test="orItemsVolume != null">AND or_items_volume =#{model.orItemsVolume}</if>
+				<if test="orItemsPriceUnit != null">AND or_items_priceUnit =#{model.orItemsPriceUnit}</if>
+				<if test="model.orItemsNum != null">AND or_items_num =#{model.orItemsNum}</if>
+				<if test="model.orItemsCreated != null">AND or_items_created =#{model.orItemsCreated}</if>
+				<if test="model.orItemsUpdated != null">AND or_items_updated =now()</if>
+				<if test="model.orItemsStatus != null">AND or_items_status =#{model.orItemsStatus}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersItemResultMap">
+		select * from orders_item
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+
+	<!--计算产品销量 -->
+	<select id="getItemsNumCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select orders_item.or_items_num from
+		orders_item
+		where
+		or_items_status=1 AND or_items_product_id=
+		#{value}
+	</select>
+
+	<select id="getItemAll" resultMap="ordersItemResultMap">
+		select * from orders_item
+	</select>
+
+	<select id="frontPageItemAll" resultMap="ordersItemResultMap">
+		select * from
+		orders_item where or_items_stem_from in(0,1,2) order by
+		or_items_created desc limit 20
+	</select>
+
+	<select id="getItemByOrdersId" resultMap="ordersItemResultMap"
+		parameterType="java.lang.String">
+		<!-- select * from orders_item where orders_id=#{ordersId,jdbcType=VARCHAR} -->
+		select * from orders_item where
+		orders_id in
+		(#{ordersId,jdbcType=VARCHAR},
+		(
+		select or_faceface_brothers_id from
+		orders_faceface where
+		or_faceface_id= #{ordersId,jdbcType=VARCHAR}
+		)
+		)
+	</select>
+	<!-- 精品订单的item -->
+	<select id="getItemByOrdersExcellentId" resultMap="ordersItemResultMap"
+		parameterType="java.lang.String">
+		select * from orders_item where
+		orders_id =
+		#{ordersId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 获取成交后的item -->
+	<select id="getItemByProductId" resultMap="BaseResultInfoMap">
+		select
+		or_items_id,orders_id,or_items_name,or_items_product_id,or_items_price,or_items_account_price,or_items_picture,
+		or_items_param,or_items_param_modify,or_items_num,or_items_created,or_items_recycle_type,
+		or_items_buyway,or_items_user
+		from
+		orders_item where
+		or_items_product_id=#{orItemsProductId,jdbcType=VARCHAR}
+		AND
+		or_items_status = 1
+		AND
+		or_items_num+0 !=0
+		ORDER BY
+		or_items_created
+		DESC
+	</select>
+	<!--根据or_items_type获取成交后的所有item -->
+	<select id="getItemByHouseType" resultMap="BaseResultInfoMap">
+		SELECT
+		o.or_faceface_id orders_id,
+		o.username or_items_user,
+		item.or_items_id,
+		item.or_items_name,
+		item.or_items_product_id,
+		item.or_items_price,
+		item.or_items_account_price,
+		item.or_items_picture,
+		item.or_items_param,
+		item.or_items_param_modify,
+		item.or_items_num,
+		item.or_items_created,
+		item.or_items_recycle_type,
+		item.or_items_buyway
+		FROM
+		orders_faceface o
+		LEFT JOIN orders_item item ON o.or_faceface_id =
+		item.orders_id
+		WHERE
+		item.or_items_status = 1
+		AND item.or_items_stem_from
+		= 1
+		AND item.or_items_num + 0 != 0
+		ORDER BY
+		o.or_faceface_created DESC
+	</select>
+	<select id="getItemByPhoneType" resultMap="BaseResultInfoMap">
+		SELECT
+		o.or_express_id
+		orders_id,
+		o.or_express_user_phone or_items_user,
+		item.or_items_id,
+		item.or_items_name,
+		item.or_items_product_id,
+		item.or_items_price,
+		item.or_items_account_price,
+		item.or_items_picture,
+		item.or_items_param,
+		item.or_items_param_modify,
+		item.or_items_num,
+		item.or_items_created,
+		item.or_items_recycle_type,
+		item.or_items_buyway
+		FROM
+		orders_express o
+		LEFT JOIN orders_item item ON o.or_express_id =
+		item.orders_id
+		WHERE
+		item.or_items_status = 1
+		AND item.or_items_num + 0
+		!= 0
+		ORDER BY
+		o.or_express_created DESC
+	</select>
+	<update id="updateByStatus" parameterType="com.lianjiu.model.OrdersItem">
+		update orders_item set
+		or_items_status=#{orItemsStatus},or_items_updated=now()
+		where
+		orders_id=#{ordersId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByOrdersItemCheck" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select count(1) from orders_item where
+		orders_id=#{orItemsId}
+	</select>
+
+
+	<select id="getItemByOrdersStatus" resultMap="ordersItemResultMap"
+		parameterType="java.lang.String">
+		select * from orders_item where
+		orders_id=#{ordersId,jdbcType=VARCHAR} order by orders_id desc limit 1
+	</select>
+
+	<insert id="addItemList" parameterType="java.util.List">
+		insert into orders_item (
+		or_items_id,
+		orders_id,
+		or_items_type,
+		or_items_name,
+		or_items_product_id,
+
+		or_items_stem_from,
+		or_items_account_price,
+		or_items_before_price,
+		or_items_price,
+
+		or_items_picture,
+		or_items_orperater,
+		or_items_num,
+
+		or_items_volume,
+		or_items_priceUnit,
+
+		or_items_created,
+		or_items_updated,
+		or_items_status,
+
+		or_items_param,
+		or_items_param_modify,
+		or_items_recycle_type,
+		or_items_buyway,category_id)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.orItemsId,jdbcType=VARCHAR},
+			#{item.ordersId,jdbcType=VARCHAR},
+			#{item.orItemsType,jdbcType=VARCHAR},
+			#{item.orItemsName,jdbcType=VARCHAR},
+			#{item.orItemsProductId,jdbcType=VARCHAR},
+
+			#{item.orItemsStemFrom,jdbcType=VARCHAR},
+			#{item.orItemsAccountPrice,jdbcType=VARCHAR},
+			#{item.orItemsBeforePrice,jdbcType=VARCHAR},
+			#{item.orItemsPrice,jdbcType=VARCHAR},
+
+			#{item.orItemsPicture,jdbcType=VARCHAR},
+			#{item.orItemsOrperater,jdbcType=VARCHAR},
+			#{item.orItemsNum,jdbcType=VARCHAR},
+
+			#{item.orItemsVolume,jdbcType=BIGINT},
+			#{item.orItemsPriceUnit,jdbcType=BIGINT},
+
+			#{item.orItemsCreated,jdbcType=TIMESTAMP},
+			now(),
+			#{item.orItemsStatus,jdbcType=INTEGER},
+
+			#{item.orItemsParam,jdbcType=LONGVARCHAR},
+			#{item.orItemsParam,jdbcType=LONGVARCHAR},
+			#{item.orItemsRecycleType,jdbcType=VARCHAR},
+			#{item.orItemsBuyway,jdbcType=VARCHAR},
+			#{item.categoryId,jdbcType=BIGINT})
+		</foreach>
+	</insert>
+
+	<!-- 查询指定产品最高成交价 -->
+	<select id="selectMaxPricebyPid" parameterType="string"
+		resultType="string">
+		select max(or_items_price) from orders_item where
+		or_items_product_id = #{productId} and or_items_status = 1
+	</select>
+
+	<select id="slectMaxPriceItem" parameterType="string"
+		resultMap="ordersItemResultMap">
+		select * from orders_item where or_items_price =(select
+		max(or_items_price)
+		from orders_item where
+		or_items_product_id=#{productId} ) and
+		or_items_product_id=#{productId}
+	</select>
+
+	<select id="selectByPrimaryKeys" resultMap="BaseResultInfoMap"
+		parameterType="java.lang.String">
+		select * from orders_item where or_items_id =
+		#{orItemsId,jdbcType=VARCHAR} and or_items_status = 1
+	</select>
+
+	<select id="selectProductByOrderId" parameterType="string"
+		resultMap="ordersItemResultMap">
+		select * from orders_item where orders_id = #{orders_id} and
+		or_items_recycle_type = '上门回收'
+	</select>
+
+	<select id="getItemByordersId" parameterType="string"
+		resultMap="ordersItemResultMap">
+		select * from orders_item where orders_id = #{orders_id}
+	</select>
+
+	<select id="selectPriceMaxImage" parameterType="string"
+		resultType="java.lang.String">
+		select or_items_picture from orders_item where
+		orders_id=#{value} ORDER BY or_items_price desc LIMIT 1
+	</select>
+
+
+	<!--质检明细 -->
+	<select id="qualityCheckingFaceface" resultMap="BaseResultInfoMap1"
+		parameterType="java.lang.String">
+		SELECT
+		o.username,
+		item.or_items_id,
+		item.orders_id,
+		item.or_items_type,
+		item.or_items_name,
+		item.or_items_product_id,
+		item.or_items_stem_from,
+		item.or_items_before_price,
+		item.or_items_price,
+		item.or_items_account_price,
+		item.or_items_picture,
+		item.or_items_orperater,
+		item.or_items_num,
+		item.or_items_created,
+		item.or_items_updated,
+		item.or_items_status,
+		item.or_items_param,
+		item.or_items_param_modify,
+		item.or_items_recycle_type,
+		item.or_items_buyway,
+		item.or_items_priceUnit unit
+		FROM
+		orders_faceface o
+		LEFT JOIN orders_item
+		item ON o.or_faceface_id = item.orders_id
+		WHERE
+		item.or_items_id =
+		#{orItemsId,jdbcType=VARCHAR}
+	</select>
+	<select id="qualityCheckingExpress" resultMap="BaseResultInfoMap1"
+		parameterType="java.lang.String">
+		select
+		o.or_express_user_phone username,
+		item.or_items_id,
+		item.orders_id,
+		item.or_items_type,
+		item.or_items_name,
+		item.or_items_product_id,
+		item.or_items_stem_from,
+		item.or_items_before_price,
+		item.or_items_price,
+		item.or_items_account_price,
+		item.or_items_picture,
+		item.or_items_orperater,
+		item.or_items_num,
+		item.or_items_created,
+		item.or_items_updated,
+		item.or_items_status,
+		item.or_items_param,
+		item.or_items_param_modify,
+		item.or_items_recycle_type,
+		item.or_items_buyway,
+		item.or_items_priceUnit unit
+		from
+		orders_express o
+		LEFT JOIN
+		orders_item item ON
+		o.or_express_id =
+		item.orders_id where
+		item.or_items_id =
+		#{orItemsId,jdbcType=VARCHAR}
+	</select>
+	<update id="updateBuyway" parameterType="string">
+		update orders_item set
+		or_items_buyway=#{1},or_items_user = #{2},or_items_updated=NOW()
+		where
+		orders_id=#{0}
+	</update>
+	<select id="selectByOrderId" resultMap="BaseResultInfoMap1"
+		parameterType="java.lang.String">
+		SELECT
+		or_items_id,
+		or_items_name,
+		or_items_product_id,
+		or_items_num,
+		or_items_price,
+		or_items_stem_from,
+		or_items_priceUnit AS
+		unit
+		FROM
+		orders_item
+		WHERE
+		or_items_num+0 != 0
+		and
+		orders_id IN (
+		#{ordersId,jdbcType=VARCHAR},
+		(
+		SELECT
+		or_faceface_brothers_id
+		FROM
+		orders_faceface
+		WHERE
+		or_faceface_id = #{ordersId,jdbcType=VARCHAR}
+		)
+		)
+
+	</select>
+
+	<update id="updateByOrderId" parameterType="com.lianjiu.model.OrdersItem">
+		update orders_item
+		set
+		or_items_num=#{orItemsNum}
+		where
+		orders_id=#{ordersId,jdbcType=VARCHAR}
+	</update>
+	<select id="selectFrontPageMatter" resultMap="ordersItemResultMap">
+		SELECT
+		or_items_name_preview or_items_name,
+		or_express_user_phone
+		or_items_user
+		FROM
+		orders_express
+		WHERE or_express_status IN (5,7)
+		ORDER
+		BY
+		or_express_created
+		LIMIT 0,
+		20
+	</select>
+	<select id="selectFromByOrderId" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select or_items_stem_from from orders_item
+		where
+		orders_id = #{orderFaceId} and or_items_stem_from !=0 and
+		or_items_stem_from != 2
+	</select>
+	<update id="modifyNum" parameterType="com.lianjiu.rest.model.OrProductData">
+		update orders_item
+		set
+		or_items_num=#{orItemsNum},
+		or_items_price=#{orItemsPrice},
+		or_items_account_price = #{orItemsAccountPrice}
+		where or_items_id =
+		#{orItemsId}
+		and
+		(or_items_num!=#{orItemsNum}
+		or
+		or_items_price!=#{orItemsPrice})
+	</update>
+	<select id="selectPriceByProductId" resultType="java.lang.String">
+		select
+		or_items_price from orders_item where or_items_product_id
+		= #{0}
+	</select>
+	<!-- 个人中心，快递订单 -->
+	<resultMap id="ordersExpressItemResultMap" type="com.lianjiu.model.OrdersExpressItem">
+		<id column="or_items_id" property="orExpItemId" jdbcType="VARCHAR" />
+		<result column="orItemsId" property="productName" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectItemByOrdersId" parameterType="java.lang.String"
+		resultMap="ordersExpressItemResultMap">
+		select orItemsId from orders_item where
+		orders_id=#{ordersId}
+	</select>
+	<!--查询订单中所有产品详情页 -->
+	<select id="selectFaceFaceItemsByOrderId" parameterType="string"
+		resultMap="ordersItemResultMap">
+		select * from orders_item i LEFT JOIN orders_faceface o
+		ON
+		i.orders_id = o.or_faceface_id
+		where
+		i.or_items_num+0 != 0
+		AND
+		o.or_faceface_id = #{value} OR
+		o.or_faceface_brothers_id
+		LIKE
+		concat('%',#{value})
+	</select>
+	<select id="selectExpressItemsByOrdersId" parameterType="string"
+		resultMap="ordersItemResultMap">
+		select * from orders_item i LEFT JOIN orders_express o
+		ON
+		i.orders_id = o.or_express_id
+		where i.orders_id = #{value}
+	</select>
+	<!--上门回收订单明细 -->
+	<resultMap id="ordersFaceFaceItemResultMap" type="com.lianjiu.model.OrdersFacefaceItem">
+		<id column="or_items_id" property="orFfItemId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orFfItemType"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_item_brand" property="orFfItemBrand"
+			jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orFfItemName"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orFfItemPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orFfItemRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_account_price" property="orFfItemRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orFfItemRetrPicture"
+			jdbcType="LONGVARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="TINYINT" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="BIGINT" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<!--上门回收订单明细，要包括加单信息 -->
+	<select id="selectByFaceFaceOrdersId" parameterType="java.lang.String"
+		resultMap="ordersFaceFaceItemResultMap">
+		select * from orders_item
+		WHERE
+		orders_id IN
+		(#{value},
+		(select
+		or_faceface_brothers_id from
+		orders_faceface where
+		or_faceface_id=
+		#{value})
+		)
+		ORDER BY
+		or_items_created
+		DESC
+	</select>
+	<!--快递回收订单明细 -->
+	<resultMap id="ordersExpressItemResultMap1" type="com.lianjiu.model.OrdersExpressItem">
+		<id column="or_items_id" property="orExpItemId" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="productName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="productId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orExpItemPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orExpItemAlliancePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_account_price" property="orExpItemAccount"
+			jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="TINYINT" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="BIGINT" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<!--快递回收订单明细 -->
+	<select id="selectByExpressOrdersId" parameterType="java.lang.String"
+		resultMap="expressItemResultMap">
+		select * from orders_item i LEFT JOIN orders_express o
+		ON
+		i.orders_id
+		=o.or_express_id
+		WHERE
+		o.or_express_id =#{value}
+	</select>
+	<resultMap id="ordersExcellentItemResultMap" type="com.lianjiu.model.vo.OrdersItemExcellent">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_exce_details_express_num" property="orExceDetailsExpressNum"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_exce_details_express_name" property="orExceDetailsExpressName"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<!-- 根据订单id查询精品订单详情 -->
+	<select id="selectByOrdersId" parameterType="java.lang.String"
+		resultMap="ordersExcellentItemResultMap">
+		select * from orders_item i LEFT JOIN orders_excellent o
+		ON
+		i.orders_id =o.or_excellent_id
+		WHERE
+		i.orders_id =#{value}
+	</select>
+
+	<resultMap id="expressItemResultMap" type="com.lianjiu.model.vo.OrdersItemExpress">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_account_price" property="orItemsAccountPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_express_num" property="orExpressNum"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_buyway" property="orItemsBuyway"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_express_status" property="orExpressStatus"
+			jdbcType="TINYINT" />
+	</resultMap>
+	<!-- 根据订单itemId查询快递订单详情 -->
+	<select id="selectOrdersExpressByItemId" parameterType="java.lang.String"
+		resultMap="expressItemResultMap">
+		select * from orders_item i LEFT JOIN orders_express o
+		ON
+		i.orders_id =o.or_express_id
+		WHERE
+		i.or_items_id =#{value}
+	</select>
+	<!-- 根据订单itemId查询家电的订单详情 -->
+	<resultMap id="facefaceItemResultMap" type="com.lianjiu.model.vo.OrdersItemFaceface">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_buyway" property="orItemsBuyway"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<!-- 根据订单itemId查询家电的订单详情 -->
+	<select id="selectOrdersFacefaceByItemId" parameterType="java.lang.String"
+		resultMap="facefaceItemResultMap">
+		select * from orders_item i LEFT JOIN orders_faceface o
+		ON
+		i.orders_id =o.or_faceface_id
+		WHERE
+		i.or_items_id =#{value}
+	</select>
+	<!-- 根据订单id查询快递订单详情 -->
+	<select id="selectItemsAccountPriceByOrdersId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select or_items_account_price from orders_item
+		WHERE
+		orders_id =#{value}
+	</select>
+
+</mapper>

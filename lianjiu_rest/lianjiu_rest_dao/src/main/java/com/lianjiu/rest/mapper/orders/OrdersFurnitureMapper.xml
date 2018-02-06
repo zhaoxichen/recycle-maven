@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersFurnitureMapper">
+	<resultMap id="ordersFurnitureResultMap" type="com.lianjiu.model.OrdersFurniture">
+		<id column="or_furniture_id" property="orFurnitureId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="or_furniture_alliance_id" property="orFurnitureAllianceId"
+			jdbcType="VARCHAR" />
+		<result column="address_id" property="addressId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="or_furniture_status" property="orFurnitureStatus"
+			jdbcType="TINYINT" />
+		<result column="or_furniture_brothers_id" property="orFurnitureBrothersId"
+			jdbcType="VARCHAR" />
+		<result column="or_furniture_visitTime" property="orFurnitureVisittime"
+			jdbcType="TIMESTAMP" />
+		<result column="orders_price" property="ordersPrice" jdbcType="VARCHAR" />
+		<result column="orders_retr_price" property="ordersRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_furniture_payTime" property="orFurniturePaytime"
+			jdbcType="TIMESTAMP" />
+		<result column="or_furniture_handler_id" property="orFurnitureHandlerId"
+			jdbcType="VARCHAR" />
+		<result column="or_furniture_handler_tel" property="orFurnitureHandlerTel"
+			jdbcType="VARCHAR" />
+		<result column="or_items_name_preview" property="orItemsNamePreview"
+			jdbcType="VARCHAR" />
+		<result column="or_items_pictrue_preview" property="orItemsPictruePreview"
+			jdbcType="VARCHAR" />
+		<result column="or_furniture_created" property="orFurnitureCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_furniture_updated" property="orFurnitureUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersFurnitureResultMap"
+		parameterType="java.lang.String">select * from orders_furniture where or_furniture_id =
+		#{orFurnitureId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_furniture
+		where or_furniture_id =
+		#{orFurnitureId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersFurniture">
+		insert into orders_furniture
+		(or_furniture_id, category_id,
+		or_furniture_alliance_id,
+		address_id,
+		user_id, username,
+		or_furniture_status, or_furniture_brothers_id,
+		or_furniture_visitTime, orders_price, orders_retr_price,
+		or_furniture_payTime, or_furniture_handler_id,
+		or_furniture_handler_tel, or_items_name_preview,
+		or_items_pictrue_preview, or_furniture_created,
+		or_furniture_updated)
+		values (#{orFurnitureId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{orFurnitureAllianceId,jdbcType=VARCHAR},
+		#{addressId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{orFurnitureStatus,jdbcType=TINYINT},
+		#{orFurnitureBrothersId,jdbcType=VARCHAR},
+		#{orFurnitureVisittime,jdbcType=TIMESTAMP},
+		#{ordersPrice,jdbcType=VARCHAR}, #{ordersRetrPrice,jdbcType=VARCHAR},
+		#{orFurniturePaytime,jdbcType=TIMESTAMP},
+		#{orFurnitureHandlerId,jdbcType=VARCHAR},
+		#{orFurnitureHandlerTel,jdbcType=VARCHAR},
+		#{orItemsNamePreview,jdbcType=VARCHAR},
+		#{orItemsPictruePreview,jdbcType=VARCHAR},
+		NOW(),
+		NOW())
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersFurniture">
+		update orders_furniture
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orFurnitureAllianceId != null">
+				or_furniture_alliance_id =
+				#{orFurnitureAllianceId,jdbcType=VARCHAR},
+			</if>
+			<if test="addressId != null">
+				address_id = #{addressId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="orFurnitureStatus != null">
+				or_furniture_status =
+				#{orFurnitureStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orFurnitureBrothersId != null">
+				or_furniture_brothers_id =
+				#{orFurnitureBrothersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFurnitureVisittime != null">
+				or_furniture_visitTime =
+				#{orFurnitureVisittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersPrice != null">
+				orders_price = #{ordersPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersRetrPrice != null">
+				orders_retr_price = #{ordersRetrPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFurniturePaytime != null">
+				or_furniture_payTime =
+				#{orFurniturePaytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFurnitureHandlerId != null">
+				or_furniture_handler_id =
+				#{orFurnitureHandlerId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFurnitureHandlerTel != null">
+				or_furniture_handler_tel =
+				#{orFurnitureHandlerTel,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsNamePreview != null">
+				or_items_name_preview =
+				#{orItemsNamePreview,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsPictruePreview != null">
+				or_items_pictrue_preview =
+				#{orItemsPictruePreview,jdbcType=VARCHAR},
+			</if>
+			or_furniture_updated=NOW()
+		</set>
+		where or_furniture_id = #{orFurnitureId,jdbcType=VARCHAR}
+	</update>
+
+	<!--30分钟无操作，自动取消订单 状态从1变成0 -->
+	<update id="ordersAutoCancel">
+		update
+		orders_furniture
+		set
+		or_furniture_status= 0,
+		or_furniture_updated=NOW()
+		where
+		or_furniture_status = 1
+		AND
+		or_furniture_id in
+		<foreach collection="ordersIdList" item="ordersId" index="index"
+			open="(" close=")" separator=",">
+			#{ordersId}
+		</foreach>
+	</update>
+
+</mapper>

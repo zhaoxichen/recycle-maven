@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersFacefaceItemMapper">
+	<resultMap id="ordersFacefaceItemResultMap" type="com.lianjiu.model.OrdersFacefaceItem">
+		<id column="or_ff_item_id" property="orFfItemId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_ff_item_type" property="orFfItemType"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_item_brand" property="orFfItemBrand"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_item_name" property="orFfItemName"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_item_num" property="orFfItemNum"
+			jdbcType="BIGINT" />
+		<result column="or_ff_item_price" property="orFfItemPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_item_retr_price" property="orFfItemRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_ff_item_created" property="orFfItemCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_ff_item_updated" property="orFfItemUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_ff_item_retr_picture" property="orFfItemRetrPicture"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersFacefaceItemResultMap"
+		parameterType="java.lang.String">
+		select * from orders_faceface_item where or_ff_item_id =
+		#{orFfItemId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_faceface_item
+		where or_ff_item_id =
+		#{orFfItemId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersFacefaceItem">
+		insert into
+		orders_faceface_item (or_ff_item_id, orders_id, or_ff_item_type,
+		or_ff_item_brand, or_ff_item_name, or_ff_item_num,
+		or_ff_item_price,
+		or_ff_item_retr_price, or_ff_item_created,
+		or_ff_item_updated,
+		or_ff_item_retr_picture
+		)
+		values (#{orFfItemId,jdbcType=VARCHAR},
+		#{ordersId,jdbcType=VARCHAR},
+		#{orFfItemType,jdbcType=VARCHAR},
+		#{orFfItemBrand,jdbcType=VARCHAR}, #{orFfItemName,jdbcType=VARCHAR},
+		#{orFfItemNum,jdbcType=BIGINT},
+		#{orFfItemPrice,jdbcType=VARCHAR},
+		#{orFfItemRetrPrice,jdbcType=VARCHAR},
+		#{orFfItemCreated,jdbcType=TIMESTAMP},
+		#{orFfItemUpdated,jdbcType=TIMESTAMP},
+		#{orFfItemRetrPicture,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersFacefaceItem">
+		insert into orders_faceface_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orFfItemId != null">
+				or_ff_item_id,
+			</if>
+			<if test="ordersId != null">
+				orders_id,
+			</if>
+			<if test="orFfItemType != null">
+				or_ff_item_type,
+			</if>
+			<if test="orFfItemBrand != null">
+				or_ff_item_brand,
+			</if>
+			<if test="orFfItemName != null">
+				or_ff_item_name,
+			</if>
+			<if test="orFfItemNum != null">
+				or_ff_item_num,
+			</if>
+			<if test="orFfItemPrice != null">
+				or_ff_item_price,
+			</if>
+			<if test="orFfItemRetrPrice != null">
+				or_ff_item_retr_price,
+			</if>
+			<if test="orFfItemCreated != null">
+				or_ff_item_created,
+			</if>
+			<if test="orFfItemUpdated != null">
+				or_ff_item_updated,
+			</if>
+			<if test="orFfItemRetrPicture != null">
+				or_ff_item_retr_picture,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orFfItemId != null">
+				#{orFfItemId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersId != null">
+				#{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemType != null">
+				#{orFfItemType,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemBrand != null">
+				#{orFfItemBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemName != null">
+				#{orFfItemName,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemNum != null">
+				#{orFfItemNum,jdbcType=BIGINT},
+			</if>
+			<if test="orFfItemPrice != null">
+				#{orFfItemPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemRetrPrice != null">
+				#{orFfItemRetrPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemCreated != null">
+				#{orFfItemCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFfItemUpdated != null">
+				#{orFfItemUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFfItemRetrPicture != null">
+				#{orFfItemRetrPicture,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersFacefaceItem">
+		update orders_faceface_item
+		<set>
+			<if test="ordersId != null">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemType != null">
+				or_ff_item_type = #{orFfItemType,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemBrand != null">
+				or_ff_item_brand = #{orFfItemBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemName != null">
+				or_ff_item_name = #{orFfItemName,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemNum != null">
+				or_ff_item_num = #{orFfItemNum,jdbcType=BIGINT},
+			</if>
+			<if test="orFfItemPrice != null">
+				or_ff_item_price = #{orFfItemPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemRetrPrice != null">
+				or_ff_item_retr_price =
+				#{orFfItemRetrPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orFfItemCreated != null">
+				or_ff_item_created =
+				#{orFfItemCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFfItemUpdated != null">
+				or_ff_item_updated =
+				#{orFfItemUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orFfItemRetrPicture != null">
+				or_ff_item_retr_picture =
+				#{orFfItemRetrPicture,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_ff_item_id = #{orFfItemId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersFacefaceItem">
+		update
+		orders_faceface_item
+		set orders_id = #{ordersId,jdbcType=VARCHAR},
+		or_ff_item_type = #{orFfItemType,jdbcType=VARCHAR},
+		or_ff_item_brand =
+		#{orFfItemBrand,jdbcType=VARCHAR},
+		or_ff_item_name =
+		#{orFfItemName,jdbcType=VARCHAR},
+		or_ff_item_num =
+		#{orFfItemNum,jdbcType=BIGINT},
+		or_ff_item_price =
+		#{orFfItemPrice,jdbcType=VARCHAR},
+		or_ff_item_retr_price =
+		#{orFfItemRetrPrice,jdbcType=VARCHAR},
+		or_ff_item_created =
+		#{orFfItemCreated,jdbcType=TIMESTAMP},
+		or_ff_item_updated =
+		#{orFfItemUpdated,jdbcType=TIMESTAMP}
+		where or_ff_item_id =
+		#{orFfItemId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_ff_item_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orFfItemId != null">AND or_ff_item_id =#{model.orFfItemId}</if>
+				<if test="model.ordersId != null">AND orders_id =#{model.ordersId}</if>
+				<if test="model.orFfItemType != null">AND or_ff_item_type =#{model.orFfItemType}</if>
+				<if test="model.orFfItemBrand != null">AND or_ff_item_brand =#{model.orFfItemBrand}</if>
+				<if test="model.orFfItemName != null">AND or_ff_item_name =#{model.orFfItemName}</if>
+				<if test="model.orFfItemNum != null">AND or_ff_item_num =#{model.orFfItemNum}</if>
+				<if test="model.orFfItemPrice != null">AND or_ff_item_price =#{model.orFfItemPrice}</if>
+				<if test="model.orFfItemRetrPrice != null">AND or_ff_item_retr_price =#{model.orFfItemRetrPrice}</if>
+				<if test="model.orFfItemCreated != null">AND or_ff_item_created =#{model.orFfItemCreated}</if>
+				<if test="model.orFfItemUpdated != null">AND or_ff_item_updated =#{model.orFfItemUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersFacefaceItemResultMap">
+		select * from orders_faceface_item
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.DeptRoleMapper">
+	<resultMap id="deptRoleResultMap" type="com.lianjiu.model.DeptRole">
+		<id column="dept_role_id" property="deptRoleId" jdbcType="VARCHAR" />
+		<result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="deptRoleResultMap"
+		parameterType="java.lang.String">select * from dept_role where dept_role_id =
+		#{deptRoleId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from dept_role
+		where dept_role_id = #{deptRoleId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.DeptRole">
+		insert into dept_role (dept_role_id, dept_id, role_id
+		)
+		values (#{deptRoleId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},
+		#{roleId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.DeptRole">
+		update dept_role
+		<set>
+			<if test="deptId != null">
+				dept_id = #{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where dept_role_id = #{deptRoleId,jdbcType=VARCHAR}
+	</update>
+	<select id="getRoleByDeptId" parameterType="java.lang.String" resultMap="deptRoleResultMap">
+		select * from dept_role where dept_id = #{deptId}
+	</select>
+	
+	<delete id="deleteDept" parameterType="java.lang.String">
+		delete from dept_role where dept_id = #{deptId}
+	</delete>
+	
+	<delete id="deleteByRoleId">
+		delete from dept_role where role_id=#{roleId}
+	</delete>
+	
+	<insert id="addDRList">
+		insert into dept_role 
+		(dept_role_id,dept_id,role_id)
+		values 
+		<foreach collection="drList" item="list" index="index" separator=",">
+			(#{list.deptRoleId},#{list.deptId},#{list.roleId})
+		</foreach>
+	</insert>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lianjiu_common" />
+        <module name="lianjiu_manager_service" />
+        <module name="lianjiu_manager_web" />
+        <module name="lianjiu_order_service" />
+        <module name="lianjiu_order_web" />
+        <module name="lianjiu_payment_dao" />
+        <module name="lianjiu_payment_service" />
+        <module name="lianjiu_payment_web" />
+        <module name="lianjiu_rest_dao" />
+        <module name="lianjiu_rest_model" />
+        <module name="lianjiu_rest_service" />
+        <module name="lianjiu_rest_web" />
+        <module name="lianjiu_source_upload" />
+        <module name="lianjiu_sso_service" />
+        <module name="lianjiu_sso_web" />
+        <module name="lianjiu_timer_service" />
+        <module name="lianjiu_timer_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="lianjiu_common" target="1.7" />
+      <module name="lianjiu_manager" target="1.7" />
+      <module name="lianjiu_manager_service" target="1.7" />
+      <module name="lianjiu_manager_web" target="1.7" />
+      <module name="lianjiu_order" target="1.7" />
+      <module name="lianjiu_order_service" target="1.7" />
+      <module name="lianjiu_order_web" target="1.7" />
+      <module name="lianjiu_parent" target="1.7" />
+      <module name="lianjiu_payment" target="1.7" />
+      <module name="lianjiu_payment_dao" target="1.7" />
+      <module name="lianjiu_payment_service" target="1.7" />
+      <module name="lianjiu_payment_web" target="1.7" />
+      <module name="lianjiu_rest" target="1.7" />
+      <module name="lianjiu_rest_dao" target="1.7" />
+      <module name="lianjiu_rest_model" target="1.7" />
+      <module name="lianjiu_rest_service" target="1.7" />
+      <module name="lianjiu_rest_web" target="1.7" />
+      <module name="lianjiu_source_upload" target="1.7" />
+      <module name="lianjiu_sso" target="1.7" />
+      <module name="lianjiu_sso_service" target="1.7" />
+      <module name="lianjiu_sso_web" target="1.7" />
+      <module name="lianjiu_timer" target="1.7" />
+      <module name="lianjiu_timer_service" target="1.7" />
+      <module name="lianjiu_timer_web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

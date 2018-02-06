@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.WalletLianjiuMapper">
+	<resultMap id="BaseResultMap" type="com.lianjiu.model.WalletLianjiu">
+		<id column="wallet_id" property="walletId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="wallet_money" property="walletMoney" jdbcType="VARCHAR" />
+		<result column="wallet_created" property="walletCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="wallet_updated" property="walletUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="payment" property="payment" jdbcType="VARCHAR" />
+		<result column="wallet_drawing" property="walletDrawing"
+			jdbcType="VARCHAR" />
+		<result column="wallet_drawed" property="walletDrawed"
+			jdbcType="VARCHAR" />
+		<result column="wallet_totalCount" property="walletTotalcount"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		wallet_id, user_id, wallet_money, wallet_created,
+		wallet_updated,payment,wallet_drawing,
+		wallet_drawed, wallet_totalCount
+	</sql>
+	<insert id="insert" parameterType="com.lianjiu.model.WalletLianjiu">
+		insert into wallet_lianjiu
+		(wallet_id, user_id, wallet_money,
+		wallet_created, wallet_updated,
+		payment
+		)
+		values (#{walletId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{walletMoney,jdbcType=VARCHAR},
+		#{walletCreated,jdbcType=TIMESTAMP},
+		#{walletUpdated,jdbcType=TIMESTAMP}, #{payment,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 根据用户id获取payment密码 -->
+	<select id="selectPaymentByUserId" resultType="string">
+		select payment
+		from wallet_lianjiu
+		where user_id = #{userId}
+	</select>
+	<!-- 根据用户id查询钱包信息 -->
+	<select id="selectWalletByUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from wallet_lianjiu
+		where user_id = #{userId}
+	</select>
+	<!-- 用户链旧钱包加钱 -->
+	<update id="addWalletMoney">
+		update
+		wallet_lianjiu
+		set
+		wallet_money =
+		ROUND(wallet_money+#{walletMoney},2), wallet_updated = NOW()
+		where
+		user_id =
+		#{userId}
+	</update>
+
+	<!-- 用户链旧钱包减钱 -->
+	<update id="reduceWalletMoney">
+		update
+		wallet_lianjiu
+		set
+		wallet_money = TRUNCATE
+		(ABS(cast(wallet_money AS DECIMAL(15, 2))) - #{walletMoney},2),
+		wallet_updated = NOW()
+		where
+		user_id = #{userId}
+	</update>
+	<!-- 用户链旧钱包加钱,加上累计赚取 -->
+	<update id="updateWalletMoney">
+		update
+		wallet_lianjiu
+		set
+		wallet_money =ROUND(
+		wallet_money+#{walletMoney},2),wallet_totalCount=ROUND(wallet_totalCount+#{walletMoney},2),
+		wallet_updated = NOW()
+		where
+		user_id =
+		#{userId}
+	</update>
+	<insert id="insertWallet" parameterType="com.lianjiu.model.WalletLianjiu">
+		insert into
+		wallet_lianjiu (wallet_id, user_id,wallet_created,
+		wallet_updated)
+		values (#{walletId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{walletCreated,jdbcType=TIMESTAMP},
+		#{walletUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="walletDrawingMoney" parameterType="com.lianjiu.model.WalletLianjiu">
+		update
+		wallet_lianjiu
+		set
+		wallet_drawing = ROUND(wallet_drawing+#{walletMoney},2),
+		wallet_updated = NOW()
+		where
+		user_id = #{userId}
+	</update>
+	<update id="addWalletDrawedMoney" parameterType="com.lianjiu.model.WalletLianjiu">
+		update
+		wallet_lianjiu
+		set
+		wallet_drawed = ROUND(wallet_drawed+#{walletMoney},2),
+		wallet_updated = NOW()
+		where
+		user_id = #{userId}
+	</update>
+	<select id="selectUserMoney" parameterType="java.lang.String" resultType="java.lang.String">
+		select wallet_money from wallet_lianjiu where user_id = #{userId}
+	</select>
+	<select id="selectUserDrawingMoney" parameterType="java.lang.String" resultType="java.lang.String">
+		select wallet_drawing from wallet_lianjiu where user_id = #{userId}
+	</select>
+	<select id="selectUserDrawedMoney" parameterType="java.lang.String" resultType="java.lang.String">
+		select wallet_drawed from wallet_lianjiu where user_id = #{userId}
+	</select>
+	
+	<update id="updateUserWalletMoney" parameterType="com.lianjiu.model.WalletLianjiu">
+		update
+		wallet_lianjiu
+		set
+		wallet_money = #{money},
+		wallet_updated = NOW()
+		where user_id = #{userId}
+	</update>
+	
+	<update id="updateUserWalletDrawingMoney" parameterType="com.lianjiu.model.WalletLianjiu">
+		update
+		wallet_lianjiu
+		set
+		wallet_drawing = #{money},
+		wallet_updated = NOW()
+		where user_id = #{userId}
+	</update>
+	
+	<update id="updateUserWalletDrawedMoney" parameterType="com.lianjiu.model.WalletLianjiu">
+		update
+		wallet_lianjiu
+		set
+		wallet_drawed = #{money},
+		wallet_updated = NOW()
+		where user_id = #{userId}
+	</update>
+</mapper>

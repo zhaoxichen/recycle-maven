@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.user.RolePowerMapper">
+	<resultMap id="rolePowerResultMap" type="com.lianjiu.model.RolePower">
+		<id column="role_power_id" property="rolePowerId" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="power_id" property="powerId" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="rolePowerResultMap"
+		parameterType="java.lang.String">select * from role_power where role_power_id =
+		#{rolePowerId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		role_power
+		where role_power_id = #{rolePowerId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByRoleId" parameterType="java.lang.String">
+		delete from
+		role_power
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByPowerId" parameterType="java.lang.String">
+		delete from
+		role_power
+		where power_id = #{powerId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.RolePower">
+		insert into role_power
+		(role_power_id, role_id, power_id
+		)
+		values
+		(#{rolePowerId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
+		#{powerId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.RolePower">
+		insert into role_power
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="rolePowerId != null">
+				role_power_id,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="powerId != null">
+				power_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="rolePowerId != null">
+				#{rolePowerId,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="powerId != null">
+				#{powerId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.RolePower">
+		update role_power
+		<set>
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="powerId != null">
+				power_id = #{powerId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where role_power_id = #{rolePowerId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.RolePower">
+		update role_power
+		set role_id = #{roleId,jdbcType=VARCHAR},
+		power_id =
+		#{powerId,jdbcType=VARCHAR}
+		where role_power_id =
+		#{rolePowerId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND role_power_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.rolePowerId != null">AND role_power_id =#{model.rolePowerId}</if>
+				<if test="model.roleId != null">AND role_id =#{model.roleId}</if>
+				<if test="model.powerId != null">AND power_id =#{model.powerId}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="rolePowerResultMap">
+		select * from role_power
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.product.ProductMapper">
+	<!--重映射 -->
+	<resultMap id="productResultMap" type="com.lianjiu.model.Product">
+		<id column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="product_master_picture" property="productMasterPicture"
+			jdbcType="VARCHAR" />
+		<result column="product_sub_picture" property="productSubPicture"
+			jdbcType="VARCHAR" />
+		<result column="product_status" property="productStatus"
+			jdbcType="INTEGER" />
+		<result column="product_barcode" property="productBarcode"
+			jdbcType="VARCHAR" />
+		<result column="product_price" property="productPrice"
+			jdbcType="VARCHAR" />
+		<result column="product_price_alliance" property="productPriceAlliance"
+			jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="product_volume" property="productVolume"
+			jdbcType="BIGINT" />
+		<result column="product_created" property="productCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="product_updated" property="productUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="product_retri_type" property="productRetriType"
+			jdbcType="TINYINT" />
+
+		<result column="product_param_data" property="productParamData"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productResultMap"
+		parameterType="java.lang.String">
+		select * from product where product_id =
+		#{productId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product
+		where product_id = #{productId,jdbcType=VARCHAR}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.Product">
+		insert into product
+		(product_id, product_name, product_master_picture,
+		product_sub_picture, product_status, product_barcode,
+		product_price,
+		product_price_alliance, category_id,
+		product_volume, product_created,
+		product_updated,
+		product_retri_type, product_param_data)
+		values
+		(#{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+		#{productMasterPicture,jdbcType=VARCHAR},
+		#{productSubPicture,jdbcType=VARCHAR},
+		#{productStatus,jdbcType=INTEGER}, #{productBarcode,jdbcType=VARCHAR},
+		#{productPrice,jdbcType=VARCHAR},
+		#{productPriceAlliance,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{productVolume,jdbcType=BIGINT},
+		#{productCreated,jdbcType=TIMESTAMP},
+		#{productUpdated,jdbcType=TIMESTAMP},
+		#{productRetriType,jdbcType=TINYINT},
+		#{productParamData,jdbcType=LONGVARCHAR})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Product">
+		update product
+		<set>
+			<if test="productName != null and productName != ''">
+				product_name = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if
+				test="productMasterPicture != null and productMasterPicture != '' and productMasterPicture != 'null'">
+				product_master_picture =
+				#{productMasterPicture,jdbcType=VARCHAR},
+			</if>
+			<if
+				test="productSubPicture != null and productSubPicture != '' and productSubPicture != 'null'">
+				product_sub_picture =
+				#{productSubPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="productStatus != null">
+				product_status = #{productStatus,jdbcType=INTEGER},
+			</if>
+			<if test="productBarcode != null and productBarcode != ''">
+				product_barcode = #{productBarcode,jdbcType=VARCHAR},
+			</if>
+			<if test="productPrice != null and productPrice != ''">
+				product_price = #{productPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="productPriceAlliance != null and productPriceAlliance != ''">
+				product_price_alliance =
+				#{productPriceAlliance,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="productVolume != null">
+				product_volume = #{productVolume,jdbcType=BIGINT},
+			</if>
+			<if test="productCreated != null">
+				product_created = #{productCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="productUpdated != null">
+				product_updated = #{productUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="productRetriType != null">
+				product_retri_type =
+				#{productRetriType,jdbcType=TINYINT},
+			</if>
+			<if test="productParamData != null and productParamData != ''">
+				product_param_data =
+				#{productParamData,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where product_id = #{productId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND product_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.productId != null">AND product_id =#{model.productId}</if>
+				<if test="model.productName != null">AND product_name =#{model.productName}</if>
+				<if test="model.productMasterPicture != null">AND product_master_picture
+					=#{model.productMasterPicture}
+				</if>
+				<if test="model.productSubPicture != null">AND product_sub_picture =#{model.productSubPicture}</if>
+				<if test="model.productStatus != null">AND product_status =#{model.productStatus}</if>
+				<if test="model.productBarcode != null">AND product_barcode =#{model.productBarcode}</if>
+				<if test="model.productPrice != null">AND product_price =#{model.productPrice}</if>
+				<if test="model.productPriceAlliance != null">AND product_price_alliance
+					=#{model.productPriceAlliance}
+				</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.productVolume != null">AND product_volume =#{model.productVolume}</if>
+				<if test="model.productCreated != null">AND product_created =#{model.productCreated}</if>
+				<if test="model.productUpdated != null">AND product_updated =#{model.productUpdated}</if>
+				<if test="model.productRetriType != null">AND product_retri_type =#{model.productRetriType}</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="productResultMap">
+		select * from product
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		product_created
+		DESC
+	</select>
+</mapper>

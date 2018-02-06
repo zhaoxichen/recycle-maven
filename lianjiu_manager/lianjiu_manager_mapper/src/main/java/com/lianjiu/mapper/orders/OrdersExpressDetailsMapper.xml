@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersExpressDetailsMapper">
+	<resultMap id="ordersExpressDetailsResultMap" type="com.lianjiu.model.OrdersExpressDetails">
+		<id column="or_exp_details_id" property="orExpDetailsId" jdbcType="VARCHAR" />
+		<result column="or_express_id" property="orExpressId" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="or_exp_details_price" property="orExpDetailsPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_exp_details_alliance_price" property="orExpDetailsAlliancePrice"
+			jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="or_exp_details_account" property="orExpDetailsAccount"
+			jdbcType="VARCHAR" />
+		<result column="or_exp_details_created" property="orExpDetailsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_exp_details_updated" property="orExpDetailsUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersExpressDetailsResultMap"
+		parameterType="java.lang.String">select * from orders_express_details where
+		or_exp_details_id = #{orExpDetailsId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_express_details
+		where or_exp_details_id =
+		#{orExpDetailsId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersExpressDetails">
+		insert into
+		orders_express_details (or_exp_details_id, or_express_id,
+		product_name,
+		or_exp_details_price, or_exp_details_alliance_price,
+		product_id, or_exp_details_account, or_exp_details_created,
+		or_exp_details_updated)
+		values (#{orExpDetailsId,jdbcType=VARCHAR},
+		#{orExpressId,jdbcType=VARCHAR},
+		#{productName,jdbcType=VARCHAR},
+		#{orExpDetailsPrice,jdbcType=VARCHAR},
+		#{orExpDetailsAlliancePrice,jdbcType=VARCHAR},
+		#{productId,jdbcType=VARCHAR},
+		#{orExpDetailsAccount,jdbcType=VARCHAR},
+		#{orExpDetailsCreated,jdbcType=TIMESTAMP},
+		#{orExpDetailsUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersExpressDetails">
+		insert into orders_express_details
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orExpDetailsId != null">
+				or_exp_details_id,
+			</if>
+			<if test="orExpressId != null">
+				or_express_id,
+			</if>
+			<if test="productName != null">
+				product_name,
+			</if>
+			<if test="orExpDetailsPrice != null">
+				or_exp_details_price,
+			</if>
+			<if test="orExpDetailsAlliancePrice != null">
+				or_exp_details_alliance_price,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="orExpDetailsAccount != null">
+				or_exp_details_account,
+			</if>
+			<if test="orExpDetailsCreated != null">
+				or_exp_details_created,
+			</if>
+			<if test="orExpDetailsUpdated != null">
+				or_exp_details_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orExpDetailsId != null">
+				#{orExpDetailsId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpressId != null">
+				#{orExpressId,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsPrice != null">
+				#{orExpDetailsPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsAlliancePrice != null">
+				#{orExpDetailsAlliancePrice,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsAccount != null">
+				#{orExpDetailsAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsCreated != null">
+				#{orExpDetailsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExpDetailsUpdated != null">
+				#{orExpDetailsUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersExpressDetails">
+		update orders_express_details
+		<set>
+			<if test="orExpressId != null">
+				or_express_id = #{orExpressId,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				product_name = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsPrice != null">
+				or_exp_details_price =
+				#{orExpDetailsPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsAlliancePrice != null">
+				or_exp_details_alliance_price =
+				#{orExpDetailsAlliancePrice,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsAccount != null">
+				or_exp_details_account =
+				#{orExpDetailsAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpDetailsCreated != null">
+				or_exp_details_created =
+				#{orExpDetailsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExpDetailsUpdated != null">
+				or_exp_details_updated =
+				#{orExpDetailsUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where or_exp_details_id = #{orExpDetailsId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersExpressDetails">
+		update
+		orders_express_details
+		set or_express_id =
+		#{orExpressId,jdbcType=VARCHAR},
+		product_name =
+		#{productName,jdbcType=VARCHAR},
+		or_exp_details_price =
+		#{orExpDetailsPrice,jdbcType=VARCHAR},
+		or_exp_details_alliance_price =
+		#{orExpDetailsAlliancePrice,jdbcType=VARCHAR},
+		product_id =
+		#{productId,jdbcType=VARCHAR},
+		or_exp_details_account =
+		#{orExpDetailsAccount,jdbcType=VARCHAR},
+		or_exp_details_created =
+		#{orExpDetailsCreated,jdbcType=TIMESTAMP},
+		or_exp_details_updated =
+		#{orExpDetailsUpdated,jdbcType=TIMESTAMP}
+		where or_exp_details_id =
+		#{orExpDetailsId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_exp_details_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orExpDetailsId != null">AND or_exp_details_id =#{model.orExpDetailsId}</if>
+				<if test="model.orExpressId != null">AND or_express_id =#{model.orExpressId}</if>
+				<if test="model.productName != null">AND product_name =#{model.productName}</if>
+				<if test="model.orExpDetailsPrice != null">AND or_exp_details_price =#{model.orExpDetailsPrice}
+				</if>
+				<if test="model.orExpDetailsAlliancePrice != null">AND or_exp_details_alliance_price
+					=#{model.orExpDetailsAlliancePrice}
+				</if>
+				<if test="model.productId != null">AND product_id =#{model.productId}</if>
+				<if test="model.orExpDetailsAccount != null">AND or_exp_details_account =#{model.orExpDetailsAccount}
+				</if>
+				<if test="model.orExpDetailsCreated != null">AND or_exp_details_created =#{model.orExpDetailsCreated}
+				</if>
+				<if test="model.orExpDetailsUpdated != null">AND or_exp_details_updated =#{model.orExpDetailsUpdated}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersExpressDetailsResultMap">
+		select * from orders_express_details
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

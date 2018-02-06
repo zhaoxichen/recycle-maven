@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.content.AdEssenceBrandMapper">
+	<resultMap id="adEssenceBrandResultMap" type="com.lianjiu.model.AdEssenceBrand">
+		<id column="br_id" property="brId" jdbcType="VARCHAR" />
+		<result column="br_title" property="brTitle" jdbcType="VARCHAR" />
+		<result column="br_position" property="brPosition" jdbcType="VARCHAR" />
+		<result column="br_picture" property="brPicture" jdbcType="VARCHAR" />
+		<result column="br_pic_link" property="brPicLink" jdbcType="VARCHAR" />
+		<result column="br_size" property="brSize" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="adEssenceBrandResultMap"
+		parameterType="java.lang.String">select * from ad_essence_brand where br_id =
+		#{brId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ad_essence_brand
+		where br_id = #{brId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.AdEssenceBrand">
+		insert into ad_essence_brand
+		(br_id, br_title, br_position,
+		br_picture, br_pic_link, br_size,
+		add_time, update_time, add_person,
+		category_id)
+		values
+		(#{brId,jdbcType=VARCHAR}, #{brTitle,jdbcType=VARCHAR},
+		#{brPosition,jdbcType=VARCHAR},
+		#{brPicture,jdbcType=VARCHAR},
+		#{brPicLink,jdbcType=VARCHAR}, #{brSize,jdbcType=VARCHAR},
+		#{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{addPerson,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.AdEssenceBrand">
+		insert into ad_essence_brand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="brId != null">
+				br_id,
+			</if>
+			<if test="brTitle != null">
+				br_title,
+			</if>
+			<if test="brPosition != null">
+				br_position,
+			</if>
+			<if test="brPicture != null">
+				br_picture,
+			</if>
+			<if test="brPicLink != null">
+				br_pic_link,
+			</if>
+			<if test="brSize != null">
+				br_size,
+			</if>
+			<if test="addTime != null">
+				add_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="addPerson != null">
+				add_person,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="brId != null">
+				#{brId,jdbcType=VARCHAR},
+			</if>
+			<if test="brTitle != null">
+				#{brTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="brPosition != null">
+				#{brPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="brPicture != null">
+				#{brPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="brPicLink != null">
+				#{brPicLink,jdbcType=VARCHAR},
+			</if>
+			<if test="brSize != null">
+				#{brSize,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addPerson != null">
+				#{addPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdEssenceBrand">
+		update ad_essence_brand
+		<set>
+			<if test="brTitle != null">
+				br_title = #{brTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="brPosition != null">
+				br_position = #{brPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="brPicture != null">
+				br_picture = #{brPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="brPicLink != null">
+				br_pic_link = #{brPicLink,jdbcType=VARCHAR},
+			</if>
+			<if test="brSize != null">
+				br_size = #{brSize,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				add_time = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addPerson != null">
+				add_person = #{addPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where br_id = #{brId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AdEssenceBrand">
+		update
+		ad_essence_brand
+		set br_title = #{brTitle,jdbcType=VARCHAR},
+		br_position = #{brPosition,jdbcType=VARCHAR},
+		br_picture =
+		#{brPicture,jdbcType=VARCHAR},
+		br_pic_link =
+		#{brPicLink,jdbcType=VARCHAR},
+		br_size = #{brSize,jdbcType=VARCHAR},
+		add_time = #{addTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		add_person =
+		#{addPerson,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT}
+		where br_id = #{brId,jdbcType=VARCHAR}
+	</update>
+
+
+	<select id="findAll" resultMap="adEssenceBrandResultMap">
+		select
+		br_id, br_title,
+		br_position,
+		br_picture, br_pic_link, br_size,
+		add_time, update_time,
+		add_person,
+		category_id
+		from ad_essence_brand ORDER BY br_position asc
+	</select>
+	<select id="selectAdEssenceBrandList" resultMap="adEssenceBrandResultMap"
+		parameterType="java.lang.String">
+		select * from ad_essence_brand
+	</select>
+	<insert id="insertAdEssenceBrand" parameterType="com.lianjiu.model.AdEssenceBrand">
+		insert into
+		ad_essence_brand (br_id, br_title, br_position,
+		br_picture,
+		br_pic_link, br_size,
+		add_time, update_time, add_person,
+		category_id)
+		values (#{brId,jdbcType=VARCHAR}, #{brTitle,jdbcType=VARCHAR},
+		#{brPosition,jdbcType=VARCHAR},
+		#{brPicture,jdbcType=VARCHAR},
+		#{brPicLink,jdbcType=VARCHAR}, #{brSize,jdbcType=VARCHAR},
+		#{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{addPerson,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT})
+	</insert>
+</mapper>

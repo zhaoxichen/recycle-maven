@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.product.ProductParamTemplateMapper">
+	<!--重映射 -->
+	<resultMap id="productParamResultMap" type="com.lianjiu.model.ProductParamTemplate">
+		<id column="pptempl_id" property="pptemplId" jdbcType="VARCHAR" />
+		<result column="pptempl_name" property="pptemplName" jdbcType="VARCHAR" />
+		<result column="pptempl_data" property="pptemplData" jdbcType="VARCHAR" />
+		<result column="pptempl_created" property="pptemplCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="pptempl_updated" property="pptemplUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!--通过主键删除所有 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product_param_template
+		where pptempl_id = #{pptemplId,jdbcType=VARCHAR}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.ProductParamTemplate">
+		insert into
+		product_param_template (pptempl_id, pptempl_name,
+		pptempl_created,
+		pptempl_updated, pptempl_data)
+		values (#{pptemplId,jdbcType=VARCHAR},
+		#{pptemplName,jdbcType=VARCHAR},
+		#{pptemplCreated,jdbcType=TIMESTAMP},
+		#{pptemplUpdated,jdbcType=TIMESTAMP},
+		#{pptemplData,jdbcType=LONGVARCHAR})
+	</insert>
+	<!--条件插入 -->
+	<insert id="insertSelective" parameterType="com.lianjiu.model.ProductParamTemplate">
+		insert into product_param_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pptemplId != null">
+				pptempl_id,
+			</if>
+			<if test="pptemplName != null">
+				pptempl_name,
+			</if>
+			<if test="pptemplCreated != null">
+				pptempl_created,
+			</if>
+			<if test="pptemplUpdated != null">
+				pptempl_updated,
+			</if>
+			<if test="pptemplData != null">
+				pptempl_data,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pptemplId != null">
+				#{pptemplId,jdbcType=VARCHAR},
+			</if>
+			<if test="pptemplName != null">
+				#{pptemplName,jdbcType=VARCHAR},
+			</if>
+			<if test="pptemplCreated != null">
+				#{pptemplCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pptemplUpdated != null">
+				#{pptemplUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pptemplData != null">
+				#{pptemplData,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!--通过主键条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductParamTemplate">
+		update product_param_template
+		<set>
+			<if test="pptemplName != null">
+				pptempl_name = #{pptemplName,jdbcType=VARCHAR},
+			</if>
+			<if test="pptemplCreated != null">
+				pptempl_created = #{pptemplCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pptemplUpdated != null">
+				pptempl_updated = #{pptemplUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pptemplData != null">
+				pptempl_data = #{pptemplData,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where pptempl_id = #{pptemplId,jdbcType=VARCHAR}
+	</update>
+	<!--通过主键更新所有 -->
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.ProductParamTemplate">
+		update
+		product_param_template
+		set pptempl_name =
+		#{pptemplName,jdbcType=VARCHAR},
+		pptempl_created =
+		#{pptemplCreated,jdbcType=TIMESTAMP},
+		pptempl_updated =
+		#{pptemplUpdated,jdbcType=TIMESTAMP}
+		where pptempl_id =
+		#{pptemplId,jdbcType=VARCHAR}
+	</update>
+	<!--查询 -->
+	<select id="selectById" parameterType="String" resultMap="productParamResultMap">
+		select
+		* from product_param_template where pptempl_id=#{value}
+	</select>
+	<select id="selectAll" resultMap="productParamResultMap">
+		select * from
+		product_param_template
+	</select>
+	<!--sql片段 -->
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and pptemplId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND pptempl_id=#{pptemplId}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.pptemplId != null and model.pptemplId.length()>0">
+					AND pptempl_id=#{model.pptemplId}
+				</if>
+				<if test="model.pptemplName != null and model.pptemplName.length()>0">
+					AND pptempl_name=#{model.pptemplName}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="productParamResultMap">
+		select * from product_param_template
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		pptempl_created
+		DESC
+	</select>
+</mapper>

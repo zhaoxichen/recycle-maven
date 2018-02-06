@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersBulkMapper">
+	<resultMap id="ordersBulkResultMap" type="com.lianjiu.model.OrdersBulk">
+		<id column="or_bulk_id" property="orBulkId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="or_bulk_status" property="orBulkStatus"
+			jdbcType="TINYINT" />
+		<result column="or_bulk_expire" property="orBulkExpire"
+			jdbcType="TINYINT" />
+		<result column="orders_price" property="ordersPrice" jdbcType="VARCHAR" />
+		<result column="orders_retr_price" property="ordersRetrPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_bulk_payTime" property="orBulkPaytime"
+			jdbcType="TIMESTAMP" />
+		<result column="or_bulk_handler_id" property="orBulkHandlerId"
+			jdbcType="VARCHAR" />
+		<result column="or_bulk_handler_tel" property="orBulkHandlerTel"
+			jdbcType="VARCHAR" />
+		<result column="or_bulk_created" property="orBulkCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_bulk_updated" property="orBulkUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersBulkResultMap"
+		parameterType="java.lang.String">select * from orders_bulk where or_bulk_id =
+		#{orBulkId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_bulk
+		where or_bulk_id = #{orBulkId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersBulk">
+		insert into orders_bulk
+		(or_bulk_id, category_id,user_id, user_name,
+		user_phone,
+		or_bulk_status,
+		or_bulk_expire,
+		orders_price, orders_retr_price,
+		or_bulk_payTime,
+		or_bulk_handler_id, or_bulk_handler_tel,
+		or_bulk_created,
+		or_bulk_updated)
+		values (#{orBulkId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{userId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR},
+		#{orBulkStatus,jdbcType=TINYINT},
+		0,
+		#{ordersPrice,jdbcType=VARCHAR},
+		#{ordersRetrPrice,jdbcType=VARCHAR},
+		#{orBulkPaytime,jdbcType=TIMESTAMP},
+		#{orBulkHandlerId,jdbcType=VARCHAR},
+		#{orBulkHandlerTel,jdbcType=VARCHAR},
+		NOW(),
+		NOW())
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersBulk">
+		update orders_bulk
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="orBulkStatus != null">
+				or_bulk_status = #{orBulkStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orBulkExpire != null">
+				or_bulk_expire = #{orBulkExpire,jdbcType=TINYINT},
+			</if>
+			<if test="ordersPrice != null">
+				orders_price = #{ordersPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersRetrPrice != null">
+				orders_retr_price = #{ordersRetrPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orBulkPaytime != null">
+				or_bulk_payTime = #{orBulkPaytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orBulkHandlerId != null">
+				or_bulk_handler_id = #{orBulkHandlerId,jdbcType=VARCHAR},
+			</if>
+			<if test="orBulkHandlerTel != null">
+				or_bulk_handler_tel =
+				#{orBulkHandlerTel,jdbcType=VARCHAR},
+			</if>
+			or_bulk_updated = NOW()
+		</set>
+		where or_bulk_id = #{orBulkId,jdbcType=VARCHAR}
+	</update>
+	<!-- 获取所有大宗订单 -->
+	<select id="getAllOrdersBulk" resultMap="ordersBulkResultMap">
+		select * from
+		orders_bulk order by or_bulk_created desc
+	</select>
+	<!-- 订单状态设为取消 -->
+	<update id="modifyCancle" parameterType="com.lianjiu.model.OrdersBulk">
+		update orders_bulk set
+		or_bulk_status = #{orBulkStatus},or_bulk_updated = NOW() where
+		or_bulk_id = #{orBulkId}
+	</update>
+	<!--0 全部，1 交货，2结算，3取消 -->
+	<select id="getOrdersListByStatus" resultMap="ordersBulkResultMap">
+		SELECT
+		o.or_bulk_id,
+		o.user_id,
+		o.user_name,
+		o.user_phone,
+		o.or_bulk_status,
+		o.orders_price,
+		o.orders_retr_price,
+		o.or_bulk_payTime,
+		o.or_bulk_created
+		FROM
+		orders_bulk o
+		WHERE
+		o.user_id =
+		#{uid}
+		AND o.or_bulk_status IN
+		<foreach collection="statusList" item="status" index="index"
+			open="(" close=")" separator=",">
+			#{status}
+		</foreach>
+		ORDER BY
+		o.or_bulk_created DESC
+	</select>
+	<!--修改订单状态 -->
+	<update id="modifyOrdersStatus">
+		update orders_bulk set
+		or_bulk_status =
+		#{orderStatus},
+		or_bulk_updated = NOW()
+		where or_bulk_id =
+		#{ordersId}
+	</update>
+	<!--30分钟无操作，自动取消订单 状态从2变成0 -->
+	<update id="ordersAutoCancel">
+		update orders_bulk set
+		or_bulk_status = 0,
+		or_bulk_updated = NOW()
+		where
+		or_bulk_status = 2 AND
+		or_bulk_id in
+		<foreach collection="ordersIdList" item="ordersId" index="index"
+			open="(" close=")" separator=",">
+			#{ordersId}
+		</foreach>
+	</update>
+	<!--多参数搜索订单 -->
+	<select id="searchOrders" resultMap="ordersBulkResultMap">
+
+		SELECT
+		ob.or_bulk_id,
+		ob.user_name,
+		ob.user_phone,
+		ob.or_bulk_status,
+		ob.or_bulk_created,
+		c.category_name
+		FROM
+		orders_bulk ob
+		left join category c
+		on ob.category_id = c.category_id
+		WHERE
+		ob.or_bulk_id = #{parameter}
+		OR ob.user_name = #{parameter}
+		OR ob.user_phone =
+		#{parameter}
+		ORDER BY ob.or_bulk_created DESC
+	</select>
+	<!--查询订单详情 -->
+	<select id="getOrderById" resultMap="ordersBulkResultMap"
+		parameterType="java.lang.String">
+		select
+		or_bulk_id,user_id,orders_price,orders_retr_price,or_bulk_payTime from
+		orders_bulk where or_bulk_id =#{orBulkId}
+	</select>
+</mapper>

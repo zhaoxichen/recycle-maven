@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>跳转到首页</title>
+</head>
+<body>
+	<div id=win
+		style="display: none; POSITION: absolute; left: 50%; top: 50%; width: 400px; height: 200px; margin-left: -300px; margin-top: -200px; border: 1px solid #888; background-color: #edf; text-align: center">
+		请输入密码<br> <input id="pass" name="password" /> <a
+			href="javascript:closeLogin();">确定</a>
+	</div>
+	<script>
+		function openLogin() {
+			document.getElementById("win").style.display = "";
+		}
+		function closeLogin() {
+			var password = document.getElementById("pass").value;
+			if ("rest" != password) {
+				alert("密码不正确");
+				return;
+			}
+			document.getElementById("win").style.display = "none";
+			document.getElementById("hello").style.display = "";
+		}
+		window.onload = openLogin();
+	</script>
+	<h1 id="hello" style="display: none;">rest接口系统Index页面</h1>
+</body>
+</html>

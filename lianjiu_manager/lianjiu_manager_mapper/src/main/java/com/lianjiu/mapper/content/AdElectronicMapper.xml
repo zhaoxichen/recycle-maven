@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.content.AdElectronicMapper" >
+  <resultMap id="BaseResultMap" type="com.lianjiu.model.AdElectronic" >
+    <id column="ele_id" property="eleId" jdbcType="VARCHAR" />
+    <result column="ele_title" property="eleTitle" jdbcType="VARCHAR" />
+    <result column="ele_order" property="eleOrder" jdbcType="VARCHAR" />
+    <result column="ele_picture" property="elePicture" jdbcType="VARCHAR" />
+    <result column="ele_pic_link" property="elePicLink" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+    <result column="ele_state" property="eleState" jdbcType="VARCHAR" />
+    <result column="ele_size" property="eleSize" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ele_id, ele_title, ele_order, ele_picture, ele_pic_link, add_time, add_person, ele_state, 
+    ele_size, category_id
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_electronic
+    where ele_id = #{eleId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectElectronicList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_electronic
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ad_electronic
+    where ele_id = #{eleId,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insertElectronic" parameterType="com.lianjiu.model.AdElectronic" >
+    insert into ad_electronic (ele_id, ele_title, ele_order, 
+      ele_picture, ele_pic_link, add_time, 
+      add_person, ele_state, ele_size, 
+      category_id)
+    values (#{eleId,jdbcType=VARCHAR}, #{eleTitle,jdbcType=VARCHAR}, #{eleOrder,jdbcType=VARCHAR}, 
+      #{elePicture,jdbcType=VARCHAR}, #{elePicLink,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{addPerson,jdbcType=VARCHAR}, #{eleState,jdbcType=VARCHAR}, #{eleSize,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianjiu.model.AdElectronic" >
+    insert into ad_electronic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eleId != null" >
+        ele_id,
+      </if>
+      <if test="eleTitle != null" >
+        ele_title,
+      </if>
+      <if test="eleOrder != null" >
+        ele_order,
+      </if>
+      <if test="elePicture != null" >
+        ele_picture,
+      </if>
+      <if test="elePicLink != null" >
+        ele_pic_link,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPerson != null" >
+        add_person,
+      </if>
+      <if test="eleState != null" >
+        ele_state,
+      </if>
+      <if test="eleSize != null" >
+        ele_size,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eleId != null" >
+        #{eleId,jdbcType=VARCHAR},
+      </if>
+      <if test="eleTitle != null" >
+        #{eleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="eleOrder != null" >
+        #{eleOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="elePicture != null" >
+        #{elePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="elePicLink != null" >
+        #{elePicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="eleState != null" >
+        #{eleState,jdbcType=VARCHAR},
+      </if>
+      <if test="eleSize != null" >
+        #{eleSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdElectronic" >
+    update ad_electronic
+    <set >
+      <if test="eleTitle != null" >
+        ele_title = #{eleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="eleOrder != null" >
+        ele_order = #{eleOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="elePicture != null" >
+        ele_picture = #{elePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="elePicLink != null" >
+        ele_pic_link = #{elePicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null and" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        add_person = #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="eleState != null " >
+        ele_state = #{eleState,jdbcType=VARCHAR},
+      </if>
+      <if test="eleSize != null " >
+        ele_size = #{eleSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ele_id = #{eleId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AdElectronic" >
+    update ad_electronic
+    set ele_title = #{eleTitle,jdbcType=VARCHAR},
+      ele_order = #{eleOrder,jdbcType=VARCHAR},
+      ele_picture = #{elePicture,jdbcType=VARCHAR},
+      ele_pic_link = #{elePicLink,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person = #{addPerson,jdbcType=VARCHAR},
+      ele_state = #{eleState,jdbcType=VARCHAR},
+      ele_size = #{eleSize,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=BIGINT}
+    where ele_id = #{eleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

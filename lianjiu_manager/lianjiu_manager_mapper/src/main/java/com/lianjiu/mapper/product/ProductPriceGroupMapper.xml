@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.product.ProductPriceGroupMapper">
+	<resultMap id="productPriceGroupResultMap" type="com.lianjiu.common.pojo.ProductPriceGroup">
+		<id column="price_id" property="priceId" jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="price_one" property="priceOne" jdbcType="VARCHAR" />
+		<result column="price_two" property="priceTwo" jdbcType="VARCHAR" />
+		<result column="price_final" property="priceFinal" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productPriceGroupResultMap"
+		parameterType="java.lang.String">select * from product_price_group where price_id =
+		#{priceId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product_price_group
+		where price_id = #{priceId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.common.pojo.ProductPriceGroup">
+		insert into
+		product_price_group (price_id, product_id, price_one,
+		price_two,
+		price_final, price_created,
+		price_updated)
+		values
+		(#{priceId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR},
+		#{priceOne,jdbcType=VARCHAR},
+		#{priceTwo,jdbcType=VARCHAR},
+		#{priceFinal,jdbcType=VARCHAR}, #{priceCreated,jdbcType=TIMESTAMP},
+		#{priceUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.common.pojo.ProductPriceGroup">
+		insert into product_price_group
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="priceId != null">
+				price_id,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="priceOne != null">
+				price_one,
+			</if>
+			<if test="priceTwo != null">
+				price_two,
+			</if>
+			<if test="priceFinal != null">
+				price_final,
+			</if>
+			<if test="priceCreated != null">
+				price_created,
+			</if>
+			<if test="priceUpdated != null">
+				price_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="priceId != null">
+				#{priceId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="priceOne != null">
+				#{priceOne,jdbcType=VARCHAR},
+			</if>
+			<if test="priceTwo != null">
+				#{priceTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="priceFinal != null">
+				#{priceFinal,jdbcType=VARCHAR},
+			</if>
+			<if test="priceCreated != null">
+				#{priceCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="priceUpdated != null">
+				#{priceUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.common.pojo.ProductPriceGroup">
+		update product_price_group
+		<set>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="priceOne != null">
+				price_one = #{priceOne,jdbcType=VARCHAR},
+			</if>
+			<if test="priceTwo != null">
+				price_two = #{priceTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="priceFinal != null">
+				price_final = #{priceFinal,jdbcType=VARCHAR},
+			</if>
+			<if test="priceCreated != null">
+				price_created = #{priceCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="priceUpdated != null">
+				price_updated = #{priceUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where price_id = #{priceId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.common.pojo.ProductPriceGroup">
+		update
+		product_price_group
+		set product_id = #{productId,jdbcType=VARCHAR},
+		price_one = #{priceOne,jdbcType=VARCHAR},
+		price_two =
+		#{priceTwo,jdbcType=VARCHAR},
+		price_final =
+		#{priceFinal,jdbcType=VARCHAR},
+		price_created =
+		#{priceCreated,jdbcType=TIMESTAMP},
+		price_updated =
+		#{priceUpdated,jdbcType=TIMESTAMP}
+		where price_id =
+		#{priceId,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPid" resultMap="productPriceGroupResultMap"
+		parameterType="java.lang.String">select * from product_price_group where product_id =
+		#{value}
+	</select>
+
+</mapper>

@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.lianjiu</groupId>
+		<artifactId>lianjiu_parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>lianjiu_sso</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>lianjiu_sso_service</module>
+		<module>lianjiu_sso_web</module>
+	</modules>
+	<!-- 依赖管理 -->
+	<dependencies>
+		<dependency>
+			<groupId>com.lianjiu</groupId>
+			<artifactId>lianjiu_common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<!-- 配置插件 -->
+		<plugins>
+			<!-- install跳过测试 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<!--热部署插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>8083</port>
+					<path>/</path>
+					<url>http://101.132.38.30:8083/manager/text</url>
+					<username>adminLianjiu</username>
+					<password>yhlst1702lianjiu.@*#</password>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

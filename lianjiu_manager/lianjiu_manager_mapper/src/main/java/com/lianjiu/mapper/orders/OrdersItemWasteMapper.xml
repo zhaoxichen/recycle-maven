@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersItemWasteMapper">
+	<resultMap id="ordersItemResultMap" type="com.lianjiu.model.OrdersItem">
+		<id column="or_items_id" property="orItemsId" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_type" property="orItemsType" jdbcType="VARCHAR" />
+		<result column="or_items_name" property="orItemsName" jdbcType="VARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_items_stem_from" property="orItemsStemFrom"
+			jdbcType="VARCHAR" />
+		<result column="or_items_before_price" property="orItemsBeforePrice"
+			jdbcType="DECIMAL" />
+		<result column="or_items_price" property="orItemsPrice"
+			jdbcType="DECIMAL" />
+		<result column="or_items_picture" property="orItemsPicture"
+			jdbcType="VARCHAR" />
+		<result column="or_items_orperater" property="orItemsOrperater"
+			jdbcType="VARCHAR" />
+		<result column="or_items_num" property="orItemsNum" jdbcType="BIGINT" />
+		<result column="or_items_created" property="orItemsCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_updated" property="orItemsUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_param_modify" property="orItemsParamModify"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersItemResultMap"
+		parameterType="java.lang.String">
+		select * from orders_item where or_items_id =
+		#{orItemsId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_item
+		where or_items_id = #{orItemsId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersItem">
+		insert into orders_item
+		(or_items_id, orders_id, or_items_type,
+		or_items_name,
+		or_items_product_id, or_items_stem_from,
+		or_items_before_price,
+		or_items_price, or_items_picture,
+		or_items_orperater, or_items_num,
+		or_items_created,
+		or_items_updated, or_items_param,
+		or_items_param_modify
+		)
+		values (#{orItemsId,jdbcType=VARCHAR},
+		#{ordersId,jdbcType=VARCHAR},
+		#{orItemsType,jdbcType=VARCHAR},
+		#{orItemsName,jdbcType=VARCHAR}, #{orItemsProductId,jdbcType=VARCHAR},
+		#{orItemsStemFrom,jdbcType=VARCHAR},
+		#{orItemsBeforePrice,jdbcType=DECIMAL},
+		#{orItemsPrice,jdbcType=DECIMAL}, #{orItemsPicture,jdbcType=VARCHAR},
+		#{orItemsOrperater,jdbcType=VARCHAR}, #{orItemsNum,jdbcType=BIGINT},
+		#{orItemsCreated,jdbcType=TIMESTAMP},
+		#{orItemsUpdated,jdbcType=TIMESTAMP},
+		#{orItemsParam,jdbcType=LONGVARCHAR},
+		#{orItemsParamModify,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersItem">
+		insert into orders_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orItemsId != null">
+				or_items_id,
+			</if>
+			<if test="ordersId != null">
+				orders_id,
+			</if>
+			<if test="orItemsType != null">
+				or_items_type,
+			</if>
+			<if test="orItemsName != null">
+				or_items_name,
+			</if>
+			<if test="orItemsProductId != null">
+				or_items_product_id,
+			</if>
+			<if test="orItemsStemFrom != null">
+				or_items_stem_from,
+			</if>
+			<if test="orItemsBeforePrice != null">
+				or_items_before_price,
+			</if>
+			<if test="orItemsPrice != null">
+				or_items_price,
+			</if>
+			<if test="orItemsPicture != null">
+				or_items_picture,
+			</if>
+			<if test="orItemsOrperater != null">
+				or_items_orperater,
+			</if>
+			<if test="orItemsNum != null">
+				or_items_num,
+			</if>
+			<if test="orItemsCreated != null">
+				or_items_created,
+			</if>
+			<if test="orItemsUpdated != null">
+				or_items_updated,
+			</if>
+			<if test="orItemsParam != null">
+				or_items_param,
+			</if>
+			<if test="orItemsParamModify != null">
+				or_items_param_modify,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orItemsId != null">
+				#{orItemsId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersId != null">
+				#{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsType != null">
+				#{orItemsType,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsName != null">
+				#{orItemsName,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsProductId != null">
+				#{orItemsProductId,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsStemFrom != null">
+				#{orItemsStemFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsBeforePrice != null">
+				#{orItemsBeforePrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsPrice != null">
+				#{orItemsPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsPicture != null">
+				#{orItemsPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsOrperater != null">
+				#{orItemsOrperater,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsNum != null">
+				#{orItemsNum,jdbcType=BIGINT},
+			</if>
+			<if test="orItemsCreated != null">
+				#{orItemsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orItemsUpdated != null">
+				#{orItemsUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orItemsParam != null">
+				#{orItemsParam,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="orItemsParamModify != null">
+				#{orItemsParamModify,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersItem">
+		update orders_item
+		<set>
+			<if test="ordersId != null">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsType != null">
+				or_items_type = #{orItemsType,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsName != null">
+				or_items_name = #{orItemsName,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsProductId != null">
+				or_items_product_id =
+				#{orItemsProductId,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsStemFrom != null">
+				or_items_stem_from = #{orItemsStemFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsBeforePrice != null">
+				or_items_before_price =
+				#{orItemsBeforePrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsPrice != null">
+				or_items_price = #{orItemsPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="orItemsPicture != null">
+				or_items_picture = #{orItemsPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsOrperater != null">
+				or_items_orperater =
+				#{orItemsOrperater,jdbcType=VARCHAR},
+			</if>
+			<if test="orItemsNum != null">
+				or_items_num = #{orItemsNum,jdbcType=BIGINT},
+			</if>
+			<if test="orItemsCreated != null">
+				or_items_created = #{orItemsCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orItemsUpdated != null">
+				or_items_updated = #{orItemsUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orItemsParam != null">
+				or_items_param = #{orItemsParam,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="orItemsParamModify != null">
+				or_items_param_modify =
+				#{orItemsParamModify,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_items_id = #{orItemsId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersItem">
+		update orders_item
+		set orders_id = #{ordersId,jdbcType=VARCHAR},
+		or_items_type =
+		#{orItemsType,jdbcType=VARCHAR},
+		or_items_name =
+		#{orItemsName,jdbcType=VARCHAR},
+		or_items_product_id =
+		#{orItemsProductId,jdbcType=VARCHAR},
+		or_items_stem_from =
+		#{orItemsStemFrom,jdbcType=VARCHAR},
+		or_items_before_price =
+		#{orItemsBeforePrice,jdbcType=DECIMAL},
+		or_items_price =
+		#{orItemsPrice,jdbcType=DECIMAL},
+		or_items_picture =
+		#{orItemsPicture,jdbcType=VARCHAR},
+		or_items_orperater =
+		#{orItemsOrperater,jdbcType=VARCHAR},
+		or_items_num =
+		#{orItemsNum,jdbcType=BIGINT},
+		or_items_created =
+		#{orItemsCreated,jdbcType=TIMESTAMP},
+		or_items_updated =
+		#{orItemsUpdated,jdbcType=TIMESTAMP}
+		where or_items_id =
+		#{orItemsId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_items_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orItemsId != null">AND or_items_id =#{model.orItemsId}</if>
+				<if test="model.ordersId != null">AND orders_id =#{model.ordersId}</if>
+				<if test="model.orItemsType != null">AND or_items_type =#{model.orItemsType}</if>
+				<if test="model.orItemsName != null">AND or_items_name =#{model.orItemsName}</if>
+				<if test="model.orItemsProductId != null">AND or_items_product_id =#{model.orItemsProductId}</if>
+				<if test="model.orItemsStemFrom != null">AND or_items_stem_from =#{model.orItemsStemFrom}</if>
+				<if test="model.orItemsBeforePrice != null">AND or_items_before_price =#{model.orItemsBeforePrice}
+				</if>
+				<if test="model.orItemsPrice != null">AND or_items_price =#{model.orItemsPrice}</if>
+				<if test="model.orItemsPicture != null">AND or_items_picture =#{model.orItemsPicture}</if>
+				<if test="model.orItemsOrperater != null">AND or_items_orperater =#{model.orItemsOrperater}</if>
+				<if test="model.orItemsNum != null">AND or_items_num =#{model.orItemsNum}</if>
+				<if test="model.orItemsCreated != null">AND or_items_created =#{model.orItemsCreated}</if>
+				<if test="model.orItemsUpdated != null">AND or_items_updated =#{model.orItemsUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersItemResultMap">
+		select * from orders_item
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

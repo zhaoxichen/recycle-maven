@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.user.UserDetailsMapper">
+	<resultMap id="userDetailsResultMap" type="com.lianjiu.model.UserDetails">
+		<id column="udetails_id" property="udetailsId" jdbcType="VARCHAR" />
+		<result column="udetails_id_card" property="udetailsIdCard"
+			jdbcType="VARCHAR" />
+		<result column="udetails_user_address" property="udetailsUserAddress"
+			jdbcType="VARCHAR" />
+		<result column="udetails_realname_time" property="udetailsRealnameTime"
+			jdbcType="TIMESTAMP" />
+		<result column="udetails_card_no" property="udetailsCardNo"
+			jdbcType="VARCHAR" />
+		<result column="udetails_card_bank" property="udetailsCardBank"
+			jdbcType="VARCHAR" />
+		<result column="udetails_integral" property="udetailsIntegral"
+			jdbcType="INTEGER" />
+		<result column="udetails_account_balance" property="udetailsAccountBalance"
+			jdbcType="INTEGER" />
+		<result column="udetails_money_details" property="udetailsMoneyDetails"
+			jdbcType="VARCHAR" />
+		<result column="udetails_card_time" property="udetailsCardTime"
+			jdbcType="TIMESTAMP" />
+		<result column="udetails_register_time" property="udetailsRegisterTime"
+			jdbcType="TIMESTAMP" />
+		<result column="udetails_equipment" property="udetailsEquipment"
+			jdbcType="VARCHAR" />
+		<result column="udetails_edition" property="udetailsEdition"
+			jdbcType="VARCHAR" />
+		<result column="udetails_referrer" property="udetailsReferrer"
+			jdbcType="VARCHAR" />
+		<result column="udetails_photo" property="udetailsPhoto"
+			jdbcType="VARCHAR" />
+		<result column="coupon_id" property="couponId" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_phonenum" property="userPhonenum"
+			jdbcType="VARCHAR" />
+		<result column="user_openid" property="userOpenid" jdbcType="VARCHAR" />
+		<result column="is_id_card" property="isIdCard" jdbcType="TINYINT" />
+		<result column="user_check" property="userCheck" jdbcType="VARCHAR" />
+		<result column="check_time" property="checkTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="isFirstOrderResultMap" type="com.lianjiu.model.UserDetails">
+		<id column="udetails_id" property="udetailsId" jdbcType="VARCHAR" />
+		<result column="udetails_referrer" property="udetailsReferrer"
+			jdbcType="VARCHAR" />
+		<result column="is_first_order" property="isFirstOrder"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<!-- <select id="selectByPrimaryKey" resultMap="userDetailsResultMap" parameterType="java.lang.String">select 
+		* from user_details where udetails_id = #{udetailsId,jdbcType=VARCHAR} </select> -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		user_details
+		where udetails_id = #{udetailsId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.UserDetails">
+		insert into user_details
+		(udetails_id, udetails_id_card,
+		udetails_user_address,
+		udetails_realname_time, udetails_card_no,
+		udetails_card_bank,
+		udetails_integral, udetails_account_balance,
+		udetails_money_details,
+		udetails_register_time,
+		udetails_equipment, udetails_edition,
+		udetails_referrer,
+		udetails_photo, coupon_id, user_name,
+		user_phonenum,
+		user_openid, is_id_card
+		)
+		values (#{udetailsId,jdbcType=VARCHAR},
+		#{udetailsIdCard,jdbcType=VARCHAR},
+		#{udetailsUserAddress,jdbcType=VARCHAR},
+		#{udetailsRealnameTime,jdbcType=TIMESTAMP},
+		#{udetailsCardNo,jdbcType=VARCHAR},
+		#{udetailsCardBank,jdbcType=VARCHAR},
+		#{udetailsIntegral,jdbcType=INTEGER},
+		#{udetailsAccountBalance,jdbcType=INTEGER},
+		#{udetailsMoneyDetails,jdbcType=VARCHAR},
+		#{udetailsRegisterTime,jdbcType=TIMESTAMP},
+		#{udetailsEquipment,jdbcType=VARCHAR},
+		#{udetailsEdition,jdbcType=VARCHAR},
+		#{udetailsReferrer,jdbcType=VARCHAR},
+		#{udetailsPhoto,jdbcType=VARCHAR}, #{couponId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{userPhonenum,jdbcType=INTEGER},
+		#{userOpenid,jdbcType=VARCHAR}, 0
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.UserDetails">
+		update user_details
+		<set>
+			<if test="udetailsIdCard != null">
+				udetails_id_card = #{udetailsIdCard,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsUserAddress != null">
+				udetails_user_address =
+				#{udetailsUserAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsRealnameTime != null">
+				udetails_realname_time =
+				#{udetailsRealnameTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="udetailsCardNo != null">
+				udetails_card_no = #{udetailsCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsCardBank != null">
+				udetails_card_bank =
+				#{udetailsCardBank,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsIntegral != null">
+				udetails_integral = #{udetailsIntegral,jdbcType=INTEGER},
+			</if>
+			<if test="udetailsAccountBalance != null">
+				udetails_account_balance =
+				#{udetailsAccountBalance,jdbcType=INTEGER},
+			</if>
+			<if test="udetailsMoneyDetails != null">
+				udetails_money_details =
+				#{udetailsMoneyDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsRegisterTime != null">
+				udetails_register_time =
+				#{udetailsRegisterTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="udetailsEquipment != null">
+				udetails_equipment =
+				#{udetailsEquipment,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsEdition != null">
+				udetails_edition = #{udetailsEdition,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsReferrer != null">
+				udetails_referrer = #{udetailsReferrer,jdbcType=VARCHAR},
+			</if>
+			<if test="udetailsPhoto != null">
+				udetails_photo = #{udetailsPhoto,jdbcType=VARCHAR},
+			</if>
+			<if test="couponId != null">
+				coupon_id = #{couponId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhonenum != null">
+				user_phonenum = #{userPhonenum,jdbcType=VARCHAR},
+			</if>
+			<if test="userOpenid != null">
+				user_openid = #{userOpenid,jdbcType=VARCHAR},
+			</if>
+			<if test="isIdCard != null">
+				is_id_card = #{isIdCard,jdbcType=TINYINT},
+			</if>
+		</set>
+		where udetails_id = #{udetailsId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.UserDetails">
+		update
+		user_details
+		set udetails_id_card = #{udetailsIdCard,jdbcType=VARCHAR},
+		udetails_user_address = #{udetailsUserAddress,jdbcType=VARCHAR},
+		udetails_realname_time = #{udetailsRealnameTime,jdbcType=TIMESTAMP},
+		udetails_card_no = #{udetailsCardNo,jdbcType=VARCHAR},
+		udetails_card_bank = #{udetailsCardBank,jdbcType=VARCHAR},
+		udetails_integral = #{udetailsIntegral,jdbcType=INTEGER},
+		udetails_account_balance = #{udetailsAccountBalance,jdbcType=INTEGER},
+		udetails_money_details = #{udetailsMoneyDetails,jdbcType=VARCHAR},
+		udetails_register_time = #{udetailsRegisterTime,jdbcType=TIMESTAMP},
+		udetails_equipment = #{udetailsEquipment,jdbcType=VARCHAR},
+		udetails_edition = #{udetailsEdition,jdbcType=VARCHAR},
+		udetails_referrer = #{udetailsReferrer,jdbcType=VARCHAR},
+		udetails_photo = #{udetailsPhoto,jdbcType=VARCHAR},
+		coupon_id =
+		#{couponId,jdbcType=VARCHAR},
+		user_name = #{userName,jdbcType=VARCHAR},
+		user_phonenum = #{userPhonenum,jdbcType=VARCHAR},
+		user_openid =
+		#{userOpenid,jdbcType=VARCHAR},
+		is_id_card =
+		#{isIdCard,jdbcType=TINYINT}
+		where udetails_id =
+		#{udetailsId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND udetails_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.udetailsId != null">AND udetails_id =#{model.udetailsId}</if>
+				<if test="model.udetailsIdCard != null">AND udetails_id_card =#{model.udetailsIdCard}</if>
+				<if test="model.udetailsUserAddress != null">AND udetails_user_address =#{model.udetailsUserAddress}
+				</if>
+				<if test="model.udetailsRealnameTime != null">AND udetails_realname_time
+					=#{model.udetailsRealnameTime}
+				</if>
+				<if test="model.udetailsCardNo != null">AND udetails_card_no =#{model.udetailsCardNo}</if>
+				<if test="model.udetailsCardBank != null">AND udetails_card_bank =#{model.udetailsCardBank}</if>
+				<if test="model.udetailsIntegral != null">AND udetails_integral =#{model.udetailsIntegral}</if>
+				<if test="model.udetailsAccountBalance != null">AND udetails_account_balance
+					=#{model.udetailsAccountBalance}
+				</if>
+				<if test="model.udetailsMoneyDetails != null">AND udetails_money_details
+					=#{model.udetailsMoneyDetails}
+				</if>
+				<if test="model.udetailsRegisterTime != null">AND udetails_register_time
+					=#{model.udetailsRegisterTime}
+				</if>
+				<if test="model.udetailsEquipment != null">AND udetails_equipment =#{model.udetailsEquipment}</if>
+				<if test="model.udetailsEdition != null">AND udetails_edition =#{model.udetailsEdition}</if>
+				<if test="model.udetailsReferrer != null">AND udetails_referrer =#{model.udetailsReferrer}</if>
+				<if test="model.udetailsPhoto != null">AND udetails_photo =#{model.udetailsPhoto}</if>
+				<if test="model.couponId != null">AND coupon_id =#{model.couponId}</if>
+				<if test="model.userName != null">AND user_name =#{model.userName}</if>
+				<if test="model.userPhonenum != null">AND user_phonenum =#{model.userPhonenum}</if>
+				<if test="model.userOpenid != null">AND user_openid =#{model.userOpenid}</if>
+				<if test="model.isIdCard != null">AND is_id_card =#{model.isIdCard}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="userDetailsResultMap">
+		select * from user_details
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<!--通过主键查询所有 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="userDetailsResultMap">
+		select * from user_details where udetails_id = #{value}
+	</select>
+
+	<update id="updateUserIdentity" parameterType="com.lianjiu.model.UserDetails">
+		update
+		user_details set
+		udetails_id_card=#{udetailsIdCard,jdbcType=VARCHAR},
+		user_name=#{userName,jdbcType=VARCHAR},
+		udetails_realname_time =
+		#{udetailsRealnameTime,jdbcType=VARCHAR}
+		where udetails_id =
+		#{udetailsId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateUserbankCard" parameterType="com.lianjiu.model.UserDetails">
+		update
+		user_details set
+		udetails_card_no = #{udetailsCardNo,jdbcType=VARCHAR},
+		udetails_card_bank = #{udetailsCardBank,jdbcType=VARCHAR},
+		udetails_card_time = NOW()
+		where
+		udetails_id =
+		#{udetailsId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="removeUserbankCard" parameterType="java.lang.String">
+		update
+		user_details set
+		udetails_card_no = "",
+		udetails_card_bank = ''
+		where
+		udetails_id =
+		#{udetailsId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="userDetailsResultMap">
+		select * from user_details d join user u on
+		u.user_details_id=d.udetails_id where u.user_id=#{0}
+	</select>
+
+	<!-- 添加用户唯一openId -->
+	<update id="saveOpenId" parameterType="java.lang.String">
+		update user_details d,user
+		u
+		set d.user_openid = #{0}
+		where u.user_details_id = d.udetails_id and
+		u.user_id = #{1}
+	</update>
+
+	<!-- 添加用户唯一openId -->
+	<update id="saveOpenIdH5">
+		update user_details d,user
+		u
+		set
+		d.user_openid =
+		#{0},d.check_time = #{2},d.user_check = #{3}
+		where
+		u.user_details_id =
+		d.udetails_id and u.user_id = #{1}
+	</update>
+
+	<!-- <select id="selectCardById" parameterType="java.lang.String" resultMap="userDetailsResultMap"> 
+		select udetails_id_card,is_id_card,udetails_card_no from user_details where 
+		udetails_id = #{userDetailsId} </select> -->
+	<select id="getIsIdCard" parameterType="com.lianjiu.model.UserDetails"
+		resultType="java.lang.Integer">
+		select b.is_id_card from user a left join user_details b on
+		a.user_details_id = b.udetails_id where user_id = #{userId}
+	</select>
+	<insert id="insertId" parameterType="com.lianjiu.model.UserDetails">
+		insert into user_details
+		(udetails_id,udetails_id_card) values
+		(#{udetailsId},#{udetailsRegisterTime})
+	</insert>
+	<update id="updateIsCard" parameterType="java.lang.String">
+		update user_details set
+		is_id_card = #{1} where udetails_id = #{0}
+	</update>
+	<update id="upIdCardById" parameterType="com.lianjiu.model.UserDetails">
+		update user_details set
+		user_name = #{userName},udetails_id_card =
+		#{udetailsIdCard},is_id_card = 1,udetails_realname_time =
+		#{udetailsRealnameTime} where udetails_id=#{udetailsId}
+	</update>
+	<select id="getBankCardById" parameterType="java.lang.String"
+		resultMap="userDetailsResultMap">
+		select udetails_card_bank,udetails_card_no from user_details
+		where udetails_id = #{0}
+	</select>
+	<select id="getNameCardById" parameterType="java.lang.String"
+		resultMap="userDetailsResultMap">
+		select
+		udetails_id,udetails_id_card,user_name,udetails_card_no,udetails_card_bank
+		from user_details where udetails_id = #{0}
+	</select>
+	<select id="selectIntegralById" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select udetails_integral from user_details where
+		udetails_id = #{0}
+	</select>
+	<update id="modifyIntegeralById" parameterType="com.lianjiu.model.UserDetails">
+		update
+		user_details set udetails_integral = #{udetailsIntegral}
+		where
+		udetails_id=#{udetailsId}
+	</update>
+	<select id="selectOpenidByUser" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select d.user_openid from user_details d join user u on
+		d.udetails_id = u.user_details_id where u.user_id = #{0}
+	</select>
+	<!--登陆设备方式更新 -->
+	<update id="modifyEqEdByUserId" parameterType="com.lianjiu.model.UserDetails">
+		update
+		user_details set udetails_equipment =
+		#{udetailsEquipment},udetails_edition = #{udetailsEdition}
+		where
+		udetails_id=#{udetailsId}
+	</update>
+	<!--更新数据推荐码 -->
+	<update id="modifyRefferByUserId" parameterType="com.lianjiu.model.UserDetails">
+		update
+		user_details set udetails_equipment =
+		#{udetailsEquipment},udetails_edition =
+		#{udetailsEdition}
+		where
+		udetails_id=#{udetailsId}
+	</update>
+	<!--获取登陆方式 -->
+	<select id="getEdById" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select udetails_edition from user_details where udetails_id
+		= #{udetailsId}
+	</select>
+	<!--userId获取用户基本信息 -->
+	<select id="getDetailsByUserId" parameterType="java.lang.String"
+		resultMap="userDetailsResultMap">
+		select
+		user_name,udetails_id_card,udetails_card_no,udetails_card_bank from
+		user_details where udetails_id = #{udetailsId}
+	</select>
+	<!--查是否存在推荐人 -->
+	<select id="getReferrerByPhone" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from user_details where
+		user_phonenum = #{phone} 
+	</select>
+	<!--更新电话号码 -->
+	<update id="updatePhone" parameterType="com.lianjiu.model.UserDetails">
+		update user_details set
+		user_phonenum =
+		#{userPhonenum}
+		where udetails_id=#{udetailsId}
+	</update>
+	<!-- 更新用户验证码 -->
+	<update id="updateCheckCode">
+		update user_details d,user
+		u
+		set
+		d.user_check = #{check}
+		where
+		u.user_details_id = d.udetails_id and u.user_id = #{userId}
+	</update>
+	<!-- 查用户是否是推荐人推荐，是否是首单 -->
+	<select id="getIsFirstOrder" parameterType="java.lang.String"
+		resultMap="isFirstOrderResultMap">
+		select udetails_referrer,is_first_order from
+		user_details where udetails_id = #{udetailsId}
+	</select>
+	<!-- 更新首单 -->
+	<update id="modifyIsFirstOrder">
+		update user_details set is_first_order = #{isFirstOrder}
+		where udetails_id = #{udetailsId}
+	</update>
+</mapper>

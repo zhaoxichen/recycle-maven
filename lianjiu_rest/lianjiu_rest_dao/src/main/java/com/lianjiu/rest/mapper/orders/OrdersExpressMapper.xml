@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersExpressMapper">
+	<resultMap id="ordersExpressResultMap" type="com.lianjiu.model.OrdersExpress">
+		<id column="or_express_id" property="orExpressId" jdbcType="VARCHAR" />
+		<result column="or_express_user_id" property="orExpressUserId"
+			jdbcType="VARCHAR" />
+		<result column="or_express_user_phone" property="orExpressUserPhone"
+			jdbcType="VARCHAR" />
+		<result column="or_express_evaluated_price" property="orExpressEvaluatedPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_express_operater" property="orExpressOperater"
+			jdbcType="VARCHAR" />
+		<result column="or_express_status" property="orExpressStatus"
+			jdbcType="TINYINT" />
+		<result column="or_express_num" property="orExpressNum"
+			jdbcType="VARCHAR" />
+		<result column="or_express_num_cancel" property="orExpressNumCancel"
+			jdbcType="VARCHAR" />
+		<result column="or_express_recycle_price" property="orExpressRecyclePrice"
+			jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="or_express_created" property="orExpressCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_updated" property="orExpressUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_cancel" property="orExpressCancel"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_account" property="orExpressAccount"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_user_name" property="orExpressUserName"
+			jdbcType="VARCHAR" />
+		<result column="or_express_return_num" property="orExpressReturnNum"
+			jdbcType="VARCHAR" />
+		<result column="or_items_name_preview" property="orItemsNamePreview"
+			jdbcType="INTEGER" />
+		<result column="or_items_pictrue_preview" property="orItemsPictruePreview"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ordersExpressItemResultMap" type="com.lianjiu.rest.model.OrdersExpressItemVo">
+		<id column="or_express_id" property="orExpressId" jdbcType="VARCHAR" />
+		<result column="or_express_user_id" property="orExpressUserId"
+			jdbcType="VARCHAR" />
+		<result column="or_express_user_phone" property="orExpressUserPhone"
+			jdbcType="VARCHAR" />
+		<result column="or_express_evaluated_price" property="orExpressEvaluatedPrice"
+			jdbcType="VARCHAR" />
+		<result column="or_express_operater" property="orExpressOperater"
+			jdbcType="VARCHAR" />
+		<result column="or_express_status" property="orExpressStatus"
+			jdbcType="TINYINT" />
+		<result column="or_express_num" property="orExpressNum"
+			jdbcType="VARCHAR" />
+		<result column="or_express_num_cancel" property="orExpressNumCancel"
+			jdbcType="VARCHAR" />
+		<result column="or_express_recycle_price" property="orExpressRecyclePrice"
+			jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="or_express_created" property="orExpressCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_updated" property="orExpressUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_cancel" property="orExpressCancel"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_account" property="orExpressAccount"
+			jdbcType="TIMESTAMP" />
+		<result column="or_express_return_num" property="orExpressReturnNum"
+			jdbcType="VARCHAR" />
+		<result column="itemList" property="orExpressAccount" />
+		<result column="or_items_name_preview" property="orItemsNamePreview"
+			jdbcType="INTEGER" />
+		<result column="or_items_pictrue_preview" property="orItemsPictruePreview"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="selectByPrimaryKey" resultMap="ordersExpressResultMap"
+		parameterType="java.lang.String">select * from orders_express where or_express_id =
+		#{orExpressId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_express
+		where or_express_id = #{orExpressId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersExpress">
+		insert into orders_express
+		(or_express_id, or_express_user_id,
+		or_express_user_phone,
+		or_express_evaluated_price, or_express_operater,
+		or_express_status,
+		or_express_num, or_express_recycle_price,
+		category_id,
+		or_express_created, or_express_updated,
+		or_express_cancel,
+		or_express_account,
+		or_items_name_preview,or_items_pictrue_preview)
+		values (#{orExpressId,jdbcType=VARCHAR},
+		#{orExpressUserId,jdbcType=VARCHAR},
+		#{orExpressUserPhone,jdbcType=VARCHAR},
+		#{orExpressEvaluatedPrice,jdbcType=VARCHAR},
+		#{orExpressOperater,jdbcType=VARCHAR},
+		#{orExpressStatus,jdbcType=TINYINT}, #{orExpressNum,jdbcType=VARCHAR},
+		#{orExpressRecyclePrice,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT}, now(),
+		now(),
+		#{orExpressCancel,jdbcType=TIMESTAMP},
+		#{orExpressAccount,jdbcType=TIMESTAMP},
+		#{orItemsNamePreview,jdbcType=VARCHAR},
+		#{orItemsPictruePreview,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersExpress">
+		update orders_express
+		<set>
+			<if test="orExpressUserId != null and orExpressUserId !=''">
+				or_express_user_id = #{orExpressUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpressUserPhone != null and orExpressUserPhone !=''">
+				or_express_user_phone =
+				#{orExpressUserPhone,jdbcType=VARCHAR},
+			</if>
+			<if
+				test="orExpressEvaluatedPrice != null and orExpressEvaluatedPrice !=''">
+				or_express_evaluated_price =
+				#{orExpressEvaluatedPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpressOperater != null and orExpressOperater !=''">
+				or_express_operater =
+				#{orExpressOperater,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpressStatus != null">
+				or_express_status = #{orExpressStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orExpressNum != null and orExpressNum !=''">
+				or_express_num = #{orExpressNum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpressRecyclePrice != null and orExpressRecyclePrice !=''">
+				or_express_recycle_price =
+				#{orExpressRecyclePrice,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orExpressCreated != null">
+				or_express_created =
+				#{orExpressCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExpressUpdated != null">
+				or_express_updated =
+				now(),
+			</if>
+			<if test="orExpressCancel != null">
+				or_express_cancel =
+				#{orExpressCancel,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExpressAccount != null">
+				or_express_account =
+				#{orExpressAccount,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExpressReturnNum != null and orExpressReturnNum !=''">
+				or_express_return_num =
+				#{orExpressReturnNum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExpressNumCancel != null ">
+				or_express_num_cancel =
+				#{orExpressNumCancel,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where or_express_id = #{orExpressId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersExpress">
+		update
+		orders_express
+		set or_express_user_id =
+		#{orExpressUserId,jdbcType=VARCHAR},
+		or_express_user_phone =
+		#{orExpressUserPhone,jdbcType=VARCHAR},
+		or_express_evaluated_price =
+		#{orExpressEvaluatedPrice,jdbcType=VARCHAR},
+		or_express_operater =
+		#{orExpressOperater,jdbcType=VARCHAR},
+		or_express_status =
+		#{orExpressStatus,jdbcType=TINYINT},
+		or_express_num =
+		#{orExpressNum,jdbcType=VARCHAR},
+		or_express_recycle_price =
+		#{orExpressRecyclePrice,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		or_express_created =
+		#{orExpressCreated,jdbcType=TIMESTAMP},
+		or_express_updated =
+		now(),
+		or_express_cancel =
+		#{orExpressCancel,jdbcType=TIMESTAMP},
+		or_express_account =
+		#{orExpressAccount,jdbcType=TIMESTAMP}
+		where
+		or_express_id =
+		#{orExpressId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_express_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orExpressId != null">AND or_express_id =#{model.orExpressId}</if>
+				<if test="model.orExpressUserId != null">AND or_express_user_id =#{model.orExpressUserId}</if>
+				<if test="model.orExpressUserPhone != null">AND or_express_user_phone =#{model.orExpressUserPhone}
+				</if>
+				<if test="model.orExpressEvaluatedPrice != null">AND or_express_evaluated_price
+					=#{model.orExpressEvaluatedPrice}
+				</if>
+				<if test="model.orExpressOperater != null">AND or_express_operater =#{model.orExpressOperater}</if>
+				<if test="model.orExpressStatus != null">AND or_express_status =#{model.orExpressStatus}</if>
+				<if test="model.orExpressNum != null">AND or_express_num =#{model.orExpressNum}</if>
+				<if test="model.orExpressRecyclePrice != null">AND or_express_recycle_price
+					=#{model.orExpressRecyclePrice}
+				</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.orExpressCreated != null">AND or_express_created =#{model.orExpressCreated}</if>
+				<if test="model.orExpressUpdated != null">AND or_express_updated =now()</if>
+				<if test="model.orExpressCancel != null">AND or_express_cancel =#{model.orExpressCancel}</if>
+				<if test="model.orExpressAccount != null">AND or_express_account =#{model.orExpressAccount}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersExpressResultMap">
+		select * from orders_express
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		or_express_created
+		DESC
+	</select>
+	<select id="selectExpressByUserId" parameterType="java.lang.String"
+		resultMap="ordersExpressItemResultMap">
+		select * from orders_express where
+		or_express_user_id=#{userId}
+	</select>
+	<update id="updateExpressNum" parameterType="com.lianjiu.model.OrdersExpress">
+		update
+		orders_express set or_express_updated = NOW()
+		,or_express_status =
+		1,or_express_num=#{orExpressNum} where
+		or_express_id = #{orExpressId}
+	</update>
+
+	<update id="updateExpressSubmit" parameterType="com.lianjiu.model.OrdersExpress">
+		update
+		orders_express set or_express_updated =
+		NOW(),or_express_user_phone=#{orExpressUserPhone},or_express_user_name=#{orExpressUserName}
+		where or_express_id = #{orExpressId}
+	</update>
+
+	<select id="selectListByUserId" parameterType="string"
+		resultMap="ordersExpressItemResultMap">
+		select * from orders_express where or_express_user_id = #{0}
+		order by or_express_created desc
+	</select>
+	<select id="getExpressStutsList" parameterType="com.lianjiu.model.OrdersExpress"
+		resultMap="ordersExpressItemResultMap">
+		select * from orders_express where or_express_user_id =
+		#{orExpressUserId}
+		<choose>
+			<when test="orExpressStatus == 0 or orExpressStatus == 1 ">
+				and or_express_status = #{orExpressStatus}
+			</when>
+			<when test="orExpressStatus == 2">
+				and or_express_status in (2,5,6,7)
+			</when>
+			<when test="orExpressStatus == 3">
+				and or_express_status in (3,4)
+			</when>
+			<when test="orExpressStatus == 4">
+				and 1=1
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		order by or_express_created desc
+	</select>
+
+	<update id="ModifyExpressOrderStatus">
+		update
+		orders_express
+		set
+		or_express_status = #{orExpressStatus}
+		<choose>
+			<when test="orExpressStatus == 4 ">
+				,or_express_cancel = NOW()
+			</when>
+			<when test="orExpressStatus == 5">
+				,or_express_account = NOW()
+			</when>
+			<when
+				test="orExpressStatus == 1 or orExpressStatus == 2 or orExpressStatus == 3">
+				,or_express_updated=NOW()
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		where
+		or_express_id = #{orExpressId}
+	</update>
+
+	<!-- 修改订单状态 -->
+	<update id="modifyOrdersStatus">
+		update
+		orders_express
+		set
+		or_express_status= #{status},
+		or_express_updated=NOW()
+		where
+		or_express_id = #{ordersId}
+	</update>
+	<!--30分钟不确认价格，自动取消订单 状态从3变成6 -->
+	<update id="ordersAutoCancel">
+		update
+		orders_express
+		set
+		or_express_status= 3,
+		or_express_updated=NOW()
+		where
+		or_express_status = 6
+		AND
+		or_express_id in
+		<foreach collection="ordersIdList" item="ordersId" index="index"
+			open="(" close=")" separator=",">
+			#{ordersId}
+		</foreach>
+	</update>
+	<!--结算，更新item标识为已成交 -->
+	<update id="updateOrdersToFinish">
+		update
+		orders_express o LEFT JOIN orders_item i
+		ON
+		o.or_express_id = i.orders_id
+		set
+		o.or_express_status= #{status},
+		o.or_express_updated=NOW(),
+		i.or_items_status=1,
+		i.or_items_updated=NOW()
+		where
+		o.or_express_id = #{ordersId}
+	</update>
+	<select id="vagueQuery" resultMap="ordersExpressResultMap">
+		select * from orders_express
+		<where>
+			<if test="express.orExpressId != null and express.orExpressId != ''">
+				and or_express_id LIKE CONCAT('%',#{express.orExpressId},'%')
+			</if>
+			<if test="express.orExpressUserId != null and express.orExpressUserId != ''">
+				and or_express_user_id LIKE CONCAT('%',#{express.orExpressUserId},'%')
+			</if>
+			<if test="express.orExpressStatus != null and express.orExpressStatus != ''">
+				and or_express_status LIKE CONCAT('%',#{express.orExpressStatus},'%')
+			</if>
+			<if test="cratedStart != null and cratedStart != '' and cratedOver != null and cratedOver != '' ">
+				and or_express_created between #{cratedStart} and #{cratedOver}
+			</if>
+		</where>
+		ORDER BY or_express_created DESC
+	</select>
+	
+</mapper>

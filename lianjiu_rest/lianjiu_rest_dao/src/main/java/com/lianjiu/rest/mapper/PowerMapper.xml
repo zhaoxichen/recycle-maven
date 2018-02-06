@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.PowerMapper">
+	<resultMap id="powerResultMap" type="com.lianjiu.model.Power">
+		<id column="power_id" property="powerId" jdbcType="VARCHAR" />
+		<result column="power_name" property="powerName" jdbcType="VARCHAR" />
+		<result column="power_url" property="powerUrl" jdbcType="VARCHAR" />
+		<result column="power_up" property="powerUp" jdbcType="VARCHAR" />
+		<result column="power_remarks" property="powerRemarks"
+			jdbcType="VARCHAR" />
+		<result column="power_created" property="powerCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="power_updated" property="powerUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="powerVoResultMap" type="com.lianjiu.model.vo.PowerVo">
+		<id column="power_id" property="powerId" jdbcType="VARCHAR" />
+		<result column="power_name" property="powerName" jdbcType="VARCHAR" />
+		<result column="power_url" property="powerUrl" jdbcType="VARCHAR" />
+		<result column="power_up" property="powerUp" jdbcType="VARCHAR" />
+		<result column="power_remarks" property="powerRemarks"
+			jdbcType="VARCHAR" />
+		<result column="power_created" property="powerCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="power_updated" property="powerUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="powerResultMap"
+		parameterType="java.lang.String">select * from power where power_id =
+		#{powerId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from power
+		where power_id = #{powerId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Power">
+		insert into power (power_id, power_name, power_url,
+		power_up, power_remarks, power_created,
+		power_updated)
+		values (#{powerId,jdbcType=VARCHAR}, #{powerName,jdbcType=VARCHAR},
+		#{powerUrl,jdbcType=VARCHAR},
+		#{powerUp,jdbcType=VARCHAR}, #{powerRemarks,jdbcType=VARCHAR}, #{powerCreated,jdbcType=TIMESTAMP},
+		#{powerUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Power">
+		update power
+		<set>
+			<if test="powerName != null">
+				power_name = #{powerName,jdbcType=VARCHAR},
+			</if>
+			<if test="powerUrl != null">
+				power_url = #{powerUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="powerUp != null">
+				power_up = #{powerUp,jdbcType=VARCHAR},
+			</if>
+			<if test="powerRemarks != null">
+				power_remarks = #{powerRemarks,jdbcType=VARCHAR},
+			</if>
+			<if test="powerCreated != null">
+				power_created = #{powerCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="powerUpdated != null">
+				power_updated = #{powerUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where power_id = #{powerId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getAll" resultMap="powerResultMap">
+		select * from power
+	</select>
+	
+	<select id="getAllVo" resultMap="powerVoResultMap">
+		select * from power
+	</select>
+</mapper>

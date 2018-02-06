@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.product.WastePriceMapper">
+	<resultMap id="wastePriceResultMap" type="com.lianjiu.model.WastePrice">
+		<id column="w_price_id" property="wPriceId" jdbcType="VARCHAR" />
+		<result column="w_price_single" property="wPriceSingle"
+			jdbcType="VARCHAR" />
+		<result column="w_price_single_alliance" property="wPriceSingleAlliance"
+			jdbcType="VARCHAR" />
+		<result column="waste_id" property="wasteId" jdbcType="VARCHAR" />
+		<result column="w_price_unit" property="wPriceUnit" jdbcType="INTEGER" />
+		<result column="w_price_created" property="wPriceCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="w_price_updated" property="wPriceUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="wastePriceResultMap"
+		parameterType="java.lang.String">
+		select
+		from waste_price
+		where w_price_id =
+		#{wPriceId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		waste_price
+		where w_price_id = #{wPriceId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.WastePrice">
+		insert into waste_price
+		(w_price_id, w_price_single,
+		w_price_single_alliance,
+		waste_id,
+		w_price_unit, w_price_created,
+		w_price_updated)
+		values
+		(#{wPriceId,jdbcType=VARCHAR}, #{wPriceSingle,jdbcType=VARCHAR},
+		#{wPriceSingleAlliance,jdbcType=VARCHAR},
+		#{wasteId,jdbcType=VARCHAR},
+		#{wPriceUnit,jdbcType=INTEGER}, #{wPriceCreated,jdbcType=TIMESTAMP},
+		#{wPriceUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.WastePrice">
+		insert into waste_price
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wPriceId != null">
+				w_price_id,
+			</if>
+			<if test="wPriceSingle != null">
+				w_price_single,
+			</if>
+			<if test="wPriceSingleAlliance != null">
+				w_price_single_alliance,
+			</if>
+			<if test="wasteId != null">
+				waste_id,
+			</if>
+			<if test="wPriceUnit != null">
+				w_price_unit,
+			</if>
+			<if test="wPriceCreated != null">
+				w_price_created,
+			</if>
+			<if test="wPriceUpdated != null">
+				w_price_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wPriceId != null">
+				#{wPriceId,jdbcType=VARCHAR},
+			</if>
+			<if test="wPriceSingle != null">
+				#{wPriceSingle,jdbcType=VARCHAR},
+			</if>
+			<if test="wPriceSingleAlliance != null">
+				#{wPriceSingleAlliance,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteId != null">
+				#{wasteId,jdbcType=VARCHAR},
+			</if>
+			<if test="wPriceUnit != null">
+				#{wPriceUnit,jdbcType=INTEGER},
+			</if>
+			<if test="wPriceCreated != null">
+				#{wPriceCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wPriceUpdated != null">
+				#{wPriceUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.WastePrice">
+		update waste_price
+		<set>
+			<if test="wPriceSingle != null">
+				w_price_single = #{wPriceSingle,jdbcType=VARCHAR},
+			</if>
+			<if test="wPriceSingleAlliance != null">
+				w_price_single_alliance =
+				#{wPriceSingleAlliance,jdbcType=VARCHAR},
+			</if>
+			<if test="wasteId != null">
+				waste_id = #{wasteId,jdbcType=VARCHAR},
+			</if>
+			<if test="wPriceUnit != null">
+				w_price_unit = #{wPriceUnit,jdbcType=INTEGER},
+			</if>
+			<if test="wPriceCreated != null">
+				w_price_created = #{wPriceCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wPriceUpdated != null">
+				w_price_updated = #{wPriceUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where w_price_id = #{wPriceId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.WastePrice">
+		update waste_price
+		set w_price_single = #{wPriceSingle,jdbcType=VARCHAR},
+		w_price_single_alliance = #{wPriceSingleAlliance,jdbcType=VARCHAR},
+		waste_id = #{wasteId,jdbcType=VARCHAR},
+		w_price_unit =
+		#{wPriceUnit,jdbcType=INTEGER},
+		w_price_created =
+		#{wPriceCreated,jdbcType=TIMESTAMP},
+		w_price_updated =
+		#{wPriceUpdated,jdbcType=TIMESTAMP}
+		where w_price_id =
+		#{wPriceId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and wasteId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND w_price_id=#{id}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.wasteId != null and model.wasteId.length()>0">
+					AND waste_id=#{model.wasteId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="wastePriceResultMap">
+		select * from waste_price
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		w_price_updated
+		DESC
+	</select>
+</mapper>

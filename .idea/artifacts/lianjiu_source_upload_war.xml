@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lianjiu_source_upload:war">
+    <output-path>$PROJECT_DIR$/lianjiu_source_upload/target</output-path>
+    <root id="archive" name="lianjiu_source_upload.war">
+      <element id="artifact" artifact-name="lianjiu_source_upload:war exploded" />
+    </root>
+  </artifact>
+</component>

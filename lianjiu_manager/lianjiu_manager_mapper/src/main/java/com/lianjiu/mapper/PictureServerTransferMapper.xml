@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.PictureServerTransferMapper">
+	<!--分类表的 -->
+	<update id="updateCategory" parameterType="java.lang.String">
+		update category c
+		set
+		c.category_image=replace(c.category_image,#{oldIp},#{newIp})
+	</update>
+	<!-- 产品图片服务器迁移 -->
+	<update id="updateProduct" parameterType="java.lang.String">
+		update product p
+		set
+		p.product_master_picture=replace(p.product_master_picture,#{oldIp},#{newIp}),
+		p.product_sub_picture=replace(p.product_sub_picture,#{oldIp},#{newIp})
+	</update>
+	<!-- 精品图片服务器迁移 -->
+	<update id="updateProductExcellent" parameterType="java.lang.String">
+		update
+		product_excellent
+		p
+		set
+		p.excellent_master_picture=replace(p.excellent_master_picture,#{oldIp},#{newIp}),
+		p.excellent_sub_picture=replace(p.excellent_sub_picture,#{oldIp},#{newIp})
+	</update>
+</mapper>

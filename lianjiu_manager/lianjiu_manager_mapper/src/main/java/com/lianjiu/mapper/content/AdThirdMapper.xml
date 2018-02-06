@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.content.AdThirdMapper" >
+  <resultMap id="BaseResultMap" type="com.lianjiu.model.AdThird" >
+    <id column="thi_id" property="thiId" jdbcType="VARCHAR" />
+    <result column="thi_title" property="thiTitle" jdbcType="VARCHAR" />
+    <result column="thi_content" property="thiContent" jdbcType="VARCHAR" />
+    <result column="thi_position" property="thiPosition" jdbcType="VARCHAR" />
+    <result column="thi_picture" property="thiPicture" jdbcType="VARCHAR" />
+    <result column="thi_pic_link" property="thiPicLink" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+    <result column="thi_size" property="thiSize" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    thi_id, thi_title, thi_content, thi_position, thi_picture, thi_pic_link, add_time, 
+    add_person, thi_size, category_id
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_third
+    where thi_id = #{thiId,jdbcType=VARCHAR}
+  </select>
+   <select id="selectAdThirdList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_third
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ad_third
+    where thi_id = #{thiId,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insertAdTheme" parameterType="com.lianjiu.model.AdThird" >
+    insert into ad_third (thi_id, thi_title, thi_content, 
+      thi_position, thi_picture, thi_pic_link, 
+      add_time, add_person, thi_size, 
+      category_id)
+    values (#{thiId,jdbcType=VARCHAR}, #{thiTitle,jdbcType=VARCHAR}, #{thiContent,jdbcType=VARCHAR}, 
+      #{thiPosition,jdbcType=VARCHAR}, #{thiPicture,jdbcType=VARCHAR}, #{thiPicLink,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{addPerson,jdbcType=VARCHAR}, #{thiSize,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianjiu.model.AdThird" >
+    insert into ad_third
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="thiId != null" >
+        thi_id,
+      </if>
+      <if test="thiTitle != null" >
+        thi_title,
+      </if>
+      <if test="thiContent != null" >
+        thi_content,
+      </if>
+      <if test="thiPosition != null" >
+        thi_position,
+      </if>
+      <if test="thiPicture != null" >
+        thi_picture,
+      </if>
+      <if test="thiPicLink != null" >
+        thi_pic_link,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPerson != null" >
+        add_person,
+      </if>
+      <if test="thiSize != null" >
+        thi_size,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="thiId != null" >
+        #{thiId,jdbcType=VARCHAR},
+      </if>
+      <if test="thiTitle != null" >
+        #{thiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="thiContent != null" >
+        #{thiContent,jdbcType=VARCHAR},
+      </if>
+      <if test="thiPosition != null" >
+        #{thiPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="thiPicture != null" >
+        #{thiPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="thiPicLink != null" >
+        #{thiPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="thiSize != null" >
+        #{thiSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdThird" >
+    update ad_third
+    <set >
+      <if test="thiTitle != null" >
+        thi_title = #{thiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="thiContent != null" >
+        thi_content = #{thiContent,jdbcType=VARCHAR},
+      </if>
+      <if test="thiPosition != null" >
+        thi_position = #{thiPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="thiPicture != null" >
+        thi_picture = #{thiPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="thiPicLink != null" >
+        thi_pic_link = #{thiPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        add_person = #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="thiSize != null" >
+        thi_size = #{thiSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null " >
+        category_id = #{categoryId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where thi_id = #{thiId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AdThird" >
+    update ad_third
+    set thi_title = #{thiTitle,jdbcType=VARCHAR},
+      thi_content = #{thiContent,jdbcType=VARCHAR},
+      thi_position = #{thiPosition,jdbcType=VARCHAR},
+      thi_picture = #{thiPicture,jdbcType=VARCHAR},
+      thi_pic_link = #{thiPicLink,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person = #{addPerson,jdbcType=VARCHAR},
+      thi_size = #{thiSize,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=VARCHAR}
+    where thi_id = #{thiId,jdbcType=VARCHAR}
+  </update>
+</mapper>

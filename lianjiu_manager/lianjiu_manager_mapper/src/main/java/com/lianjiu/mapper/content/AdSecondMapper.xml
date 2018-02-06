@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.content.AdSecondMapper" >
+  <resultMap id="BaseResultMap" type="com.lianjiu.model.AdSecond" >
+    <id column="sec_id" property="secId" jdbcType="VARCHAR" />
+    <result column="sec_title" property="secTitle" jdbcType="VARCHAR" />
+    <result column="sec_content" property="secContent" jdbcType="VARCHAR" />
+    <result column="sec_position" property="secPosition" jdbcType="VARCHAR" />
+    <result column="sec_picture" property="secPicture" jdbcType="VARCHAR" />
+    <result column="sec_pic_link" property="secPicLink" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+    <result column="sec_size" property="secSize" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sec_id, sec_title, sec_content, sec_position, sec_picture, sec_pic_link, add_time, 
+    add_person, sec_size, category_id
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_second
+    where sec_id = #{secId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectAdSecondList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_second
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ad_second
+    where sec_id = #{secId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertAdSecond" parameterType="com.lianjiu.model.AdSecond" >
+    insert into ad_second (sec_id, sec_title, sec_content, 
+      sec_position, sec_picture, sec_pic_link, 
+      add_time, add_person, sec_size, 
+      category_id)
+    values (#{secId,jdbcType=VARCHAR}, #{secTitle,jdbcType=VARCHAR}, #{secContent,jdbcType=VARCHAR}, 
+      #{secPosition,jdbcType=VARCHAR}, #{secPicture,jdbcType=VARCHAR}, #{secPicLink,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{addPerson,jdbcType=VARCHAR}, #{secSize,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianjiu.model.AdSecond" >
+    insert into ad_second
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="secId != null" >
+        sec_id,
+      </if>
+      <if test="secTitle != null" >
+        sec_title,
+      </if>
+      <if test="secContent != null" >
+        sec_content,
+      </if>
+      <if test="secPosition != null" >
+        sec_position,
+      </if>
+      <if test="secPicture != null" >
+        sec_picture,
+      </if>
+      <if test="secPicLink != null" >
+        sec_pic_link,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPerson != null" >
+        add_person,
+      </if>
+      <if test="secSize != null" >
+        sec_size,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="secId != null" >
+        #{secId,jdbcType=VARCHAR},
+      </if>
+      <if test="secTitle != null" >
+        #{secTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="secContent != null" >
+        #{secContent,jdbcType=VARCHAR},
+      </if>
+      <if test="secPosition != null" >
+        #{secPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="secPicture != null" >
+        #{secPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="secPicLink != null" >
+        #{secPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="secSize != null" >
+        #{secSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdSecond" >
+    update ad_second
+    <set >
+      <if test="secTitle != null " >
+        sec_title = #{secTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="secContent != null" >
+        sec_content = #{secContent,jdbcType=VARCHAR},
+      </if>
+      <if test="secPosition != null  " >
+        sec_position = #{secPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="secPicture != null" >
+        sec_picture = #{secPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="secPicLink != null " >
+        sec_pic_link = #{secPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null " >
+        add_person = #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="secSize != null" >
+        sec_size = #{secSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null " >
+      </if>
+    </set>
+    where sec_id = #{secId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AdSecond" >
+    update ad_second
+    set sec_title = #{secTitle,jdbcType=VARCHAR},
+      sec_content = #{secContent,jdbcType=VARCHAR},
+      sec_position = #{secPosition,jdbcType=VARCHAR},
+      sec_picture = #{secPicture,jdbcType=VARCHAR},
+      sec_pic_link = #{secPicLink,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person = #{addPerson,jdbcType=VARCHAR},
+      sec_size = #{secSize,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=BIGINT}
+    where sec_id = #{secId,jdbcType=VARCHAR}
+  </update>
+</mapper>

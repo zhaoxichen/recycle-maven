@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.user.QqMapper">
+	<resultMap id="qqResultMap" type="com.lianjiu.model.Qq">
+		<id column="qq_id" property="qqId" jdbcType="VARCHAR" />
+		<result column="qq_num" property="qqNum" jdbcType="VARCHAR" />
+		<result column="qq_nickname" property="qqNickname" jdbcType="VARCHAR" />
+		<result column="qq_picture" property="qqPicture" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column=" qq_created" property="qqCreated" jdbcType="TIMESTAMP" />
+		<result column="qq_updated" property="qqUpdated" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="qqResultMap"
+		parameterType="java.lang.String">select * from qq where qq_id = #{qqId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from qq
+		where qq_id = #{qqId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Qq">
+		insert into qq (qq_id, qq_num, qq_nickname,
+		qq_picture, user_id, " qq_created",
+		qq_updated)
+		values (#{qqId,jdbcType=VARCHAR}, #{qqNum,jdbcType=VARCHAR},
+		#{qqNickname,jdbcType=VARCHAR},
+		#{qqPicture,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{qqCreated,jdbcType=TIMESTAMP},
+		#{qqUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Qq">
+		insert into qq
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="qqId != null">
+				qq_id,
+			</if>
+			<if test="qqNum != null">
+				qq_num,
+			</if>
+			<if test="qqNickname != null">
+				qq_nickname,
+			</if>
+			<if test="qqPicture != null">
+				qq_picture,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="qqCreated != null">
+				" qq_created",
+			</if>
+			<if test="qqUpdated != null">
+				qq_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="qqId != null">
+				#{qqId,jdbcType=VARCHAR},
+			</if>
+			<if test="qqNum != null">
+				#{qqNum,jdbcType=VARCHAR},
+			</if>
+			<if test="qqNickname != null">
+				#{qqNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="qqPicture != null">
+				#{qqPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="qqCreated != null">
+				#{qqCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="qqUpdated != null">
+				#{qqUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Qq">
+		update qq
+		<set>
+			<if test="qqNum != null">
+				qq_num = #{qqNum,jdbcType=VARCHAR},
+			</if>
+			<if test="qqNickname != null">
+				qq_nickname = #{qqNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="qqPicture != null">
+				qq_picture = #{qqPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="qqCreated != null">
+				" qq_created" = #{qqCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="qqUpdated != null">
+				qq_updated = #{qqUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where qq_id = #{qqId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Qq">
+		update qq
+		set qq_num = #{qqNum,jdbcType=VARCHAR},
+		qq_nickname = #{qqNickname,jdbcType=VARCHAR},
+		qq_picture = #{qqPicture,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		" qq_created" = #{qqCreated,jdbcType=TIMESTAMP},
+		qq_updated = #{qqUpdated,jdbcType=TIMESTAMP}
+		where qq_id = #{qqId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND qq_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.qqId != null">AND qq_id =#{model.qqId}</if>
+				<if test="model.qqNum != null">AND qq_num =#{model.qqNum}</if>
+				<if test="model.qqNickname != null">AND qq_nickname =#{model.qqNickname}</if>
+				<if test="model.qqPicture != null">AND qq_picture =#{model.qqPicture}</if>
+				<if test="model.userId != null">AND user_id =#{model.userId}</if>
+				<if test="model.qqCreated != null">AND qq_created =#{model.qqCreated}</if>
+				<if test="model.qqUpdated != null">AND qq_updated =#{model.qqUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="qqResultMap">
+		select * from qq
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

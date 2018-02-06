@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.orders.OrdersCompanyMapper">
+	<resultMap id="ordersCompanyResultMap" type="com.lianjiu.model.OrdersCompany">
+		<id column="or_company_id" property="orCompanyId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="or_company_name" property="orCompanyName"
+			jdbcType="VARCHAR" />
+		<result column="or_company_user" property="orCompanyUser"
+			jdbcType="VARCHAR" />
+		<result column="or_company_phone" property="orCompanyPhone"
+			jdbcType="VARCHAR" />
+		<result column="or_company_province" property="orCompanyProvince"
+			jdbcType="VARCHAR" />
+		<result column="or_company_city" property="orCompanyCity"
+			jdbcType="VARCHAR" />
+		<result column="or_company_district" property="orCompanyDistrict"
+			jdbcType="VARCHAR" />
+		<result column="or_company_location" property="orCompanyLocation"
+			jdbcType="VARCHAR" />
+		<result column="or_company_operater" property="orCompanyOperater"
+			jdbcType="VARCHAR" />
+		<result column="or_company_created" property="orCompanyCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_company_updated" property="orCompanyUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_company_products" property="orCompanyProducts"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersCompanyResultMap"
+		parameterType="java.lang.String">
+		select *
+		from orders_company
+		where or_company_id =
+		#{orCompanyId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_company
+		where or_company_id = #{orCompanyId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersCompany">
+		insert into orders_company
+		(or_company_id, category_id, or_company_name,
+		or_company_user,
+		or_company_phone, or_company_province,
+		or_company_city,
+		or_company_district, or_company_location,
+		or_company_operater,
+		or_company_created,
+		or_company_updated, or_company_products
+		)
+		values
+		(#{orCompanyId,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT},
+		#{orCompanyName,jdbcType=VARCHAR},
+		#{orCompanyUser,jdbcType=VARCHAR},
+		#{orCompanyPhone,jdbcType=VARCHAR},
+		#{orCompanyProvince,jdbcType=VARCHAR},
+		#{orCompanyCity,jdbcType=VARCHAR},
+		#{orCompanyDistrict,jdbcType=VARCHAR},
+		#{orCompanyLocation,jdbcType=VARCHAR},
+		#{orCompanyOperater,jdbcType=VARCHAR},
+		#{orCompanyCreated,jdbcType=TIMESTAMP},
+		#{orCompanyUpdated,jdbcType=TIMESTAMP},
+		#{orCompanyProducts,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersCompany">
+		insert into orders_company
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orCompanyId != null">
+				or_company_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="orCompanyName != null">
+				or_company_name,
+			</if>
+			<if test="orCompanyUser != null">
+				or_company_user,
+			</if>
+			<if test="orCompanyPhone != null">
+				or_company_phone,
+			</if>
+			<if test="orCompanyProvince != null">
+				or_company_province,
+			</if>
+			<if test="orCompanyCity != null">
+				or_company_city,
+			</if>
+			<if test="orCompanyDistrict != null">
+				or_company_district,
+			</if>
+			<if test="orCompanyLocation != null">
+				or_company_location,
+			</if>
+			<if test="orCompanyOperater != null">
+				or_company_operater,
+			</if>
+			<if test="orCompanyCreated != null">
+				or_company_created,
+			</if>
+			<if test="orCompanyUpdated != null">
+				or_company_updated,
+			</if>
+			<if test="orCompanyProducts != null">
+				or_company_products,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orCompanyId != null">
+				#{orCompanyId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orCompanyName != null">
+				#{orCompanyName,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyUser != null">
+				#{orCompanyUser,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyPhone != null">
+				#{orCompanyPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyProvince != null">
+				#{orCompanyProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyCity != null">
+				#{orCompanyCity,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyDistrict != null">
+				#{orCompanyDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyLocation != null">
+				#{orCompanyLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyOperater != null">
+				#{orCompanyOperater,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyCreated != null">
+				#{orCompanyCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orCompanyUpdated != null">
+				#{orCompanyUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orCompanyProducts != null">
+				#{orCompanyProducts,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersCompany">
+		update orders_company
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orCompanyName != null">
+				or_company_name = #{orCompanyName,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyUser != null">
+				or_company_user = #{orCompanyUser,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyPhone != null">
+				or_company_phone = #{orCompanyPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyProvince != null">
+				or_company_province =
+				#{orCompanyProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyCity != null">
+				or_company_city = #{orCompanyCity,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyDistrict != null">
+				or_company_district =
+				#{orCompanyDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyLocation != null">
+				or_company_location =
+				#{orCompanyLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyOperater != null">
+				or_company_operater =
+				#{orCompanyOperater,jdbcType=VARCHAR},
+			</if>
+			<if test="orCompanyCreated != null">
+				or_company_created =
+				#{orCompanyCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orCompanyUpdated != null">
+				or_company_updated =
+				#{orCompanyUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orCompanyProducts != null">
+				or_company_products =
+				#{orCompanyProducts,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where or_company_id = #{orCompanyId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersCompany">
+		update
+		orders_company
+		set category_id = #{categoryId,jdbcType=BIGINT},
+		or_company_name = #{orCompanyName,jdbcType=VARCHAR},
+		or_company_user =
+		#{orCompanyUser,jdbcType=VARCHAR},
+		or_company_phone =
+		#{orCompanyPhone,jdbcType=VARCHAR},
+		or_company_province =
+		#{orCompanyProvince,jdbcType=VARCHAR},
+		or_company_city =
+		#{orCompanyCity,jdbcType=VARCHAR},
+		or_company_district =
+		#{orCompanyDistrict,jdbcType=VARCHAR},
+		or_company_location =
+		#{orCompanyLocation,jdbcType=VARCHAR},
+		or_company_operater =
+		#{orCompanyOperater,jdbcType=VARCHAR},
+		or_company_created =
+		#{orCompanyCreated,jdbcType=TIMESTAMP},
+		or_company_updated =
+		#{orCompanyUpdated,jdbcType=TIMESTAMP}
+		where or_company_id =
+		#{orCompanyId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_company_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orCompanyId != null">
+					AND or_company_id=#{model.orCompanyId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersCompanyResultMap">
+		select * from orders_company
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

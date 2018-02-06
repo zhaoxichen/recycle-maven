@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.content.AdEssenceHotMapper" >
+  <resultMap id="BaseResultMap" type="com.lianjiu.model.AdEssenceHot" >
+    <id column="ess_id" property="essId" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="ess_title" property="essTitle" jdbcType="VARCHAR" />
+    <result column="pro_price" property="proPrice" jdbcType="VARCHAR" />
+    <result column="ess_position" property="essPosition" jdbcType="VARCHAR" />
+    <result column="ess_picture" property="essPicture" jdbcType="VARCHAR" />
+    <result column="ess_pic_link" property="essPicLink" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+    <result column="ess_size" property="essSize" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ess_id, product_id, ess_title, pro_price, ess_position, ess_picture, ess_pic_link, 
+    add_time, add_person, ess_size, category_id
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_essence_hot
+    where ess_id = #{essId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectAdEssenceHotList" resultMap="BaseResultMap" parameterType="java.lang.String"  >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_essence_hot
+  </select>
+  
+  <select id="selectEssenceHotFour" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_essence_hot
+    order by ess_position
+    limit 4
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ad_essence_hot
+    where ess_id = #{essId,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insertAdEssenceHot" parameterType="com.lianjiu.model.AdEssenceHot" >
+    insert into ad_essence_hot (ess_id, product_id, ess_title, 
+      pro_price, ess_position, ess_picture, 
+      ess_pic_link, add_time, add_person, 
+      ess_size, category_id)
+    values (#{essId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{essTitle,jdbcType=VARCHAR}, 
+      #{proPrice,jdbcType=VARCHAR}, #{essPosition,jdbcType=VARCHAR}, #{essPicture,jdbcType=VARCHAR}, 
+      #{essPicLink,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{addPerson,jdbcType=VARCHAR}, 
+      #{essSize,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianjiu.model.AdEssenceHot" >
+    insert into ad_essence_hot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="essId != null" >
+        ess_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="essTitle != null" >
+        ess_title,
+      </if>
+      <if test="proPrice != null" >
+        pro_price,
+      </if>
+      <if test="essPosition != null" >
+        ess_position,
+      </if>
+      <if test="essPicture != null" >
+        ess_picture,
+      </if>
+      <if test="essPicLink != null" >
+        ess_pic_link,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPerson != null" >
+        add_person,
+      </if>
+      <if test="essSize != null" >
+        ess_size,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="essId != null" >
+        #{essId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="essTitle != null" >
+        #{essTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        #{proPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="essPosition != null" >
+        #{essPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="essPicture != null" >
+        #{essPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="essPicLink != null" >
+        #{essPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="essSize != null" >
+        #{essSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+ 
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdEssenceHot" >
+    update ad_essence_hot
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="essTitle != null" >
+        ess_title = #{essTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        pro_price = #{proPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="essPosition != null" >
+        ess_position = #{essPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="essPicture != null" >
+        ess_picture = #{essPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="essPicLink != null" >
+        ess_pic_link = #{essPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        add_person = #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="essSize != null" >
+        ess_size = #{essSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ess_id = #{essId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AdEssenceHot" >
+    update ad_essence_hot
+    set product_id = #{productId,jdbcType=VARCHAR},
+      ess_title = #{essTitle,jdbcType=VARCHAR},
+      pro_price = #{proPrice,jdbcType=VARCHAR},
+      ess_position = #{essPosition,jdbcType=VARCHAR},
+      ess_picture = #{essPicture,jdbcType=VARCHAR},
+      ess_pic_link = #{essPicLink,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person = #{addPerson,jdbcType=VARCHAR},
+      ess_size = #{essSize,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=BIGINT}
+    where ess_id = #{essId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.2.xsd ">
+
+	<context:component-scan base-package="com.lianjiu.timer.controller" />
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<mvc:default-servlet-handler />
+	<!-- 资源映射 -->
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+
+	<!-- 定时器,基于xml配置 -->
+	<bean id="ordersTimer" class="com.lianjiu.timer.service.OrdersTimer"></bean>
+	<bean id="redisTimer" class="com.lianjiu.timer.service.RedisKeyClearTimer"></bean>
+	<task:scheduled-tasks>
+		<!-- 这里表示的是每隔3秒执行一次 -->
+		<task:scheduled ref="ordersTimer" method="ordersExcellentCountDown"
+			cron="*/3 * * * * ?" />
+		<!--订单任务，3秒 -->
+		<task:scheduled ref="ordersTimer" method="ordersFaceFaceCountDown"
+			cron="*/3 * * * * ?" />
+		<!--确认价格的任务，3秒 -->
+		<task:scheduled ref="ordersTimer" method="ordersFacefacePriceConfirmCountDown"
+			cron="*/3 * * * * ?" />
+		<!--夜晚订单，60秒 -->
+		<task:scheduled ref="ordersTimer" method="ordersFaceOfNight"
+			cron="*/60 * * * * ?" />
+		<!--快递回收，确认价格的任务，间隔 3秒 -->
+		<task:scheduled ref="ordersTimer"
+			method="ordersPriceExpressConfirmCountDown" cron="*/3 * * * * ?" />
+		<!--上门回收，加盟商付款，清理无用的锁，每天23点执行一次：0 0 23 * * ? -->
+		<task:scheduled ref="ordersTimer" method="ordersFaceFaceLockCountDown"
+			cron="0 0 23 * * ?" />
+		<!--链旧首页的缓存，每天凌晨1点执行一次：0 0 1 * * ? -->
+		<task:scheduled ref="redisTimer" method="lianjiuIndex"
+			cron="0 0 1 * * ?" />
+		<!--链旧回收车的缓存，每天晚上23点59分执行一次：0 59 23 * * ? -->
+		<task:scheduled ref="redisTimer" method="ordersFaceFaceCart"
+			cron="0 59 23 * * ?" />
+		<!--链旧回收车的缓存，10秒更新 -->
+		<task:scheduled ref="redisTimer" method="ordersFaceFaceCartUpdate"
+			cron="*/10 * * * * ?" />
+		<!--大宗单确认价格倒计时 -->
+		<task:scheduled ref="ordersTimer" method="ordersPriceBulkConfirmCountDown"
+			cron="*/59 * * * * ?" />
+	</task:scheduled-tasks>
+</beans>

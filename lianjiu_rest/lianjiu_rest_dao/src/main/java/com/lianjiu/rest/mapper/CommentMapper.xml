@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.CommentMapper">
+	<resultMap id="commentResultMap" type="com.lianjiu.model.Comment">
+		<id column="comment_id" property="commentId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="comment_type" property="commentType" jdbcType="INTEGER" />
+		<result column="relative_id" property="relativeId" jdbcType="VARCHAR" />
+		<result column="comment_emoji" property="commentEmoji"
+			jdbcType="INTEGER" />
+		<result column="comment_label_price" property="commentLabelPrice"
+			jdbcType="VARCHAR" />
+		<result column="comment_label_remit" property="commentLabelRemit"
+			jdbcType="VARCHAR" />
+		<result column="comment_label_service" property="commentLabelService"
+			jdbcType="VARCHAR" />
+		<result column="comment_created" property="commentCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="comment_updated" property="commentUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="comment_details" property="commentDetails"
+			jdbcType="LONGVARCHAR" />
+		<result column="orders_id" property="ordersId"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="NewcommentResultMap" type="com.lianjiu.rest.model.CommentInfo">
+		<id column="comment_id" property="commentId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="comment_type" property="commentType" jdbcType="INTEGER" />
+		<result column="relative_id" property="relativeId" jdbcType="VARCHAR" />
+		<result column="comment_emoji" property="commentEmoji"
+			jdbcType="INTEGER" />
+		<result column="comment_label_price" property="commentLabelPrice"
+			jdbcType="VARCHAR" />
+		<result column="comment_label_remit" property="commentLabelRemit"
+			jdbcType="VARCHAR" />
+		<result column="comment_label_service" property="commentLabelService"
+			jdbcType="VARCHAR" />
+		<result column="comment_created" property="commentCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="comment_updated" property="commentUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="comment_details" property="commentDetails"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="commentResultMap"
+		parameterType="java.lang.String">
+		select * from comment where comment_id =
+		#{commentId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		comment
+		where comment_id = #{commentId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Comment">
+		insert into comment
+		(comment_id, user_id, username,
+		category_id, comment_type, relative_id,
+		comment_emoji, comment_label_price, comment_label_remit,
+		comment_label_service, comment_created,
+		comment_updated,
+		comment_details,
+		orders_id)
+		values (#{commentId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT}, #{commentType,jdbcType=INTEGER},
+		#{relativeId,jdbcType=VARCHAR},
+		#{commentEmoji,jdbcType=INTEGER},
+		#{commentLabelPrice,jdbcType=VARCHAR},
+		#{commentLabelRemit,jdbcType=VARCHAR},
+		#{commentLabelService,jdbcType=VARCHAR},
+		#{commentCreated,jdbcType=TIMESTAMP},
+		#{commentUpdated,jdbcType=TIMESTAMP},
+		#{commentDetails,jdbcType=LONGVARCHAR},
+		#{ordersId,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Comment">
+		update comment
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="commentType != null">
+				comment_type = #{commentType,jdbcType=INTEGER},
+			</if>
+			<if test="relativeId != null">
+				relative_id = #{relativeId,jdbcType=VARCHAR},
+			</if>
+			<if test="commentEmoji != null">
+				comment_emoji = #{commentEmoji,jdbcType=INTEGER},
+			</if>
+			<if test="commentLabelPrice != null">
+				comment_label_price =
+				#{commentLabelPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="commentLabelRemit != null">
+				comment_label_remit =
+				#{commentLabelRemit,jdbcType=VARCHAR},
+			</if>
+			<if test="commentLabelService != null">
+				comment_label_service =
+				#{commentLabelService,jdbcType=VARCHAR},
+			</if>
+			<if test="commentCreated != null">
+				comment_created = #{commentCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="commentUpdated != null">
+				comment_updated = #{commentUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="commentDetails != null">
+				comment_details = #{commentDetails,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where comment_id = #{commentId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Comment">
+		update comment
+		set
+		user_id = #{userId,jdbcType=VARCHAR},
+		username =
+		#{username,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		comment_type =
+		#{commentType,jdbcType=INTEGER},
+		relative_id =
+		#{relativeId,jdbcType=VARCHAR},
+		comment_emoji =
+		#{commentEmoji,jdbcType=INTEGER},
+		comment_label_price =
+		#{commentLabelPrice,jdbcType=VARCHAR},
+		comment_label_remit =
+		#{commentLabelRemit,jdbcType=VARCHAR},
+		comment_label_service =
+		#{commentLabelService,jdbcType=VARCHAR},
+		comment_created =
+		#{commentCreated,jdbcType=TIMESTAMP},
+		comment_updated =
+		#{commentUpdated,jdbcType=TIMESTAMP}
+		where comment_id =
+		#{commentId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND comment_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.commentId != null">AND comment_id =#{model.commentId}</if>
+				<if test="model.userId != null">AND user_id =#{model.userId}</if>
+				<if test="model.username != null">AND username =#{model.username}</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.commentType != null">AND comment_type =#{model.commentType}</if>
+				<if test="model.relativeId != null">AND relative_id =#{model.relativeId}</if>
+				<if test="model.commentEmoji != null">AND comment_emoji =#{model.commentEmoji}</if>
+				<if test="model.commentLabelPrice != null">AND comment_label_price =#{model.commentLabelPrice}</if>
+				<if test="model.commentLabelRemit != null">AND comment_label_remit =#{model.commentLabelRemit}</if>
+				<if test="model.commentLabelService != null">AND comment_label_service =#{model.commentLabelService}
+				</if>
+				<if test="model.commentCreated != null">AND comment_created =#{model.commentCreated}</if>
+				<if test="model.commentUpdated != null">AND comment_updated =#{model.commentUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="commentResultMap">
+		select * from comment
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		comment_created
+		DESC
+	</select>
+	<select id="selectByRelativeId" parameterType="java.lang.String"
+		resultMap="commentResultMap">
+		select * from comment where relative_id=#{value}
+		ORDER BY
+		comment_created
+		DESC
+	</select>
+
+	<select id="selectByNewRelativeId" parameterType="java.lang.String"
+		resultMap="NewcommentResultMap">
+		select * from comment where relative_id=#{value}
+		ORDER BY
+		comment_created
+		DESC
+	</select>
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="commentResultMap">
+		SELECT
+		username,
+		comment_details,
+		comment_emoji,
+		comment_label_price,
+		comment_label_remit,
+		comment_label_service,
+		comment_updated
+		FROM
+		`comment`
+		WHERE
+		relative_id in (
+		SELECT
+		or_faceface_id
+		FROM
+		orders_faceface
+		WHERE
+		or_faceface_alliance_id = #{userId}
+		)
+		ORDER BY
+		comment_created
+		DESC
+	</select>
+	<select id="selectEmojiById" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select comment_emoji from comment where user_id=#{userId}
+	</select>
+
+	<select id="selectCountById" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from comment where user_id=#{userId}
+	</select>
+	<!--根据订单id -->
+	<select id="selectByOrdersId" resultMap="commentResultMap"
+		parameterType="java.lang.String">
+		select * from comment where orders_id =
+		#{ordersId,jdbcType=VARCHAR}
+	</select>
+	<!--通过来源查看评论 -->
+	<select id="selectByCommentType" parameterType="java.lang.Integer"
+		resultMap="commentResultMap">
+		select * from comment where comment_type=#{value}
+		ORDER BY
+		comment_created
+		DESC
+	</select>
+	<!--通过来源查看评论 -->
+	<select id="getAverageByUserId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		SELECT
+		Round(Avg(comment_emoji),2)
+		FROM `comment`
+		WHERE
+		relative_id IN (
+		SELECT
+		or_faceface_id
+		FROM
+		orders_faceface
+		WHERE
+		or_faceface_alliance_id = #{userId}
+		)
+		ORDER BY
+		comment_created
+		DESC
+	</select>
+
+</mapper>

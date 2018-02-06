@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.product.ProductBulkAddressMapper">
+	<resultMap id="productBulkAddressResultMap" type="com.lianjiu.model.ProductBulkAddress">
+		<id column="bulk_address_id" property="bulkAddressId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="bulk_address_name" property="bulkAddressName"
+			jdbcType="VARCHAR" />
+		<result column="bulk_address_created" property="bulkAddressCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="bulk_address_updated" property="bulkAddressUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productBulkAddressResultMap"
+		parameterType="java.lang.String">select * from product_bulk_address where bulk_address_id
+		= #{bulkAddressId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from product_bulk_address
+		where bulk_address_id = #{bulkAddressId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.ProductBulkAddress">
+		insert into product_bulk_address (bulk_address_id, category_id,
+		bulk_address_name,
+		bulk_address_created, bulk_address_updated
+		)
+		values (#{bulkAddressId,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT},
+		#{bulkAddressName,jdbcType=VARCHAR},
+		NOW(),
+		NOW()
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductBulkAddress">
+		update product_bulk_address
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="bulkAddressName != null">
+				bulk_address_name = #{bulkAddressName,jdbcType=VARCHAR},
+			</if>
+				bulk_address_updated = NOW()
+		</set>
+		where bulk_address_id = #{bulkAddressId,jdbcType=VARCHAR}
+	</update>
+	<!--通过产品编号获取仓库地址  -->
+	<select id ="getAddressNameByPid" resultType = "java.lang.String">
+		select bulk_address_name from product_bulk_address where  category_id = #{categoryId}
+	</select>
+</mapper>

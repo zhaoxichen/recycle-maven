@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.mapper.user.RoleMapper">
+	<resultMap id="roleResultMap" type="com.lianjiu.model.Role">
+		<id column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="role_created" property="roleCreated" jdbcType="TIMESTAMP" />
+		<result column="role_updated" property="roleUpdated" jdbcType="TIMESTAMP" />
+		<result column="role_handler" property="roleHandler" jdbcType="VARCHAR" />
+		<result column="role_remarks" property="roleRemarks" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="powerResultMap" type="com.lianjiu.model.Power">
+		<result column="power_id" property="powerId" />
+		<result column="power_name" property="powerName" />
+		<result column="power_url" property="powerUrl" />
+		<result column="power_created" property="powerCreated"/>
+		<result column="power_updated" property="powerUpdated"/>
+		<result column="power_remarks" property="powerRemarks"/>
+	</resultMap>
+	<resultMap id="userResultMap" type="com.lianjiu.model.User">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="username" property="username" />
+		<result column="user_password" property="userPassword" />
+		<result column="user_nickname" property="userNickname"/>
+		<result column="user_phone" property="userPhone" />
+		<result column="user_details_id" property="userDetailsId" />
+	</resultMap>
+	
+	<select id="getRoleByPowerId" resultMap="powerResultMap" parameterType="java.lang.String">
+		select distinct * from role_power rp,power p where rp.power_id=p.power_id and rp.role_id=#{roleId}	
+	</select>
+	
+	<select id="getRoleByUserId" resultMap="userResultMap" parameterType="java.lang.String">
+		select distinct * from user_role ur,user u where ur.user_id=u.user_id and ur.role_id=#{roleId}	
+	</select>
+	
+	
+	<select id="selectByPrimaryKey" resultMap="roleResultMap"
+		parameterType="java.lang.String">select * from role where role_id =
+		#{roleId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from role
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Role">
+		insert into role (role_id, role_name, role_created,
+		role_updated, role_handler, role_remarks
+		)
+		values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+		#{roleCreated,jdbcType=TIMESTAMP},
+		#{roleUpdated,jdbcType=TIMESTAMP}, #{roleHandler,jdbcType=VARCHAR}, #{roleRemarks,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Role">
+		insert into role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="roleName != null">
+				role_name,
+			</if>
+			<if test="roleCreated != null">
+				role_created,
+			</if>
+			<if test="roleUpdated != null">
+				role_updated,
+			</if>
+			<if test="roleHandler != null">
+				role_handler,
+			</if>
+			<if test="roleRemarks != null">
+				role_remarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				#{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="roleName != null">
+				#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleCreated != null">
+				#{roleCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roleUpdated != null">
+				#{roleUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roleHandler != null">
+				#{roleHandler,jdbcType=VARCHAR},
+			</if>
+			<if test="roleRemarks != null">
+				#{roleRemarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Role">
+		update role
+		<set>
+			<if test="roleName != null">
+				role_name = #{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleCreated != null">
+				role_created = #{roleCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roleUpdated != null">
+				role_updated = #{roleUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roleHandler != null">
+				role_handler = #{roleHandler,jdbcType=VARCHAR},
+			</if>
+			<if test="roleRemarks != null">
+				role_remarks = #{roleRemarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Role">
+		update role
+		set role_name = #{roleName,jdbcType=VARCHAR},
+		role_created = #{roleCreated,jdbcType=TIMESTAMP},
+		role_updated = #{roleUpdated,jdbcType=TIMESTAMP},
+		role_handler = #{roleHandler,jdbcType=VARCHAR},
+		role_remarks = #{roleRemarks,jdbcType=VARCHAR}
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND role_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.roleId != null">
+					AND role_id =#{model.roleId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="roleResultMap">
+		select * from role
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

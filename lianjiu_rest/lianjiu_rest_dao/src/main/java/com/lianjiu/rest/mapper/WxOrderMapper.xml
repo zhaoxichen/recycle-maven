@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.WxOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.lianjiu.model.WxOrder">
+    <id column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="total_fee" jdbcType="VARCHAR" property="totalFee" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="re_message" jdbcType="VARCHAR" property="reMessage" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="resource" property="resource" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql> -->
+ <sql id="Base_Column_List" >
+    out_trade_no, total_fee, user_id, state, type, date, message, re_message, sign,resource
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wx_order
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </select> 
+  <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wx_order
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </delete> -->
+<!-- 
+  <insert id="insertSelective" parameterType="com.lianjiu.model.WxOrder" >
+    insert into wx_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="outTradeNo != null" >
+        out_trade_no,
+      </if>
+      <if test="totalFee != null" >
+        total_fee,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="reMessage != null" >
+        re_message,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="outTradeNo != null" >
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="reMessage != null" >
+        #{reMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert> -->
+
+ <!--  <insert id="insertWXOrder" parameterType="com.lianjiu.model.WxOrder" >
+    insert into wx_order (out_trade_no, total_fee, user_id, 
+      state, type, date, 
+      message, re_message, sign
+      )
+    values (#{outTradeNo,jdbcType=VARCHAR}, #{totalFee,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{reMessage,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}
+      )
+  </insert> -->
+
+ <update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.WxOrder" >
+    update wx_order
+    <set >
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="reMessage != null" >
+        re_message = #{reMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+       <if test="resource != null" >
+        resource = #{resource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianjiu.model.WxOrder" >
+    update wx_order
+    set total_fee = #{totalFee,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      re_message = #{reMessage,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR}
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 查询微信订单 -->
+	 <select id="queryWXOrder" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from  wx_order
+		where out_trade_no=#{outTradeNo,jdbcType=VARCHAR}
+		<if test="type != null and type != ''">
+			and type=#{type,jdbcType=VARCHAR}
+		</if>
+		<if test="state != null and state != ''">
+			and state=#{state,jdbcType=VARCHAR}
+		</if>
+	</select>
+  
+ <!--查询用户所有成功订单-->
+	<select id="queryWXOrderList" resultMap="BaseResultMap" parameterType="com.lianjiu.model.WxOrder">
+		select  
+  		<include refid="Base_Column_List" />
+		from  wx_order
+		where ((state='4' and type='1') or (state='2' and type='2'))
+		<if test="userId != null and userId != ''">
+			and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
+		order by date desc
+	</select> 
+  
+  <!--插入微信订单 -->
+	 <insert id="insertWXOrder"  parameterType="com.lianjiu.model.WxOrder">
+		insert into wx_order (out_trade_no, total_fee, user_id, 
+	      state, type, date, 
+	      message, re_message, sign,resource
+	      )
+	    values (#{outTradeNo,jdbcType=VARCHAR}, #{totalFee,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+	      #{state,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+	      #{message,jdbcType=VARCHAR}, #{reMessage,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{resource,jdbcType=VARCHAR}
+	      )
+	</insert>
+</mapper>

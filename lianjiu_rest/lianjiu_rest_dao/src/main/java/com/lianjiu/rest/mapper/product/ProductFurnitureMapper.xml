@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.product.ProductFurnitureMapper">
+	<resultMap id="productFurnitureResultMap" type="com.lianjiu.model.ProductFurniture">
+		<id column="furniture_id" property="furnitureId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="furniture_name" property="furnitureName"
+			jdbcType="VARCHAR" />
+		<result column="furniture_handle_way" property="furnitureHandleWay"
+			jdbcType="VARCHAR" />
+		<result column="furniture_volume" property="furnitureVolume"
+			jdbcType="VARCHAR" />
+		<result column="furniture_image" property="furnitureImage"
+			jdbcType="VARCHAR" />
+		<result column="furniture_created" property="furnitureCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="furniture_updated" property="furnitureUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productFurnitureResultMap"
+		parameterType="java.lang.String">select * from product_furniture where furniture_id =
+		#{furnitureId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from product_furniture
+		where furniture_id = #{furnitureId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.ProductFurniture">
+		insert into product_furniture (furniture_id, category_id, furniture_name,
+		furniture_handle_way, furniture_volume, furniture_image,
+		furniture_created, furniture_updated)
+		values (#{furnitureId,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT},
+		#{furnitureName,jdbcType=VARCHAR},
+		#{furnitureHandleWay,jdbcType=VARCHAR},
+		#{furnitureVolume,jdbcType=VARCHAR},
+		#{furnitureImage,jdbcType=VARCHAR},
+		NOW(),
+		NOW())
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductFurniture">
+		update product_furniture
+		<set>
+			<if test="categoryId != null and categoryId != ''">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="furnitureName != null and furnitureName != 'null' and furnitureName != ''">
+				furniture_name = #{furnitureName,jdbcType=VARCHAR},
+			</if>
+			<if test="furnitureHandleWay != null and furnitureHandleWay != 'null' and furnitureHandleWay != ''">
+				furniture_handle_way = #{furnitureHandleWay,jdbcType=VARCHAR},
+			</if>
+			<if test="furnitureVolume != null and furnitureVolume != 'null' and furnitureVolume != ''">
+				furniture_volume = #{furnitureVolume,jdbcType=VARCHAR},
+			</if>
+			<if test="furnitureImage != null and furnitureImage != 'null' and furnitureImage != ''">
+				furniture_image = #{furnitureImage,jdbcType=VARCHAR},
+			</if>
+				furniture_updated = NOW()
+		</set>
+		where furniture_id = #{furnitureId,jdbcType=VARCHAR}
+	</update>
+	<select id="getAllFurniture" resultMap="productFurnitureResultMap">
+		select * from product_furniture where category_id = #{categoryId,jdbcType=BIGINT}
+	</select>
+</mapper>

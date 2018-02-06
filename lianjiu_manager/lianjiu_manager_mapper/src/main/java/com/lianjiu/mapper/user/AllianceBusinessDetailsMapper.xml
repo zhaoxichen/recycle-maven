@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.user.AllianceBusinessDetailsMapper">
+	<!-- 重集映射规则 -->
+	<resultMap id="allianceBusinessDetailsResultMap" type="com.lianjiu.model.AllianceBusinessDetails">
+		<id column="abunes_id" property="abunesId" jdbcType="VARCHAR" />
+		<result column="abunes_name" property="abunesName" jdbcType="VARCHAR" />
+		<result column="abunes_phone" property="abunesPhone" jdbcType="VARCHAR" />
+		<result column="abunes_accept_order" property="abunesAcceptOrder"
+			jdbcType="TINYINT" />
+		<result column="abunes_week_order" property="abunesWeekOrder"
+			jdbcType="INTEGER" />
+		<result column="abunes_alliance_province" property="abunesAllianceProvince"
+			jdbcType="VARCHAR" />
+		<result column="abunes_alliance_city" property="abunesAllianceCity"
+			jdbcType="VARCHAR" />
+		<result column="abunes_alliance_district" property="abunesAllianceDistrict"
+			jdbcType="VARCHAR" />
+		<result column="abunes_alliance_location" property="abunesAllianceLocation"
+			jdbcType="VARCHAR" />
+		<result column="abunes_buiness_type" property="abunesBuinessType"
+			jdbcType="VARCHAR" />
+		<result column="abunes_created" property="abunesCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="abunes_updated" property="abunesUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="abunes_image" property="abunesImage" jdbcType="VARCHAR" />
+		<result column="abunes_unfinished_order" property="abunesUnfinishedOrder"
+			jdbcType="INTEGER" />
+		<result column="abunes_operation" property="abunesOperation"
+			jdbcType="VARCHAR" />
+		<result column="abunes_ cancel_orders" property="abunesCancelOrders"
+			jdbcType="INTEGER" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="abunes_app_id" property="abunesAppId" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="allianceBusinessDetailsResultMap"
+		parameterType="java.lang.String">select * from alliance_business_details where abunes_id
+		= #{abunesId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from alliance_business_details
+		where abunes_id = #{abunesId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.AllianceBusinessDetails">
+		insert into alliance_business_details (abunes_id, abunes_name, abunes_phone,
+		abunes_accept_order, abunes_week_order, abunes_alliance_province,
+		abunes_alliance_city, abunes_alliance_district,
+		abunes_alliance_location, abunes_buiness_type,
+		abunes_created, abunes_updated, abunes_image,
+		abunes_unfinished_order, abunes_operation,
+		"abunes_ cancel_orders", category_id, abunes_app_id
+		)
+		values (#{abunesId,jdbcType=VARCHAR}, #{abunesName,jdbcType=VARCHAR},
+		#{abunesPhone,jdbcType=VARCHAR},
+		#{abunesAcceptOrder,jdbcType=TINYINT},
+		#{abunesWeekOrder,jdbcType=INTEGER},
+		#{abunesAllianceProvince,jdbcType=VARCHAR},
+		#{abunesAllianceCity,jdbcType=VARCHAR},
+		#{abunesAllianceDistrict,jdbcType=VARCHAR},
+		#{abunesAllianceLocation,jdbcType=VARCHAR},
+		#{abunesBuinessType,jdbcType=VARCHAR},
+		#{abunesCreated,jdbcType=TIMESTAMP},
+		#{abunesUpdated,jdbcType=TIMESTAMP}, #{abunesImage,jdbcType=VARCHAR},
+		#{abunesUnfinishedOrder,jdbcType=INTEGER},
+		#{abunesOperation,jdbcType=VARCHAR},
+		#{abunesCancelOrders,jdbcType=INTEGER}, #{categoryId,jdbcType=BIGINT},
+		#{abunesAppId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.AllianceBusinessDetails">
+		insert into alliance_business_details
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="abunesId != null">
+				abunes_id,
+			</if>
+			<if test="abunesName != null">
+				abunes_name,
+			</if>
+			<if test="abunesPhone != null">
+				abunes_phone,
+			</if>
+			<if test="abunesAcceptOrder != null">
+				abunes_accept_order,
+			</if>
+			<if test="abunesWeekOrder != null">
+				abunes_week_order,
+			</if>
+			<if test="abunesAllianceProvince != null">
+				abunes_alliance_province,
+			</if>
+			<if test="abunesAllianceCity != null">
+				abunes_alliance_city,
+			</if>
+			<if test="abunesAllianceDistrict != null">
+				abunes_alliance_district,
+			</if>
+			<if test="abunesAllianceLocation != null">
+				abunes_alliance_location,
+			</if>
+			<if test="abunesBuinessType != null">
+				abunes_buiness_type,
+			</if>
+			<if test="abunesCreated != null">
+				abunes_created,
+			</if>
+			<if test="abunesUpdated != null">
+				abunes_updated,
+			</if>
+			<if test="abunesImage != null">
+				abunes_image,
+			</if>
+			<if test="abunesUnfinishedOrder != null">
+				abunes_unfinished_order,
+			</if>
+			<if test="abunesOperation != null">
+				abunes_operation,
+			</if>
+			<if test="abunesCancelOrders != null">
+				"abunes_ cancel_orders",
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="abunesAppId != null">
+				abunes_app_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="abunesId != null">
+				#{abunesId,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesName != null">
+				#{abunesName,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesPhone != null">
+				#{abunesPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAcceptOrder != null">
+				#{abunesAcceptOrder,jdbcType=TINYINT},
+			</if>
+			<if test="abunesWeekOrder != null">
+				#{abunesWeekOrder,jdbcType=INTEGER},
+			</if>
+			<if test="abunesAllianceProvince != null">
+				#{abunesAllianceProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAllianceCity != null">
+				#{abunesAllianceCity,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAllianceDistrict != null">
+				#{abunesAllianceDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAllianceLocation != null">
+				#{abunesAllianceLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesBuinessType != null">
+				#{abunesBuinessType,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesCreated != null">
+				#{abunesCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="abunesUpdated != null">
+				#{abunesUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="abunesImage != null">
+				#{abunesImage,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesUnfinishedOrder != null">
+				#{abunesUnfinishedOrder,jdbcType=INTEGER},
+			</if>
+			<if test="abunesOperation != null">
+				#{abunesOperation,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesCancelOrders != null">
+				#{abunesCancelOrders,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="abunesAppId != null">
+				#{abunesAppId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AllianceBusinessDetails">
+		update alliance_business_details
+		<set>
+			<if test="abunesName != null">
+				abunes_name = #{abunesName,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesPhone != null">
+				abunes_phone = #{abunesPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAcceptOrder != null">
+				abunes_accept_order = #{abunesAcceptOrder,jdbcType=TINYINT},
+			</if>
+			<if test="abunesWeekOrder != null">
+				abunes_week_order = #{abunesWeekOrder,jdbcType=INTEGER},
+			</if>
+			<if test="abunesAllianceProvince != null">
+				abunes_alliance_province = #{abunesAllianceProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAllianceCity != null">
+				abunes_alliance_city = #{abunesAllianceCity,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAllianceDistrict != null">
+				abunes_alliance_district = #{abunesAllianceDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesAllianceLocation != null">
+				abunes_alliance_location = #{abunesAllianceLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesBuinessType != null">
+				abunes_buiness_type = #{abunesBuinessType,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesCreated != null">
+				abunes_created = #{abunesCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="abunesUpdated != null">
+				abunes_updated = #{abunesUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="abunesImage != null">
+				abunes_image = #{abunesImage,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesUnfinishedOrder != null">
+				abunes_unfinished_order = #{abunesUnfinishedOrder,jdbcType=INTEGER},
+			</if>
+			<if test="abunesOperation != null">
+				abunes_operation = #{abunesOperation,jdbcType=VARCHAR},
+			</if>
+			<if test="abunesCancelOrders != null">
+				"abunes_ cancel_orders" = #{abunesCancelOrders,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="abunesAppId != null">
+				abunes_app_id = #{abunesAppId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where abunes_id = #{abunesId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AllianceBusinessDetails">
+		update alliance_business_details
+		set abunes_name = #{abunesName,jdbcType=VARCHAR},
+		abunes_phone = #{abunesPhone,jdbcType=VARCHAR},
+		abunes_accept_order = #{abunesAcceptOrder,jdbcType=TINYINT},
+		abunes_week_order = #{abunesWeekOrder,jdbcType=INTEGER},
+		abunes_alliance_province = #{abunesAllianceProvince,jdbcType=VARCHAR},
+		abunes_alliance_city = #{abunesAllianceCity,jdbcType=VARCHAR},
+		abunes_alliance_district = #{abunesAllianceDistrict,jdbcType=VARCHAR},
+		abunes_alliance_location = #{abunesAllianceLocation,jdbcType=VARCHAR},
+		abunes_buiness_type = #{abunesBuinessType,jdbcType=VARCHAR},
+		abunes_created = #{abunesCreated,jdbcType=TIMESTAMP},
+		abunes_updated = #{abunesUpdated,jdbcType=TIMESTAMP},
+		abunes_image = #{abunesImage,jdbcType=VARCHAR},
+		abunes_unfinished_order = #{abunesUnfinishedOrder,jdbcType=INTEGER},
+		abunes_operation = #{abunesOperation,jdbcType=VARCHAR},
+		abunes_ cancel_orders = #{abunesCancelOrders,jdbcType=INTEGER},
+		category_id = #{categoryId,jdbcType=BIGINT},
+		abunes_app_id = #{abunesAppId,jdbcType=VARCHAR}
+		where abunes_id = #{abunesId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND abunes_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.abunesId != null">AND abunes_id =#{model.abunesId}</if>
+				<if test="model.abunesName != null">AND abunes_name =#{model.abunesName}</if>
+				<if test="model.abunesPhone != null">AND abunes_phone =#{model.abunesPhone}</if>
+				<if test="model.abunesAcceptOrder != null">AND abunes_accept_order =#{model.abunesAcceptOrder}</if>
+				<if test="model.abunesWeekOrder != null">AND abunes_week_order =#{model.abunesWeekOrder}</if>
+				<if test="model.abunesAllianceProvince != null">AND abunes_alliance_province
+					=#{model.abunesAllianceProvince}</if>
+				<if test="model.abunesAllianceCity != null">AND abunes_alliance_city =#{model.abunesAllianceCity}</if>
+				<if test="model.abunesAllianceDistrict != null">AND abunes_alliance_district
+					=#{model.abunesAllianceDistrict}</if>
+				<if test="model.abunesAllianceLocation != null">AND abunes_alliance_location
+					=#{model.abunesAllianceLocation}</if>
+				<if test="model.abunesBuinessType != null">AND abunes_buiness_type =#{model.abunesBuinessType}</if>
+				<if test="model.abunesCreated != null">AND abunes_created =#{model.abunesCreated}</if>
+				<if test="model.abunesUpdated != null">AND abunes_updated =#{model.abunesUpdated}</if>
+				<if test="model.abunesImage != null">AND abunes_image =#{model.abunesImage}</if>
+				<if test="model.abunesUnfinishedOrder != null">AND abunes_unfinished_order
+					=#{model.abunesUnfinishedOrder}</if>
+				<if test="model.abunesOperation != null">AND abunes_operation =#{model.abunesOperation}</if>
+				<if test="model.abunesCancelOrders != null">AND abunes_ cancel_orders =#{model.abunesCancelOrders}</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.abunesAppId != null">AND abunes_app_id =#{model.abunesAppId}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="allianceBusinessDetailsResultMap">
+		select * from alliance_business_details
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<!-- 
+	<select id="selectByPrimaryKey" parameterType="java.lang.String">
+		select *
+		from
+		alliance_business_details
+		where abunes_id =
+		#{abunesId,jdbcType=VARCHAR}
+	</select> -->
+	<!-- 更改加盟商接单状态 -->
+	<update id="modifyByAbunesId" parameterType="com.lianjiu.model.AllianceBusinessDetails" >
+		update alliance_business_details set
+		abunes_updated = NOW(),
+		abunes_accept_order = #{abunesAcceptOrder}
+		where abunes_id = #{abunesId}
+	</update>
+</mapper>

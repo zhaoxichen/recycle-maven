@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.user.AllianceBuappRemarksMapper">
+	<resultMap id="remarksResultMap" type="com.lianjiu.model.AllianceBuappRemarks">
+		<id column="al_buapp_remarks_id" property="alBuappRemarksId"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_id" property="albnessApplicationId"
+			jdbcType="VARCHAR" />
+		<result column="admin_username" property="adminUsername"
+			jdbcType="VARCHAR" />
+		<result column="al_buapp_remarks_created" property="alBuappRemarksCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="al_buapp_remarks_updated" property="alBuappRemarksUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="al_buapp_remarks_content" property="alBuappRemarksContent"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="remarksResultMap">
+		select *
+		from alliance_buapp_remarks
+		where al_buapp_remarks_id =
+		#{alBuappRemarksId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByAapId" parameterType="java.lang.String" resultMap="remarksResultMap">
+		select *
+		from alliance_buapp_remarks
+		where albness_application_id =
+		#{albnessApplicationId,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		alliance_buapp_remarks
+		where al_buapp_remarks_id =
+		#{alBuappRemarksId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.AllianceBuappRemarks">
+		insert into
+		alliance_buapp_remarks (al_buapp_remarks_id,
+		albness_application_id,
+		admin_username, al_buapp_remarks_created,
+		al_buapp_remarks_updated,
+		al_buapp_remarks_content
+		)
+		values (#{alBuappRemarksId,jdbcType=VARCHAR},
+		#{albnessApplicationId,jdbcType=VARCHAR},
+		#{adminUsername,jdbcType=VARCHAR},
+		#{alBuappRemarksCreated,jdbcType=TIMESTAMP},
+		#{alBuappRemarksUpdated,jdbcType=TIMESTAMP},
+		#{alBuappRemarksContent,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.AllianceBuappRemarks">
+		insert into alliance_buapp_remarks
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="alBuappRemarksId != null">
+				al_buapp_remarks_id,
+			</if>
+			<if test="albnessApplicationId != null">
+				albness_application_id,
+			</if>
+			<if test="adminUsername != null">
+				admin_username,
+			</if>
+			<if test="alBuappRemarksCreated != null">
+				al_buapp_remarks_created,
+			</if>
+			<if test="alBuappRemarksUpdated != null">
+				al_buapp_remarks_updated,
+			</if>
+			<if test="alBuappRemarksContent != null">
+				al_buapp_remarks_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="alBuappRemarksId != null">
+				#{alBuappRemarksId,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationId != null">
+				#{albnessApplicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="adminUsername != null">
+				#{adminUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="alBuappRemarksCreated != null">
+				#{alBuappRemarksCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="alBuappRemarksUpdated != null">
+				#{alBuappRemarksUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="alBuappRemarksContent != null">
+				#{alBuappRemarksContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AllianceBuappRemarks">
+		update alliance_buapp_remarks
+		<set>
+			<if test="albnessApplicationId != null">
+				albness_application_id =
+				#{albnessApplicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="adminUsername != null">
+				admin_username = #{adminUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="alBuappRemarksCreated != null">
+				al_buapp_remarks_created =
+				#{alBuappRemarksCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="alBuappRemarksUpdated != null">
+				al_buapp_remarks_updated =
+				#{alBuappRemarksUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="alBuappRemarksContent != null">
+				al_buapp_remarks_content =
+				#{alBuappRemarksContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where al_buapp_remarks_id = #{alBuappRemarksId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AllianceBuappRemarks">
+		update
+		alliance_buapp_remarks
+		set albness_application_id =
+		#{albnessApplicationId,jdbcType=VARCHAR},
+		admin_username =
+		#{adminUsername,jdbcType=VARCHAR},
+		al_buapp_remarks_created =
+		#{alBuappRemarksCreated,jdbcType=TIMESTAMP},
+		al_buapp_remarks_updated =
+		#{alBuappRemarksUpdated,jdbcType=TIMESTAMP}
+		where al_buapp_remarks_id =
+		#{alBuappRemarksId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--统计数量 -->
+	<sql id="sql_count">
+		count(*) as totalItems
+	</sql>
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and id != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND oitem_id=#{id}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if
+					test="model.albnessApplicationId != null and model.albnessApplicationId.length()>0">
+					AND albness_application_id=#{model.albnessApplicationId}
+				</if>
+				<if
+					test="model.alBuappRemarksId != null">
+					AND al_buapp_remarks_id=#{model.alBuappRemarksId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="remarksResultMap">
+		select * from alliance_buapp_remarks
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+
+	<update id="addAllBusinessRemarks" parameterType="com.lianjiu.model.AllianceBuappRemarks">
+		update
+		alliance_buapp_remarks
+		set
+		al_buapp_remarks_created =
+		#{alBuappRemarksCreated,jdbcType=TIMESTAMP},
+		al_buappRemarks_content=
+		#{alBuappRemarksContent,jdbcType=VARCHAR}
+		where
+		albness_application_id =
+		#{albnessApplicationId,jdbcType=VARCHAR}
+	</update>
+</mapper>

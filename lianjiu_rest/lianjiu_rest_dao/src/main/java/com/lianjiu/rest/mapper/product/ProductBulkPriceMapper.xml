@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.product.ProductBulkPriceMapper">
+	<resultMap id="productBulkPriceResultMap" type="com.lianjiu.model.ProductBulkPrice">
+		<id column="price_id" property="priceId" jdbcType="VARCHAR" />
+		<result column="price_single" property="priceSingle" jdbcType="VARCHAR" />
+		<result column="price_single_alliance" property="priceSingleAlliance"
+			jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="price_unit" property="priceUnit" jdbcType="INTEGER" />
+		<result column="price_created" property="priceCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="price_updated" property="priceUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productBulkPriceResultMap"
+		parameterType="java.lang.String">select * from product_bulk_price where price_id =
+		#{priceId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product_bulk_price
+		where price_id = #{priceId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.ProductBulkPrice">
+		insert into product_bulk_price
+		(price_id, price_single,
+		price_single_alliance,
+		product_id,
+		price_unit,
+		is_current_price,
+		price_created,
+		price_updated)
+		values
+		(#{priceId,jdbcType=VARCHAR},
+		#{priceSingle,jdbcType=VARCHAR},
+		#{priceSingleAlliance,jdbcType=VARCHAR},
+		#{productId,jdbcType=VARCHAR}, #{priceUnit,jdbcType=INTEGER},
+		1,
+		NOW(),
+		NOW())
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductBulkPrice">
+		update product_bulk_price
+		<set>
+			<if test="priceSingle != null">
+				price_single = #{priceSingle,jdbcType=VARCHAR},
+			</if>
+			<if test="priceSingleAlliance != null">
+				price_single_alliance =
+				#{priceSingleAlliance,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="priceUnit != null">
+				price_unit = #{priceUnit,jdbcType=INTEGER},
+			</if>
+			price_updated = NOW()
+		</set>
+		where price_id = #{priceId,jdbcType=VARCHAR}
+	</update>
+	<select id="getBulkPriceByPid" parameterType="java.lang.String"
+		resultMap="productBulkPriceResultMap">
+		select * from product_bulk_price where product_id = #{pid}
+	</select>
+	<select id="getCurrentPriceByPid" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select price_single from product_bulk_price where
+		product_id=#{value} AND is_current_price=1
+	</select>
+	<!-- 添加价格前调用，把其他价格设置为不使用的状态 -->
+	<update id="updateCurrentPriceByPid" parameterType="java.lang.String">
+		update
+		product_bulk_price set is_current_price=0,price_updated = NOW() where
+		product_id=#{value}
+	</update>
+</mapper>

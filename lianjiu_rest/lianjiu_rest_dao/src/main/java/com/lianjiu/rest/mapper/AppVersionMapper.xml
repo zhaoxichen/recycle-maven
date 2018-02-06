@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.AppVersionMapper">
+	<resultMap id="versionResultMap" type="com.lianjiu.model.AppVersion">
+		<!--重映射 -->
+		<result column="version_code" property="versionCode" jdbcType="VARCHAR" />
+		<result column="version_name" property="versionName" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="operater" property="operater" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--获取最新的版本 -->
+	<select id="getNewVersion" resultMap="versionResultMap">
+		SELECT
+		version_code,
+		version_name,
+		url
+		FROM
+		app_version
+		WHERE
+		created IN (
+		SELECT
+		MAX(created)
+		FROM
+		app_version
+		GROUP BY
+		app_type
+		)
+		AND app_type =#{value}
+	</select>
+
+	<insert id="inerstVersion" parameterType="com.lianjiu.model.AppVersion">
+		insert into app_version
+		(version_code,version_name,url,operater,created,updated,app_type)
+		values
+		(#{versionCode},#{versionName},#{url},#{operater},now(),now(),#{appType}
+		)
+	</insert>
+
+</mapper>

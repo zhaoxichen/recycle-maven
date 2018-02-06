@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.search.SearchMapper">
+	<!--结果集映射 -->
+	<resultMap id="productSearchResultMap" type="com.lianjiu.rest.model.ItemSearch">
+		<id column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="product_price" property="productMaxPrice"
+			jdbcType="VARCHAR" />
+		<result column="category_id" property="category" jdbcType="BIGINT" />
+	</resultMap>
+	<resultMap id="wasteSearchResultMap" type="com.lianjiu.rest.model.ItemSearch">
+		<id column="w_price_id" property="productId" jdbcType="VARCHAR" />
+		<result column="product_name" property="productName" jdbcType="VARCHAR" />
+		<result column="w_price_single" property="productMaxPrice"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="productExcellentSearchResultMap" type="com.lianjiu.rest.model.ItemSearch">
+		<id column="excellent_id" property="productId" jdbcType="VARCHAR" />
+		<result column="excellent_name" property="productName"
+			jdbcType="VARCHAR" />
+		<result column="excellent_price" property="productMaxPrice"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="getProductItemList" resultMap="productSearchResultMap">
+		SELECT
+		p.product_id,
+		p.product_name,
+		p.product_price,
+		p.category_id
+		FROM
+		product p
+		where
+		p.product_name LIKE
+		concat(concat('%',#{query}),'%')
+	</select>
+	<!--取一个最新的价格添加时间 -->
+	<select id="getWasteItemList" resultMap="wasteSearchResultMap">
+		SELECT
+		wp.w_price_id,
+		w.waste_name product_name,
+		wp.w_price_single,
+		1
+		category
+		FROM
+		waste w LEFT JOIN waste_price wp
+		ON
+		w.waste_id = wp.waste_id
+		where
+		wp.w_price_updated in (select
+		max(wp.w_price_updated) from
+		waste_price wp group by waste_id)
+		AND
+		w.waste_name LIKE
+		concat(concat('%',#{query}),'%')
+	</select>
+	<select id="getProductExcellentItemList" resultMap="productExcellentSearchResultMap">
+		SELECT
+		p.excellent_id,
+		p.excellent_name,
+		p.excellent_price,
+		4 category
+		FROM
+		product_excellent p
+		where
+		p.excellent_name LIKE
+		concat(concat('%',#{query}),'%')
+	</select>
+	<!--导入到solr -->
+	<select id="getProductExcellentItemAll" resultMap="productExcellentSearchResultMap">
+		SELECT
+		p.excellent_id,
+		p.excellent_name,
+		p.excellent_price,
+		4 category
+		FROM
+		product_excellent p
+	</select>
+	<select id="getProductItemAll" resultMap="productSearchResultMap">
+		SELECT
+		p.product_id,
+		p.product_name,
+		p.product_price,
+		p.category_id
+		FROM
+		product p
+	</select>
+	<!--取一个最新的价格添加时间 -->
+	<select id="getWasteItemAll" resultMap="wasteSearchResultMap">
+		SELECT
+		wp.w_price_id,
+		w.waste_name product_name,
+		wp.w_price_single,
+		1
+		category
+		FROM
+		waste w LEFT JOIN waste_price wp
+		ON
+		w.waste_id = wp.waste_id
+		where
+		wp.w_price_updated in (select
+		max(wp.w_price_updated) from
+		waste_price wp group by waste_id)
+	</select>
+</mapper>

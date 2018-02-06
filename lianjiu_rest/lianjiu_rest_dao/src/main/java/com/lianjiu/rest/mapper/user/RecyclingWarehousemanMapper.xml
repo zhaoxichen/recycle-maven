@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.user.RecyclingWarehousemanMapper">
+	<resultMap id="recyclingWarehousemanResultMap" type="com.lianjiu.model.RecyclingWarehouseman">
+		<id column="recycler_id" property="recyclerId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+		<result column="recycler_type" property="recyclerType"
+			jdbcType="TINYINT" />
+		<result column="recycler_name" property="recyclerName"
+			jdbcType="VARCHAR" />
+		<result column="recycler_phone" property="recyclerPhone"
+			jdbcType="VARCHAR" />
+		<result column="recycler_password" property="recyclerPassword"
+			jdbcType="VARCHAR" />
+		<result column="recycler_operator" property="recyclerOperator"
+			jdbcType="VARCHAR" />
+		<result column="is_exist" property="isExist" jdbcType="TINYINT" />
+		<result column="recycler_created" property="recyclerCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="recycler_updated" property="recyclerUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="recyclingWarehousemanResultMap"
+		parameterType="java.lang.String">select * from recycling_warehouseman where recycler_id =
+		#{recyclerId,jdbcType=VARCHAR} and is_exist != 0
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		recycling_warehouseman
+		where recycler_id =
+		#{recyclerId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.RecyclingWarehouseman">
+		insert into
+		recycling_warehouseman (recycler_id, category_id, recycler_type,
+		recycler_name, recycler_phone, recycler_password,
+		recycler_operator,
+		recycler_created, recycler_updated
+		)
+		values
+		(#{recyclerId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR},
+		#{recyclerType,jdbcType=TINYINT},
+		#{recyclerName,jdbcType=VARCHAR},
+		#{recyclerPhone,jdbcType=VARCHAR},
+		#{recyclerPassword,jdbcType=VARCHAR},
+		#{recyclerOperator,jdbcType=VARCHAR},
+		NOW(),
+		NOW()
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.RecyclingWarehouseman">
+		update recycling_warehouseman
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=VARCHAR},
+			</if>
+			<if test="recyclerType != null">
+				recycler_type = #{recyclerType,jdbcType=TINYINT},
+			</if>
+			<if test="recyclerName != null">
+				recycler_name = #{recyclerName,jdbcType=VARCHAR},
+			</if>
+			<if test="recyclerPhone != null">
+				recycler_phone = #{recyclerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="recyclerPassword != null">
+				recycler_password = #{recyclerPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="recyclerOperator != null">
+				recycler_operator = #{recyclerOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="isExist != null">
+				is_exist = #{isExist,jdbcType=TINYINT},
+			</if>
+			recycler_updated = NOW()
+		</set>
+		where recycler_id = #{recyclerId,jdbcType=VARCHAR}
+	</update>
+	<select id="getIdByPhone" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select recycler_id from recycling_warehouseman where
+		recycler_phone = #{recyclerPhone} and is_exist != 0
+	</select>
+	<select id="getIdByName" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select recycler_id from recycling_warehouseman where
+		recycler_name = #{recyclerName}
+	</select>
+	<select id="getAll" resultMap="recyclingWarehousemanResultMap">
+		select
+		recycler_id,recycler_type,recycler_name,recycler_phone,recycler_operator,recycler_created
+		from recycling_warehouseman where is_exist != 0 order by recycler_created desc
+	</select>
+	<select id="getWarehousemanByPhone" resultMap="recyclingWarehousemanResultMap">
+		select
+		recycler_id,recycler_type,recycler_name,recycler_password,recycler_phone,recycler_operator,recycler_created,recycler_updated
+		from recycling_warehouseman
+		where recycler_phone = #{recyclerPhone} and
+		is_exist != 0
+	</select>
+	<update id="modifyIsExsit" parameterType="java.lang.String">
+		update
+		recycling_warehouseman
+		set is_exist = 0 where recycler_id =
+		#{recyclerId}
+	</update>
+	<select id="getPwdById" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select recycler_password from recycling_warehouseman
+		where recycler_id =
+		#{recyclerId}
+	</select>
+	<update id="modifyPwd" parameterType="java.lang.String">
+		update
+		recycling_warehouseman
+		set recycler_password = #{recyclerPassword} where recycler_id =	#{recyclerId}
+	</update>
+	<select id="getCountByOphone" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(1) from recycling_warehouseman where recycler_phone = #{recyclerPhone} and is_exist != 0
+	</select>
+</mapper>

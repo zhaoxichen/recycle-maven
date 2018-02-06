@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersExcellentMapper">
+	<resultMap id="ordersExcellentResultMap" type="com.lianjiu.model.OrdersExcellent">
+		<id column="or_excellent_id" property="orExcellentId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="user_address_name" property="orExcellentUser"
+			jdbcType="VARCHAR" />
+		<result column="user_address_phone" property="orExcellentPhone"
+			jdbcType="VARCHAR" />
+		<result column="or_excellent_handler" property="orExcellentHandler"
+			jdbcType="VARCHAR" />
+		<result column="or_excellent_status" property="orExcellentStatus"
+			jdbcType="TINYINT" />
+		<result column="user_province" property="orExcellentProvince"
+			jdbcType="VARCHAR" />
+		<result column="user_city" property="orExcellentCity" jdbcType="VARCHAR" />
+		<result column="user_district" property="orExcellentDistrict"
+			jdbcType="VARCHAR" />
+		<result column="user_location" property="orExcellentLocation"
+			jdbcType="VARCHAR" />
+		<result column="or_excellent_created" property="orExcellentCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_excellent_handle_time" property="orExcellentHandleTime"
+			jdbcType="TIMESTAMP" />
+		<result column="or_excellent_updated" property="orExcellentUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_excellent_scheme" property="orExcellentScheme"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersExcellentResultMap"
+		parameterType="java.lang.String">
+		select *
+		from orders_excellent o LEFT JOIN user_address a
+		ON
+		o.address_id = a.user_address_id
+		where o.or_excellent_id =
+		#{orExcellentId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_excellent
+		where or_excellent_id =
+		#{orExcellentId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersExcellent">
+		insert into orders_excellent
+		(or_excellent_id, user_id, category_id,
+		or_excellent_handler,
+		or_excellent_handle_time,
+		or_excellent_status, or_excellent_created,
+		or_excellent_updated, address_id,
+		or_items_name_preview,or_items_pictrue_preview,
+		orders_price)
+		values
+		(#{orExcellentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{orExcellentHandler,jdbcType=VARCHAR},
+		#{orExcellentHandleTime,jdbcType=TIMESTAMP},
+		#{orExcellentStatus,jdbcType=TINYINT},
+		#{orExcellentCreated,jdbcType=TIMESTAMP},
+		now(),
+		#{addressId,jdbcType=VARCHAR},
+		#{orItemsNamePreview,jdbcType=VARCHAR},
+		#{orItemsPictruePreview,jdbcType=VARCHAR},
+		#{ordersPrice,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersExcellent">
+		update orders_excellent
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="orExcellentHandler != null">
+				or_excellent_handler =
+				#{orExcellentHandler,jdbcType=VARCHAR},
+			</if>
+			<if test="orExcellentHandleTime != null">
+				or_excellent_handle_time =
+				#{orExcellentHandleTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExcellentStatus != null">
+				or_excellent_status =
+				#{orExcellentStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orExcellentCreated != null">
+				or_excellent_created =
+				#{orExcellentCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orExcellentUpdated != null">
+				or_excellent_updated =
+				#{orExcellentUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addressId != null">
+				address_id = #{addressId,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsExpressNum != null">
+				or_exce_details_express_num =
+				#{orExceDetailsExpressNum,jdbcType=VARCHAR},
+			</if>
+			<if test="orExceDetailsExpressName != null">
+				or_exce_details_express_name =
+				#{orExceDetailsExpressName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where or_excellent_id = #{orExcellentId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersExcellent">
+		update
+		orders_excellent
+		set user_id = #{userId,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		or_excellent_handler =
+		#{orExcellentHandler,jdbcType=VARCHAR},
+		or_excellent_handle_time =
+		#{orExcellentHandleTime,jdbcType=TIMESTAMP},
+		or_excellent_status =
+		#{orExcellentStatus,jdbcType=TINYINT},
+		or_excellent_created =
+		#{orExcellentCreated,jdbcType=TIMESTAMP},
+		or_excellent_updated =
+		now(),
+		address_id =
+		#{addressId,jdbcType=VARCHAR}
+		where or_excellent_id =
+		#{orExcellentId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="getByExcellentList" resultMap="ordersExcellentResultMap"
+		parameterType="java.lang.Long">
+		select *
+		from orders_excellent o LEFT JOIN user_address a
+		ON
+		o.address_id = a.user_address_id
+		where o.category_id =
+		#{categoryId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectCategoryId" parameterType="java.lang.String"
+		resultType="java.lang.Long">
+		select category_id from category where
+		category_name=#{categoryName}
+	</select>
+
+	<select id="findAll" resultMap="ordersExcellentResultMap">
+		select * from orders_excellent o
+		LEFT JOIN user_address a
+		ON
+		o.address_id = a.user_address_id
+	</select>
+
+	<select id="findAllByStatus" resultMap="ordersExcellentResultMap"
+		parameterType="com.lianjiu.model.OrdersExcellent">
+		select * from orders_excellent o LEFT JOIN user_address a
+		ON
+		o.address_id = a.user_address_id
+		<if test="orExcellentStatus == 1">
+			where o.or_excellent_status='1'
+		</if>
+		<if test="orExcellentStatus == 2">
+			where o.or_excellent_status='2' or
+			o.or_excellent_status='4'
+		</if>
+		<if test="orExcellentStatus == 3">
+			where o.or_excellent_status='3'
+		</if>
+		<if test=" orExcellentStatus == 4">
+			where o.or_excellent_status='7' or
+			o.or_excellent_status='8'
+		</if>
+		<if test="orExcellentStatus == 5">
+			where o.or_excellent_status='5' o.or
+			or_excellent_status='6'
+		</if>
+	</select>
+	<!--订单视图 -->
+	<resultMap id="ordersViewResultMap" type="com.lianjiu.rest.model.OrdersView">
+		<id column="or_excellent_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="or_items_name_preview" property="orItemsNamePreview"
+			jdbcType="VARCHAR" />
+		<result column="or_items_pictrue_preview" property="orItemsPictruePreview"
+			jdbcType="VARCHAR" />
+		<result column="orders_price" property="ordersPrice" jdbcType="VARCHAR" />
+		<result column="or_excellent_status" property="ordersStatus"
+			jdbcType="TINYINT" />
+		<result column="or_excellent_created" property="ordersCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_items_param" property="orItemsParam"
+			jdbcType="LONGVARCHAR" />
+		<result column="or_items_product_id" property="orItemsProductId"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_express_name" property="orExceDetailsExpressName"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_details_express_num" property="orExceDetailsExpressNum"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_refund_express" property="orExceRefundExpress"
+			jdbcType="VARCHAR" />
+		<result column="or_exce_refund_expressNum" property="orExceRefundExpressnum"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 根据用户id -->
+	<select id="getExcellentByUserId" parameterType="java.lang.String"
+		resultMap="ordersViewResultMap">
+		select
+		o.or_excellent_id,o.or_excellent_status,o.or_excellent_created,
+		o.or_items_name_preview,o.or_items_pictrue_preview,o.orders_price,
+		i.or_items_product_id, i.or_items_param,
+		refund.or_exce_refund_express,
+		refund.or_exce_refund_expressNum
+		from
+		orders_excellent o LEFT JOIN
+		orders_item i
+		ON o.or_excellent_id =
+		i.orders_id
+		where
+		o.user_id=#{userId}
+		ORDER BY o.or_excellent_created
+		desc
+	</select>
+	<!--根据用户id，状态码 -->
+	<select id="getExcellentByUserStatus" resultMap="ordersViewResultMap">
+		SELECT
+		o.or_excellent_id,
+		o.or_excellent_status,
+		o.or_excellent_created,
+		o.or_items_name_preview,
+		o.or_items_pictrue_preview,
+		o.orders_price,
+		o.or_exce_details_express_name,
+		o.or_exce_details_express_num,
+		i.or_items_product_id,
+		i.or_items_param,
+		refund.or_exce_refund_express,
+		refund.or_exce_refund_expressNum
+		FROM
+		orders_excellent o
+		LEFT JOIN
+		orders_item i ON o.or_excellent_id = i.orders_id
+		LEFT JOIN
+		orders_excellent_refund refund ON o.or_excellent_id =
+		refund.or_excellent_id
+		WHERE
+		user_id=#{userId}
+		and
+		or_excellent_status in
+		<foreach collection="statusList" item="status" index="index"
+			open="(" close=")" separator=",">
+			#{status}
+		</foreach>
+		ORDER BY o.or_excellent_created desc
+	</select>
+
+	<insert id="insertVo" parameterType="com.lianjiu.model.OrdersExcellent">
+		insert into orders_excellent
+		(or_excellent_id, user_id, category_id,
+		or_excellent_user,
+		or_excellent_phone, or_excellent_handler,
+		or_excellent_handle_time,
+		or_excellent_status,
+		or_excellent_province, or_excellent_city,
+		or_excellent_district,
+		or_excellent_location, or_excellent_created,
+		or_excellent_updated,address_id)
+		values
+		(#{orExcellentId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{orExcellentUser,jdbcType=VARCHAR},
+		#{orExcellentPhone,jdbcType=VARCHAR},
+		#{orExcellentHandler,jdbcType=VARCHAR},
+		#{orExcellentHandleTime,jdbcType=TIMESTAMP},
+		#{orExcellentStatus,jdbcType=TINYINT},
+		#{orExcellentProvince,jdbcType=VARCHAR},
+		#{orExcellentCity,jdbcType=VARCHAR},
+		#{orExcellentDistrict,jdbcType=VARCHAR},
+		#{orExcellentLocation,jdbcType=VARCHAR},
+		now(),
+		now(),
+		#{addressId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertOrders" parameterType="com.lianjiu.model.OrdersExcellent">
+		insert into
+		orders_excellent
+		(or_excellent_id, user_id, category_id,
+		or_excellent_user,
+		or_excellent_phone, or_excellent_handler,
+		or_excellent_handle_time,
+		or_excellent_status,
+		or_excellent_province,
+		or_excellent_city,
+		or_excellent_district,
+		or_excellent_location,
+		or_excellent_created,
+		or_excellent_updated)
+		select
+		#{ordersExcellent.orExcellentId},
+		#{ordersExcellent.userId},
+		#{ordersExcellent.categoryId},
+		user_address_name,
+		user_address_phone,
+		#{ordersExcellent.orExcellentHandler},
+		#{ordersExcellent.orExcellentHandleTime},
+		#{ordersExcellent.orExcellentStatus},
+		user_province,
+		user_city,
+		user_district,
+		user_location,
+		#{ordersExcellent.orExcellentCreated},
+		now()
+		from user_address ua where
+		ua.user_address_id=#{addressId}
+	</insert>
+	<select id="selectByPrimaryKeyCheck" resultType="int">
+		select count(*)
+		from orders_excellent where or_excellent_id =
+		#{value}
+	</select>
+	<!--更新订单状态 -->
+	<update id="modifyExcellentState" parameterType="com.lianjiu.model.OrdersExcellent">
+		update
+		orders_excellent
+		set
+		or_excellent_status=#{orExcellentStatus},
+		or_excellent_updated=NOW()
+		where or_excellent_id =
+		#{orExcellentId}
+	</update>
+
+	<update id="modifyExcellentFinishState" parameterType="com.lianjiu.model.OrdersExcellent">
+		UPDATE
+		orders_excellent o,orders_item i
+		SET o.or_excellent_status =
+		#{orExcellentStatus},
+		o.or_excellent_updated = NOW(),
+		i.or_items_status
+		= 1,
+		i.or_items_updated = NOW()
+		WHERE o.or_excellent_id = i.orders_id
+		AND
+		o.or_excellent_id = #{orExcellentId}
+	</update>
+
+	<update id="modifyOrdersState">
+		update
+		orders_excellent
+		set
+		or_excellent_status=#{status},
+		or_excellent_updated=NOW()
+		where
+		or_excellent_id =
+		#{ordersId}
+	</update>
+	<!--30分钟无操作，自动取消订单 状态从1变成0 -->
+	<update id="ordersAutoCancel">
+		update
+		orders_excellent
+		set
+		or_excellent_status= 0,
+		or_excellent_updated=NOW()
+		where
+		or_excellent_status = 1
+		AND
+		or_excellent_id in
+		<foreach collection="ordersIdList" item="ordersId" index="index"
+			open="(" close=")" separator=",">
+			#{ordersId}
+		</foreach>
+	</update>
+
+	<select id="slectPriceByOrderNo" resultType="string"
+		parameterType="string">
+		select orders_price from orders_excellent where
+		or_excellent_id = #{0}
+	</select>
+
+	<!-- 修改订单状态 -->
+	<update id="modifyOrdersStatus">
+		update
+		orders_excellent
+		set
+		or_excellent_status=
+		#{status},
+		or_excellent_updated=NOW()
+		where
+		or_excellent_id = #{ordersId}
+	</update>
+
+	<!-- 查询订单状态 -->
+	<select id="getExcellentByState" parameterType="java.lang.String"
+		resultType="java.lang.Byte">
+		select or_excellent_status from orders_excellent where
+		or_excellent_id = #{ordersId}
+	</select>
+	<!--sql片段 -->
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and id != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND or_excellent_id=#{id}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.orExcellentId != null and model.orExcellentId.length()>0">
+					AND or_excellent_id=#{model.orExcellentId}
+				</if>
+				<if test="model.userId != null and model.userId.length()>0">
+					AND user_id=#{model.userId}
+				</if>
+				<if test="model.categoryId != null">
+					AND category_id=#{model.categoryId}
+				</if>
+				<if test="model.orExcellentStatus != null">
+					AND or_excellent_status=#{model.orExcellentStatus}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersExcellentResultMap">
+		select * from orders_excellent o LEFT JOIN user_address a
+		ON
+		o.address_id = a.user_address_id
+		<include refid="sql_where" />
+		ORDER BY
+		or_excellent_created
+		DESC
+	</select>
+	<select id="getOrdersStatus" parameterType="java.lang.String"
+		resultType="java.lang.Byte">
+		select or_excellent_status
+		from
+		orders_excellent
+		where
+		or_excellent_id =
+		#{value}
+	</select>
+	
+	<select id="vagueQuery" resultMap="ordersExcellentResultMap">
+		select * from orders_excellent oe,user_address ua
+		<where>
+			<if test="excellent.orExcellentId != null and excellent.orExcellentId != ''">
+				and oe.or_excellent_id LIKE CONCAT('%',#{excellent.orExcellentId},'%')
+			</if>
+			<if test="excellent.userId != null and excellent.userId != ''">
+				and oe.user_id LIKE CONCAT('%',#{excellent.userId},'%')
+			</if>
+			<if test="excellent.orExcellentPhone != null and excellent.orExcellentPhone != ''">
+				and ua.user_address_phone LIKE CONCAT('%',#{excellent.orExcellentPhone},'%')
+			</if>
+			<if test="excellent.orExcellentStatus != null and excellent.orExcellentStatus != ''">
+				and oe.or_excellent_status LIKE CONCAT('%',#{excellent.orExcellentStatus},'%')
+			</if>
+			<if test="cratedStart != null and cratedStart != '' and cratedOver != null and cratedOver != '' ">
+				and oe.or_excellent_created between #{cratedStart} and #{cratedOver}
+			</if>
+			and oe.address_id = ua.user_address_id
+		</where>
+		ORDER BY or_excellent_created DESC
+	</select>
+	
+	
+</mapper>

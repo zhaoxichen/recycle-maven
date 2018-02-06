@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.RoleMapper">
+	<resultMap id="roleResultMap" type="com.lianjiu.model.Role">
+		<id column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+		<result column="role_password" property="rolePassword"
+			jdbcType="VARCHAR" />
+		<result column="role_job" property="roleJob" jdbcType="INTEGER" />
+		<result column="role_up" property="roleUp" jdbcType="VARCHAR" />
+		<result column="role_handler" property="roleHandler" jdbcType="VARCHAR" />
+		<result column="role_created" property="roleCreated" jdbcType="TIMESTAMP" />
+		<result column="role_updated" property="roleUpdated" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="roleResultMap"
+		parameterType="java.lang.String">select * from role where role_id =
+		#{roleId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from role
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Role">
+		insert into role (role_id, role_name, role_code,
+		role_password, role_job, role_up,
+		role_handler, role_created, role_updated
+		)
+		values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+		#{roleCode,jdbcType=VARCHAR},
+		#{rolePassword,jdbcType=VARCHAR}, #{roleJob,jdbcType=INTEGER}, #{roleUp,jdbcType=VARCHAR},
+		#{roleHandler,jdbcType=VARCHAR}, #{roleCreated,jdbcType=TIMESTAMP},
+		#{roleUpdated,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Role">
+		update role
+		<set>
+			<if test="roleName != null">
+				role_name = #{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleCode != null">
+				role_code = #{roleCode,jdbcType=VARCHAR},
+			</if>
+			<if test="rolePassword != null">
+				role_password = #{rolePassword,jdbcType=VARCHAR},
+			</if>
+			<if test="roleJob != null">
+				role_job = #{roleJob,jdbcType=INTEGER},
+			</if>
+			<if test="roleUp != null">
+				role_up = #{roleUp,jdbcType=VARCHAR},
+			</if>
+			<if test="roleHandler != null">
+				role_handler = #{roleHandler,jdbcType=VARCHAR},
+			</if>
+			<if test="roleCreated != null">
+				role_created = #{roleCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="roleUpdated != null">
+				role_updated = #{roleUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getAll" resultMap="roleResultMap">
+		select * from role
+	</select>
+	
+	<select id="getRoleList" resultMap="roleResultMap">
+		select * from role where role_id in
+		<foreach collection="roleList" item="role" index="index"
+			open="(" close=")" separator=",">
+			#{role.roleId}
+		</foreach>
+	</select>
+	
+</mapper>

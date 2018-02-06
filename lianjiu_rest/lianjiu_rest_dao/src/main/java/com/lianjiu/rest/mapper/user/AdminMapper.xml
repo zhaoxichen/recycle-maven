@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.user.AdminMapper">
+	<!--重映射 -->
+	<resultMap id="adminUserResultMap" type="com.lianjiu.model.Admin">
+		<id column="admin_id" property="adminId" jdbcType="VARCHAR" />
+		<result column="admin_priority" property="adminPriority"
+			jdbcType="INTEGER" />
+		<result column="admin_username" property="adminUsername"
+			jdbcType="VARCHAR" />
+		<result column="admin_password" property="adminPassword"
+			jdbcType="VARCHAR" />
+		<result column="admin_nickname" property="adminNickname"
+			jdbcType="VARCHAR" />
+		<result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
+		<result column="admin_did" property="adminDid" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--通过主键删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from admin
+		where admin_id = #{adminId,jdbcType=VARCHAR}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.Admin">
+		insert into admin (admin_id,
+		admin_priority, admin_username,
+		admin_password, admin_nickname,
+		admin_phone,
+		admin_did)
+		values (#{adminId,jdbcType=VARCHAR},
+		#{adminPriority,jdbcType=INTEGER},
+		#{adminUsername,jdbcType=VARCHAR},
+		#{adminPassword,jdbcType=VARCHAR}, #{adminNickname,jdbcType=VARCHAR},
+		#{adminPhone,jdbcType=VARCHAR},
+		#{adminDid,jdbcType=VARCHAR})
+	</insert>
+	<!--条件插入 -->
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Admin">
+		insert into admin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="adminId != null">
+				admin_id,
+			</if>
+			<if test="adminPriority != null">
+				admin_priority,
+			</if>
+			<if test="adminUsername != null">
+				admin_username,
+			</if>
+			<if test="adminPassword != null">
+				admin_password,
+			</if>
+			<if test="adminNickname != null">
+				admin_nickname,
+			</if>
+			<if test="adminPhone != null">
+				admin_phone,
+			</if>
+			<if test="adminDid != null">
+				admin_did,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="adminId != null">
+				#{adminId,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPriority != null">
+				#{adminPriority,jdbcType=INTEGER},
+			</if>
+			<if test="adminUsername != null">
+				#{adminUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPassword != null">
+				#{adminPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="adminNickname != null">
+				#{adminNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPhone != null">
+				#{adminPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="adminDid != null">
+				#{adminDid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!--条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Admin">
+		update admin
+		<set>
+			<if test="adminPriority != null">
+				admin_priority = #{adminPriority,jdbcType=INTEGER},
+			</if>
+			<if test="adminUsername != null">
+				admin_username = #{adminUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPassword != null">
+				admin_password = #{adminPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="adminNickname != null">
+				admin_nickname = #{adminNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPhone != null">
+				admin_phone = #{adminPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="adminDid != null">
+				admin_did = #{adminDid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where admin_id = #{adminId,jdbcType=VARCHAR}
+	</update>
+	<!--通过主键更新所有 -->
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Admin">
+		update admin
+		set
+		admin_priority = #{adminPriority,jdbcType=INTEGER},
+		admin_username =
+		#{adminUsername,jdbcType=VARCHAR},
+		admin_password =
+		#{adminPassword,jdbcType=VARCHAR},
+		admin_nickname =
+		#{adminNickname,jdbcType=VARCHAR},
+		admin_phone =
+		#{adminPhone,jdbcType=VARCHAR},
+		admin_did =
+		#{adminDid,jdbcType=VARCHAR}
+		where admin_id =
+		#{adminId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--统计数量 -->
+	<sql id="sql_count">count(*) as totalItems</sql>
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and id != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND admin_id=#{id}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.adminId != null and model.adminId.length()>0">
+					AND admin_id=#{model.adminId}
+				</if>
+				<if test="model.adminUsername != null and model.adminUsername.length()>0">
+					AND admin_username=#{model.adminUsername}
+				</if>
+				<if test="model.adminPassword != null and model.adminPassword.length()>0">
+					AND admin_password=#{model.adminPassword}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="adminUserResultMap">
+		select * from admin
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

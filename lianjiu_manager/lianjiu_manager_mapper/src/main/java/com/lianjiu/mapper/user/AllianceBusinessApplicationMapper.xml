@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.user.AllianceBusinessApplicationMapper">
+	<!--重映射 -->
+	<resultMap id="allianceBusinessApplicationResultMap" type="com.lianjiu.model.AllianceBusinessApplication">
+		<id column="albness_application_id" property="albnessApplicationId"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_name" property="albnessApplicationName"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_phone" property="albnessApplicationPhone"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_province" property="albnessApplicationProvince"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_city" property="albnessApplicationCity"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_district" property="albnessApplicationDistrict"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_location" property="albnessApplicationLocation"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_retrieval_range" property="albnessApplicationRetrievalRange"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_type" property="albnessApplicationType"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_operator_id" property="albnessApplicationOperatorId"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_time" property="albnessApplicationTime"
+			jdbcType="TIMESTAMP" />
+		<result column="albness_application_remark_time" property="albnessApplicationRemarkTime"
+			jdbcType="TIMESTAMP" />
+		<result column="albness_application_remarks" property="albnessApplicationRemarks"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_image" property="albnessApplicationImage"
+			jdbcType="VARCHAR" />
+		<result column="albness_application_status" property="albnessApplicationStatus"
+			jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="abunes_details_id" property="abunesDetailsId"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="allianceBusinessApplicationResultMap"
+		parameterType="java.lang.String">select * from alliance_business_application where
+		albness_application_id = #{albnessApplicationId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		alliance_business_application
+		where albness_application_id =
+		#{albnessApplicationId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.AllianceBusinessApplication">
+		insert into
+		alliance_business_application (albness_application_id,
+		albness_application_name,
+		albness_application_phone,
+		albness_application_province,
+		albness_application_city,
+		albness_application_district,
+		albness_application_location,
+		albness_application_retrieval_range,
+		albness_application_type,
+		albness_application_operator_id,
+		albness_application_time,
+		albness_application_remark_time,
+		albness_application_remarks,
+		albness_application_image,
+		albness_application_status, category_id,
+		abunes_details_id
+		)
+		values (#{albnessApplicationId,jdbcType=VARCHAR},
+		#{albnessApplicationName,jdbcType=VARCHAR},
+		#{albnessApplicationPhone,jdbcType=VARCHAR},
+		#{albnessApplicationProvince,jdbcType=VARCHAR},
+		#{albnessApplicationCity,jdbcType=VARCHAR},
+		#{albnessApplicationDistrict,jdbcType=VARCHAR},
+		#{albnessApplicationLocation,jdbcType=VARCHAR},
+		#{albnessApplicationRetrievalRange,jdbcType=VARCHAR},
+		#{albnessApplicationType,jdbcType=VARCHAR},
+		#{albnessApplicationOperatorId,jdbcType=VARCHAR},
+		#{albnessApplicationTime,jdbcType=TIMESTAMP},
+		#{albnessApplicationRemarkTime,jdbcType=TIMESTAMP},
+		#{albnessApplicationRemarks,jdbcType=VARCHAR},
+		#{albnessApplicationImage,jdbcType=VARCHAR},
+		#{albnessApplicationStatus,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT}, #{abunesDetailsId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.AllianceBusinessApplication">
+		insert into alliance_business_application
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="albnessApplicationId != null">
+				albness_application_id,
+			</if>
+			<if test="albnessApplicationName != null">
+				albness_application_name,
+			</if>
+			<if test="albnessApplicationPhone != null">
+				albness_application_phone,
+			</if>
+			<if test="albnessApplicationProvince != null">
+				albness_application_province,
+			</if>
+			<if test="albnessApplicationCity != null">
+				albness_application_city,
+			</if>
+			<if test="albnessApplicationDistrict != null">
+				albness_application_district,
+			</if>
+			<if test="albnessApplicationLocation != null">
+				albness_application_location,
+			</if>
+			<if test="albnessApplicationRetrievalRange != null">
+				albness_application_retrieval_range,
+			</if>
+			<if test="albnessApplicationType != null">
+				albness_application_type,
+			</if>
+			<if test="albnessApplicationOperatorId != null">
+				albness_application_operator_id,
+			</if>
+			<if test="albnessApplicationTime != null">
+				albness_application_time,
+			</if>
+			<if test="albnessApplicationRemarkTime != null">
+				albness_application_remark_time,
+			</if>
+			<if test="albnessApplicationRemarks != null">
+				albness_application_remarks,
+			</if>
+			<if test="albnessApplicationImage != null">
+				albness_application_image,
+			</if>
+			<if test="albnessApplicationStatus != null">
+				albness_application_status,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="abunesDetailsId != null">
+				abunes_details_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="albnessApplicationId != null">
+				#{albnessApplicationId,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationName != null">
+				#{albnessApplicationName,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationPhone != null">
+				#{albnessApplicationPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationProvince != null">
+				#{albnessApplicationProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationCity != null">
+				#{albnessApplicationCity,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationDistrict != null">
+				#{albnessApplicationDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationLocation != null">
+				#{albnessApplicationLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationRetrievalRange != null">
+				#{albnessApplicationRetrievalRange,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationType != null">
+				#{albnessApplicationType,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationOperatorId != null">
+				#{albnessApplicationOperatorId,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationTime != null">
+				#{albnessApplicationTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="albnessApplicationRemarkTime != null">
+				#{albnessApplicationRemarkTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="albnessApplicationRemarks != null">
+				#{albnessApplicationRemarks,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationImage != null">
+				#{albnessApplicationImage,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationStatus != null">
+				#{albnessApplicationStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="abunesDetailsId != null">
+				#{abunesDetailsId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AllianceBusinessApplication">
+		update alliance_business_application
+		<set>
+			<if test="albnessApplicationName != null">
+				albness_application_name =
+				#{albnessApplicationName,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationPhone != null">
+				albness_application_phone =
+				#{albnessApplicationPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationProvince != null">
+				albness_application_province =
+				#{albnessApplicationProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationCity != null">
+				albness_application_city =
+				#{albnessApplicationCity,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationDistrict != null">
+				albness_application_district =
+				#{albnessApplicationDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationLocation != null">
+				albness_application_location =
+				#{albnessApplicationLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationRetrievalRange != null">
+				albness_application_retrieval_range =
+				#{albnessApplicationRetrievalRange,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationType != null">
+				albness_application_type =
+				#{albnessApplicationType,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationOperatorId != null">
+				albness_application_operator_id =
+				#{albnessApplicationOperatorId,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationTime != null">
+				albness_application_time =
+				#{albnessApplicationTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="albnessApplicationRemarkTime != null">
+				albness_application_remark_time =
+				#{albnessApplicationRemarkTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="albnessApplicationRemarks != null">
+				albness_application_remarks =
+				#{albnessApplicationRemarks,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationImage != null">
+				albness_application_image =
+				#{albnessApplicationImage,jdbcType=VARCHAR},
+			</if>
+			<if test="albnessApplicationStatus != null">
+				albness_application_status =
+				#{albnessApplicationStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="abunesDetailsId != null">
+				abunes_details_id = #{abunesDetailsId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where albness_application_id =
+		#{albnessApplicationId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AllianceBusinessApplication">
+		update
+		alliance_business_application
+		set albness_application_name =
+		#{albnessApplicationName,jdbcType=VARCHAR},
+		albness_application_phone =
+		#{albnessApplicationPhone,jdbcType=VARCHAR},
+		albness_application_province =
+		#{albnessApplicationProvince,jdbcType=VARCHAR},
+		albness_application_city = #{albnessApplicationCity,jdbcType=VARCHAR},
+		albness_application_district =
+		#{albnessApplicationDistrict,jdbcType=VARCHAR},
+		albness_application_location =
+		#{albnessApplicationLocation,jdbcType=VARCHAR},
+		albness_application_retrieval_range =
+		#{albnessApplicationRetrievalRange,jdbcType=VARCHAR},
+		albness_application_type = #{albnessApplicationType,jdbcType=VARCHAR},
+		albness_application_operator_id =
+		#{albnessApplicationOperatorId,jdbcType=VARCHAR},
+		albness_application_time =
+		#{albnessApplicationTime,jdbcType=TIMESTAMP},
+		albness_application_remark_time =
+		#{albnessApplicationRemarkTime,jdbcType=TIMESTAMP},
+		albness_application_remarks =
+		#{albnessApplicationRemarks,jdbcType=VARCHAR},
+		albness_application_image =
+		#{albnessApplicationImage,jdbcType=VARCHAR},
+		albness_application_status =
+		#{albnessApplicationStatus,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		abunes_details_id =
+		#{abunesDetailsId,jdbcType=VARCHAR}
+		where albness_application_id =
+		#{albnessApplicationId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND albness_application_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.albnessApplicationId != null">AND albness_application_id
+					=#{model.albnessApplicationId}
+				</if>
+				<if test="model.albnessApplicationName != null">AND albness_application_name
+					=#{model.albnessApplicationName}
+				</if>
+				<if test="model.albnessApplicationPhone != null">AND albness_application_phone
+					=#{model.albnessApplicationPhone}
+				</if>
+				<if test="model.albnessApplicationProvince != null">AND albness_application_province
+					=#{model.albnessApplicationProvince}
+				</if>
+				<if test="model.albnessApplicationCity != null">AND albness_application_city
+					=#{model.albnessApplicationCity}
+				</if>
+				<if test="model.albnessApplicationDistrict != null">AND albness_application_district
+					=#{model.albnessApplicationDistrict}
+				</if>
+				<if test="model.albnessApplicationLocation != null">AND albness_application_location
+					=#{model.albnessApplicationLocation}
+				</if>
+				<if test="model.albnessApplicationRetrievalRange != null">AND albness_application_retrieval_range
+					=#{model.albnessApplicationRetrievalRange}
+				</if>
+				<if test="model.albnessApplicationType != null">AND albness_application_type
+					=#{model.albnessApplicationType}
+				</if>
+				<if test="model.albnessApplicationOperatorId != null">AND albness_application_operator_id
+					=#{model.albnessApplicationOperatorId}
+				</if>
+				<if test="model.albnessApplicationTime != null">AND albness_application_time
+					=#{model.albnessApplicationTime}
+				</if>
+				<if test="model.albnessApplicationRemarkTime != null">AND albness_application_remark_time
+					=#{model.albnessApplicationRemarkTime}
+				</if>
+				<if test="model.albnessApplicationRemarks != null">AND albness_application_remarks
+					=#{model.albnessApplicationRemarks}
+				</if>
+				<if test="model.albnessApplicationImage != null">AND albness_application_image
+					=#{model.albnessApplicationImage}
+				</if>
+				<if test="model.albnessApplicationStatus != null">AND albness_application_status
+					=#{model.albnessApplicationStatus}
+				</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.abunesDetailsId != null">AND abunes_details_id =#{model.abunesDetailsId}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="allianceBusinessApplicationResultMap">
+		select * from alliance_business_application
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+
+</mapper>

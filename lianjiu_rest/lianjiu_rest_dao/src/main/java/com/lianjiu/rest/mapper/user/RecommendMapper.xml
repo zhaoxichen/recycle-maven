@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.user.RecommendMapper">
+	<!--重映射 -->
+	<resultMap id="recommendResultMap" type="com.lianjiu.model.Recommend">
+		<id column="recommend_id" property="recommendId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="recommend_name" property="recommendName"
+			jdbcType="VARCHAR" />
+		<result column="recommend_phone" property="recommendPhone"
+			jdbcType="VARCHAR" />
+		<result column="recommend_num" property="recommendNum"
+			jdbcType="VARCHAR" />
+		<result column="recommend_superior" property="recommendSuperior"
+			jdbcType="VARCHAR" />
+		<result column="recommend_created" property="recommendCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="recommend_updated" property="recommendUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="recommend_total_num" property="recommendTotalNum"
+			jdbcType="INTEGER" />
+		<result column="recemmend_operator" property="recemmendOperator"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<!--通过主键删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		recommend
+		where recommend_id = #{recommendId,jdbcType=VARCHAR}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.Recommend">
+		insert into recommend
+		(recommend_id,user_id,
+		recommend_name, recommend_phone,
+		recommend_num,
+		recommend_superior,
+		recemmend_operator,
+		recommend_created,
+		recommend_updated
+		) 
+		values
+		(#{recommendId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{recommendName,jdbcType=VARCHAR},
+		#{recommendPhone,jdbcType=VARCHAR},
+		#{recommendNum,jdbcType=VARCHAR},
+		#{recommendSuperior,jdbcType=VARCHAR},
+		#{recemmendOperator,jdbcType=VARCHAR},
+		NOW(),
+		NOW())
+	</insert>
+	<!--条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Recommend">
+		update recommend
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="recommendName != null">
+				recommend_name = #{recommendName,jdbcType=VARCHAR},
+			</if>
+			<if test="recommendPhone != null">
+				recommend_phone = #{recommendPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="recommendNum != null">
+				recommend_num = #{recommendNum,jdbcType=VARCHAR},
+			</if>
+			<if test="recommendSuperior != null">
+				recommend_superior = #{recommendSuperior,jdbcType=VARCHAR},
+			</if>
+				recommend_updated = NOW(),
+			<if test="recommendTotalNum != null">
+				recommend_total_num = #{recommendTotalNum,jdbcType=INTEGER},
+			</if>
+			<if test="recommendTotalNum != null">
+				recemmend_operator = #{recemmendOperator,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where recommend_id = #{recommendId,jdbcType=VARCHAR}
+	</update>
+	<select id="getIdByNum" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select recommend_id from recommend where recommend_num =
+		#{referrer}
+	</select>
+	<select id="getRecommendNumList" resultType="java.lang.String">
+		select recommend_num
+		from recommend
+	</select>
+	<select id="getRecommendNumByUser" resultType="java.lang.String">
+		select
+		recommend_num
+		from recommend WHERE user_id =#{value}
+	</select>
+	<select id="getRecomByNum" parameterType="java.lang.String"
+		resultMap="recommendResultMap">
+		select
+		recommend_id,user_id,recommend_total_num
+		from
+		recommend
+		WHERE
+		recommend_num = #{recommendNum}
+	</select>
+	<update id="modifyTotalNum" parameterType="com.lianjiu.model.Recommend">
+		update recommend set
+		recommend_total_num = #{recommendTotalNum} where recommend_id =
+		#{recommendId}
+	</update>
+	<select id="getCountByPhone" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(1) from recommend where recommend_phone = #{recommendPhone,jdbcType=VARCHAR}
+	</select>
+	<!--多参数查询  -->
+	<select id="getRecommeByParm" resultMap="recommendResultMap" parameterType="java.lang.String">
+		SELECT
+			recommend_id,
+			recommend_num,
+			recommend_name,
+			recommend_phone,
+			recommend_superior,
+			recommend_created,
+			recemmend_operator			
+		FROM
+			`recommend`
+		WHERE
+		recommend_num REGEXP '^[7-9]'
+		<if test="parameter != null and parameter !=''">
+			AND (recommend_name = #{parameter}
+			OR recommend_phone = #{parameter}
+			OR recommend_superior = #{parameter}
+			OR recommend_num = #{parameter})
+		</if>
+		order by recommend_created desc
+	</select>
+	<select id="getPhoneById" resultType="java.lang.String" parameterType="java.lang.String">
+		select recommend_phone from recommend where  recommend_id =#{recommendId}
+	</select>
+</mapper>

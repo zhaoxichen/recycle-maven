@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/lianjiu_common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_payment" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_rest" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_source_upload" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_sso" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_timer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_web" charset="UTF-8" />
+  </component>
+</project>

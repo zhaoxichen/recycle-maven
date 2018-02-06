@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.content.AdActivityMapper" >
+  <resultMap id="BaseResultMaps" type="com.lianjiu.model.AdActivity" >
+    <id column="act_id" property="actId" jdbcType="VARCHAR" />
+    <result column="act_title" property="actTitle" jdbcType="VARCHAR" />
+    <result column="act_content" property="actContent" jdbcType="VARCHAR" />
+    <result column="act_start_time" property="actStartTime" jdbcType="TIMESTAMP" />
+    <result column="act_end_time" property="actEndTime" jdbcType="TIMESTAMP" />
+    <result column="act_picture" property="actPicture" jdbcType="VARCHAR" />
+    <result column="act_pic_link" property="actPicLink" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+    <result column="act_size" property="actSize" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    act_id, act_title, act_content, act_start_time, act_end_time, act_picture, act_pic_link, 
+    add_time, add_person, act_size, category_id
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMaps" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_activity
+    where act_id = #{actId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectActivityList" resultMap="BaseResultMaps"  >
+    select 
+    <include refid="Base_Column_List" />
+    from ad_activity
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ad_activity
+    where act_id = #{actId,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insertActivity" parameterType="com.lianjiu.model.AdActivity" >
+    insert into ad_activity (act_id, act_title, act_content, 
+      act_start_time, act_end_time, act_picture, 
+      act_pic_link, add_time, add_person, 
+      act_size, category_id)
+    values (#{actId,jdbcType=VARCHAR}, #{actTitle,jdbcType=VARCHAR}, #{actContent,jdbcType=VARCHAR}, 
+      #{actStartTime,jdbcType=TIMESTAMP}, #{actEndTime,jdbcType=TIMESTAMP}, #{actPicture,jdbcType=VARCHAR}, 
+      #{actPicLink,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{addPerson,jdbcType=VARCHAR}, 
+      #{actSize,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lianjiu.model.AdActivity" >
+    insert into ad_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        act_id,
+      </if>
+      <if test="actTitle != null" >
+        act_title,
+      </if>
+      <if test="actContent != null" >
+        act_content,
+      </if>
+      <if test="actStartTime != null" >
+        act_start_time,
+      </if>
+      <if test="actEndTime != null" >
+        act_end_time,
+      </if>
+      <if test="actPicture != null" >
+        act_picture,
+      </if>
+      <if test="actPicLink != null" >
+        act_pic_link,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addPerson != null" >
+        add_person,
+      </if>
+      <if test="actSize != null" >
+        act_size,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        #{actId,jdbcType=VARCHAR},
+      </if>
+      <if test="actTitle != null" >
+        #{actTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="actContent != null" >
+        #{actContent,jdbcType=VARCHAR},
+      </if>
+      <if test="actStartTime != null" >
+        #{actStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actEndTime != null" >
+        #{actEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actPicture != null" >
+        #{actPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="actPicLink != null" >
+        #{actPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="actSize != null" >
+        #{actSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdActivity" >
+    update ad_activity
+    <set >
+      <if test="actTitle != null" >
+        act_title = #{actTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="actContent != null" >
+        act_content = #{actContent,jdbcType=VARCHAR},
+      </if>
+      <if test="actStartTime != null" >
+        act_start_time = #{actStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actEndTime != null " >
+        act_end_time = #{actEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actPicture != null" >
+        act_picture = #{actPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="actPicLink != null" >
+        act_pic_link = #{actPicLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addPerson != null" >
+        add_person = #{addPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="actSize != null" >
+        act_size = #{actSize,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where act_id = #{actId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lianjiu.model.AdActivity" >
+    update ad_activity
+    set act_title = #{actTitle,jdbcType=VARCHAR},
+      act_content = #{actContent,jdbcType=VARCHAR},
+      act_start_time = #{actStartTime,jdbcType=TIMESTAMP},
+      act_end_time = #{actEndTime,jdbcType=TIMESTAMP},
+      act_picture = #{actPicture,jdbcType=VARCHAR},
+      act_pic_link = #{actPicLink,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_person = #{addPerson,jdbcType=VARCHAR},
+      act_size = #{actSize,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=BIGINT}
+    where act_id = #{actId,jdbcType=VARCHAR}
+  </update>
+</mapper>

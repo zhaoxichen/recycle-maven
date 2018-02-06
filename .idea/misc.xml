@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_web" />
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_web" />
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_web" />
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_rest/lianjiu_rest_web" />
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_source_upload" />
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_sso/lianjiu_sso_web" />
+    <file type="web" url="file://$PROJECT_DIR$/lianjiu_timer/lianjiu_timer_web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/lianjiu_payment/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_parent/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_order/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_manager/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_common/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_rest/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_source_upload/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_sso/pom.xml" />
+        <option value="$PROJECT_DIR$/lianjiu_timer/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

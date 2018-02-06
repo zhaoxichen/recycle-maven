@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.orders.OrdersRepairMapper">
+	<resultMap id="ordersRepairResultMap" type="com.lianjiu.model.OrdersRepair">
+		<id column="or_repair_id" property="orRepairId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="or_repair_technicians" property="orRepairTechnicians"
+			jdbcType="VARCHAR" />
+		<result column="or_repair_status" property="orRepairStatus"
+			jdbcType="TINYINT" />
+		<result column="or_repair_created" property="orRepairCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="or_repair_handle_time" property="orRepairHandleTime"
+			jdbcType="TIMESTAMP" />
+		<result column="or_repair_visitTime" property="orRepairVisitTime"
+			jdbcType="TIMESTAMP" />
+		<result column="or_repair_updated" property="orRepairUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="user_address_name" property="orRepairUser"
+			jdbcType="VARCHAR" />
+		<result column="user_address_phone" property="orRepairPhone"
+			jdbcType="VARCHAR" />
+		<result column="user_province" property="orRepairProvince"
+			jdbcType="VARCHAR" />
+		<result column="user_city" property="orRepairCity" jdbcType="VARCHAR" />
+		<result column="user_district" property="orRepairDistrict"
+			jdbcType="VARCHAR" />
+		<result column="user_location" property="orRepairLocation"
+			jdbcType="VARCHAR" />
+		<result column="or_repair_scheme" property="orRepairScheme"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ordersRepairResultMap"
+		parameterType="java.lang.String">
+		select *
+		from orders_repair o LEFT JOIN user_address a
+		ON
+		o.address_id = a.user_address_id
+		where o.or_repair_id =
+		#{orRepairId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		orders_repair
+		where or_repair_id = #{orRepairId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersRepair">
+		insert into orders_repair
+		(or_repair_id, user_id, category_id,
+		address_id, or_repair_technicians,
+		or_repair_status,
+		or_repair_created, or_repair_handle_time,
+		or_repair_visitTime, or_repair_updated)
+		values
+		(#{orRepairId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{addressId,jdbcType=VARCHAR},
+		#{orRepairTechnicians,jdbcType=VARCHAR},
+		#{orRepairStatus,jdbcType=TINYINT},
+		now(),
+		#{orRepairHandleTime,jdbcType=TIMESTAMP},
+		#{orRepairVisitTime,jdbcType=TIMESTAMP},
+		now())
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.OrdersRepair">
+		insert into orders_repair
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orRepairId != null">
+				or_repair_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="addressId != null">
+				address_id,
+			</if>
+			<if test="orRepairTechnicians != null">
+				or_repair_technicians,
+			</if>
+			<if test="orRepairStatus != null">
+				or_repair_status,
+			</if>
+			<if test="orRepairCreated != null">
+				or_repair_created,
+			</if>
+			<if test="orRepairHandleTime != null">
+				or_repair_handle_time,
+			</if>
+			<if test="orRepairVisitTime != null">
+				or_repair_visitTime,
+			</if>
+			<if test="orRepairUpdated != null">
+				or_repair_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orRepairId != null">
+				#{orRepairId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="addressId != null">
+				#{addressId,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairTechnicians != null">
+				#{orRepairTechnicians,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairStatus != null">
+				#{orRepairStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orRepairCreated != null">
+				#{orRepairCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairHandleTime != null">
+				#{orRepairHandleTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairVisitTime != null">
+				#{orRepairVisitTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairUpdated != null">
+				now(),
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersRepair">
+		update orders_repair
+		<set>
+			<if test="userId != null and userId !=''">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="addressId != null and addressId !=''">
+				address_id = #{addressId,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairTechnicians != null and orRepairTechnicians !=''">
+				or_repair_technicians =
+				#{orRepairTechnicians,jdbcType=VARCHAR},
+			</if>
+			<if test="orRepairStatus != null">
+				or_repair_status = #{orRepairStatus,jdbcType=TINYINT},
+			</if>
+			<if test="orRepairCreated != null">
+				or_repair_created =
+				#{orRepairCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairHandleTime != null">
+				or_repair_handle_time =
+				#{orRepairHandleTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairVisitTime != null">
+				or_repair_visitTime =
+				#{orRepairVisitTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orRepairUpdated != null">
+				or_repair_updated =
+				now(),
+			</if>
+		</set>
+		where or_repair_id = #{orRepairId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.OrdersRepair">
+		update
+		orders_repair
+		set user_id = #{userId,jdbcType=VARCHAR},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		address_id =
+		#{addressId,jdbcType=VARCHAR},
+		or_repair_technicians =
+		#{orRepairTechnicians,jdbcType=VARCHAR},
+		or_repair_status =
+		#{orRepairStatus,jdbcType=TINYINT},
+		or_repair_created =
+		#{orRepairCreated,jdbcType=TIMESTAMP},
+		or_repair_handle_time =
+		#{orRepairHandleTime,jdbcType=TIMESTAMP},
+		or_repair_visitTime =
+		#{orRepairVisitTime,jdbcType=TIMESTAMP},
+		or_repair_updated =
+		now()
+		where
+		or_repair_id =
+		#{orRepairId,jdbcType=VARCHAR}
+	</update>
+	<select id="getRepairByUserId" resultMap="ordersRepairResultMap">
+		select
+		o.or_repair_id,o.user_id,o.or_repair_status,o.or_repair_visitTime,o.or_repair_created,
+		s.or_repair_scheme
+		from
+		orders_repair o LEFT JOIN orders_repair_scheme s
+		ON o.or_repair_id = s.or_repair_id
+		where o.user_id=#{uid} and
+		o.or_repair_status = #{status}
+	</select>
+	<select id="getRepairByStatus" resultMap="ordersRepairResultMap">
+		select
+		o.or_repair_id,o.user_id,o.or_repair_status,o.or_repair_visitTime,o.or_repair_created,
+		s.or_repair_scheme
+		from
+		orders_repair o LEFT JOIN orders_repair_scheme s
+		ON o.or_repair_id = s.or_repair_id
+		where o.user_id=#{uid} and
+		o.or_repair_status in
+		<foreach collection="statusList" item="status" index="index"
+			open="(" close=")" separator=",">
+			#{status}
+		</foreach>
+		ORDER BY
+		o.or_repair_created
+		DESC
+	</select>
+	<!--修改状态 -->
+	<update id="updateOrderStatus">
+		update
+		orders_repair
+		set
+		or_repair_status = #{status}
+		where or_repair_id =
+		#{orRepairId}
+	</update>
+	<select id="selectAll" resultMap="ordersRepairResultMap"
+		parameterType="java.lang.String">
+		select * from orders_repair o LEFT JOIN user_address a
+		ON o.address_id = a.user_address_id
+		ORDER BY
+		o.or_repair_created
+		DESC
+	</select>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND or_repair_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.orRepairId != null">
+					AND or_repair_id =#{model.orRepairId}
+				</if>
+				<if test="model.categoryId != null">
+					AND category_id =#{model.categoryId}
+				</if>
+				<if test="model.orFacefaceAllianceId != null">
+					AND
+					or_faceface_alliance_id=#{model.orFacefaceAllianceId}
+				</if>
+				<if test="model.orFacefaceStatus != null">
+					AND or_faceface_status =#{model.orFacefaceStatus}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersRepairResultMap">
+		select * from orders_repair o LEFT JOIN user_address a
+		ON
+		o.address_id=a.user_address_id
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		or_repair_created
+	</select>
+	<select id="vagueQuery" resultMap="ordersRepairResultMap">
+		select * from orders_repair o LEFT JOIN user_address a ON o.address_id = a.user_address_id
+		<where>
+			<if test="repair.orRepairId != null and repair.orRepairId != ''">
+				and o.or_repair_id LIKE CONCAT('%',#{repair.orRepairId},'%')
+			</if>
+			<if test="repair.userId != null and repair.userId != ''">
+				and o.user_id LIKE CONCAT('%',#{repair.userId},'%')
+			</if>
+			<if test="repair.orRepairTechnicians != null and repair.orRepairTechnicians != ''">
+				and o.or_repair_technicians LIKE CONCAT('%',#{repair.orRepairTechnicians},'%')
+			</if>
+			<if test="repair.orRepairPhone != null and repair.orRepairPhone != ''">
+				and o.or_repair_phone LIKE CONCAT('%',#{repair.orRepairPhone},'%')
+			</if>
+			<if test="repair.orRepairStatus != null and repair.orRepairStatus != ''">
+				and o.or_repair_status LIKE CONCAT('%',#{repair.orRepairStatus},'%')
+			</if>
+			<if test="cratedStart != null and cratedStart != '' and cratedOver != null and cratedOver != '' ">
+				and o.or_repair_created between #{cratedStart} and #{cratedOver}
+			</if>
+			<if test="handleStart != null and handleStart != '' and handleOven != null and handleOven != ''">
+				and o.or_repair_handle_time between #{handleStart} and #{handleOven}
+			</if>
+		</where>
+		ORDER BY
+		o.or_repair_created
+		DESC
+	</select>
+	<!-- name LIKE CONCAT(CONCAT('%', #{text}), '%'); -->
+</mapper>

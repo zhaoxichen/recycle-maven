@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.content.AdCarouselMapper">
+	<resultMap id="BaseResultMap" type="com.lianjiu.model.AdCarousel">
+		<id column="ca_id" property="caId" jdbcType="VARCHAR" />
+		<result column="ca_title" property="caTitle" jdbcType="VARCHAR" />
+		<result column="ca_position" property="caPosition" jdbcType="VARCHAR" />
+		<result column="ca_picture" property="caPicture" jdbcType="VARCHAR" />
+		<result column="ca_pic_link" property="caPicLink" jdbcType="VARCHAR" />
+		<result column="ca_size" property="caSize" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		ca_id, ca_title, ca_position, ca_picture, ca_pic_link,
+		ca_size, add_time,
+		add_person,
+		category_id
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_carousel
+		where ca_id = #{caId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectActivityList" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_carousel
+	</select>
+
+	<select id="selectCararouseFourType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ad_carousel
+		where category_id = #{type}
+		order by ca_position
+		limit 4
+	</select>
+
+	<select id="selectCararouseFour" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ad_carousel
+		order by add_time desc
+		limit 4
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ad_carousel
+		where ca_id = #{caId,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insertCarousel" parameterType="com.lianjiu.model.AdCarousel">
+		insert into
+		ad_carousel (ca_id, ca_title, ca_position,
+		ca_picture, ca_pic_link,
+		ca_size,
+		add_time, add_person, category_id
+		)
+		values
+		(#{caId,jdbcType=VARCHAR}, #{caTitle,jdbcType=VARCHAR},
+		#{caPosition,jdbcType=VARCHAR},
+		#{caPicture,jdbcType=VARCHAR},
+		#{caPicLink,jdbcType=VARCHAR}, #{caSize,jdbcType=VARCHAR},
+		#{addTime,jdbcType=TIMESTAMP}, #{addPerson,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT}
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdCarousel">
+		update ad_carousel
+		<set>
+			<if test="caTitle != null">
+				ca_title = #{caTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="caPosition != null">
+				ca_position = #{caPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="caPicture != null">
+				ca_picture = #{caPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="caPicLink != null and caPicLink != ''">
+				ca_pic_link = #{caPicLink,jdbcType=VARCHAR},
+			</if>
+			<if test="caSize != null ">
+				ca_size = #{caSize,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				add_time = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addPerson != null">
+				add_person = #{addPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ca_id = #{caId,jdbcType=VARCHAR}
+	</update>
+</mapper>

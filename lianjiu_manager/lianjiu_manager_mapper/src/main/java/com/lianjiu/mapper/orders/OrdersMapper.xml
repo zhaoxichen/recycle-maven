@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.orders.OrdersMapper">
+	<!--重映射 -->
+	<resultMap id="ordersResultMap" type="com.lianjiu.model.Orders">
+		<id column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="orders_payment" property="ordersPayment"
+			jdbcType="VARCHAR" />
+		<result column="orders_payment_type" property="ordersPaymentType"
+			jdbcType="INTEGER" />
+		<result column="orders_post_fee" property="ordersPostFee"
+			jdbcType="VARCHAR" />
+		<result column="orders_status" property="ordersStatus"
+			jdbcType="INTEGER" />
+		<result column="orders_payment_time" property="ordersPaymentTime"
+			jdbcType="TIMESTAMP" />
+		<result column="orders_consign_time" property="ordersConsignTime"
+			jdbcType="TIMESTAMP" />
+		<result column="orders_end_time" property="ordersEndTime"
+			jdbcType="TIMESTAMP" />
+		<result column="orders_close_time" property="ordersCloseTime"
+			jdbcType="TIMESTAMP" />
+		<result column="orders_shipping_name" property="ordersShippingName"
+			jdbcType="VARCHAR" />
+		<result column="orders_shipping_code" property="ordersShippingCode"
+			jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="orders_buyer_message" property="ordersBuyerMessage"
+			jdbcType="VARCHAR" />
+		<result column="orders_buyer_nick" property="ordersBuyerNick"
+			jdbcType="VARCHAR" />
+		<result column="orders_buyer_rate" property="ordersBuyerRate"
+			jdbcType="INTEGER" />
+		<result column="orders_create_time" property="ordersCreateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="orders_update_time" property="ordersUpdateTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!--通过主键删除所有 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from orders
+		where orders_id = #{ordersId,jdbcType=VARCHAR}
+	</delete>
+	<!--插入所有 -->
+	<insert id="insert" parameterType="com.lianjiu.model.Orders">
+		insert into orders (orders_id,
+		orders_payment, orders_payment_type,
+		orders_post_fee, orders_status,
+		orders_payment_time,
+		orders_consign_time, orders_end_time,
+		orders_close_time,
+		orders_shipping_name, orders_shipping_code,
+		user_id,
+		orders_buyer_message, orders_buyer_nick,
+		orders_buyer_rate,
+		orders_create_time, orders_update_time
+		)
+		values
+		(#{ordersId,jdbcType=VARCHAR}, #{ordersPayment,jdbcType=VARCHAR},
+		#{ordersPaymentType,jdbcType=INTEGER},
+		#{ordersPostFee,jdbcType=VARCHAR}, #{ordersStatus,jdbcType=INTEGER},
+		#{ordersPaymentTime,jdbcType=TIMESTAMP},
+		#{ordersConsignTime,jdbcType=TIMESTAMP},
+		#{ordersEndTime,jdbcType=TIMESTAMP},
+		#{ordersCloseTime,jdbcType=TIMESTAMP},
+		#{ordersShippingName,jdbcType=VARCHAR},
+		#{ordersShippingCode,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{ordersBuyerMessage,jdbcType=VARCHAR},
+		#{ordersBuyerNick,jdbcType=VARCHAR},
+		#{ordersBuyerRate,jdbcType=INTEGER},
+		#{ordersCreateTime,jdbcType=TIMESTAMP},
+		#{ordersUpdateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<!--条件插入 -->
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Orders">
+		insert into orders
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ordersId != null">
+				orders_id,
+			</if>
+			<if test="ordersPayment != null">
+				orders_payment,
+			</if>
+			<if test="ordersPaymentType != null">
+				orders_payment_type,
+			</if>
+			<if test="ordersPostFee != null">
+				orders_post_fee,
+			</if>
+			<if test="ordersStatus != null">
+				orders_status,
+			</if>
+			<if test="ordersPaymentTime != null">
+				orders_payment_time,
+			</if>
+			<if test="ordersConsignTime != null">
+				orders_consign_time,
+			</if>
+			<if test="ordersEndTime != null">
+				orders_end_time,
+			</if>
+			<if test="ordersCloseTime != null">
+				orders_close_time,
+			</if>
+			<if test="ordersShippingName != null">
+				orders_shipping_name,
+			</if>
+			<if test="ordersShippingCode != null">
+				orders_shipping_code,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="ordersBuyerMessage != null">
+				orders_buyer_message,
+			</if>
+			<if test="ordersBuyerNick != null">
+				orders_buyer_nick,
+			</if>
+			<if test="ordersBuyerRate != null">
+				orders_buyer_rate,
+			</if>
+			<if test="ordersCreateTime != null">
+				orders_create_time,
+			</if>
+			<if test="ordersUpdateTime != null">
+				orders_update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ordersId != null">
+				#{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersPayment != null">
+				#{ordersPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersPaymentType != null">
+				#{ordersPaymentType,jdbcType=INTEGER},
+			</if>
+			<if test="ordersPostFee != null">
+				#{ordersPostFee,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersStatus != null">
+				#{ordersStatus,jdbcType=INTEGER},
+			</if>
+			<if test="ordersPaymentTime != null">
+				#{ordersPaymentTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersConsignTime != null">
+				#{ordersConsignTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersEndTime != null">
+				#{ordersEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersCloseTime != null">
+				#{ordersCloseTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersShippingName != null">
+				#{ordersShippingName,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersShippingCode != null">
+				#{ordersShippingCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersBuyerMessage != null">
+				#{ordersBuyerMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersBuyerNick != null">
+				#{ordersBuyerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersBuyerRate != null">
+				#{ordersBuyerRate,jdbcType=INTEGER},
+			</if>
+			<if test="ordersCreateTime != null">
+				#{ordersCreateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersUpdateTime != null">
+				#{ordersUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<!--通过主键条件更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Orders">
+		update orders
+		<set>
+			<if test="ordersPayment != null">
+				orders_payment = #{ordersPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersPaymentType != null">
+				orders_payment_type =
+				#{ordersPaymentType,jdbcType=INTEGER},
+			</if>
+			<if test="ordersPostFee != null">
+				orders_post_fee = #{ordersPostFee,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersStatus != null">
+				orders_status = #{ordersStatus,jdbcType=INTEGER},
+			</if>
+			<if test="ordersPaymentTime != null">
+				orders_payment_time =
+				#{ordersPaymentTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersConsignTime != null">
+				orders_consign_time =
+				#{ordersConsignTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersEndTime != null">
+				orders_end_time = #{ordersEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersCloseTime != null">
+				orders_close_time =
+				#{ordersCloseTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersShippingName != null">
+				orders_shipping_name =
+				#{ordersShippingName,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersShippingCode != null">
+				orders_shipping_code =
+				#{ordersShippingCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersBuyerMessage != null">
+				orders_buyer_message =
+				#{ordersBuyerMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersBuyerNick != null">
+				orders_buyer_nick = #{ordersBuyerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersBuyerRate != null">
+				orders_buyer_rate = #{ordersBuyerRate,jdbcType=INTEGER},
+			</if>
+			<if test="ordersCreateTime != null">
+				orders_create_time =
+				#{ordersCreateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ordersUpdateTime != null">
+				orders_update_time =
+				#{ordersUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where orders_id = #{ordersId,jdbcType=VARCHAR}
+	</update>
+	<!--通过主键更新 -->
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Orders">
+		update orders
+		set
+		orders_payment = #{ordersPayment,jdbcType=VARCHAR},
+		orders_payment_type = #{ordersPaymentType,jdbcType=INTEGER},
+		orders_post_fee = #{ordersPostFee,jdbcType=VARCHAR},
+		orders_status =
+		#{ordersStatus,jdbcType=INTEGER},
+		orders_payment_time =
+		#{ordersPaymentTime,jdbcType=TIMESTAMP},
+		orders_consign_time =
+		#{ordersConsignTime,jdbcType=TIMESTAMP},
+		orders_end_time =
+		#{ordersEndTime,jdbcType=TIMESTAMP},
+		orders_close_time =
+		#{ordersCloseTime,jdbcType=TIMESTAMP},
+		orders_shipping_name =
+		#{ordersShippingName,jdbcType=VARCHAR},
+		orders_shipping_code =
+		#{ordersShippingCode,jdbcType=VARCHAR},
+		user_id =
+		#{userId,jdbcType=VARCHAR},
+		orders_buyer_message =
+		#{ordersBuyerMessage,jdbcType=VARCHAR},
+		orders_buyer_nick =
+		#{ordersBuyerNick,jdbcType=VARCHAR},
+		orders_buyer_rate =
+		#{ordersBuyerRate,jdbcType=INTEGER},
+		orders_create_time =
+		#{ordersCreateTime,jdbcType=TIMESTAMP},
+		orders_update_time =
+		#{ordersUpdateTime,jdbcType=TIMESTAMP}
+		where orders_id =
+		#{ordersId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--统计数量 -->
+	<sql id="sql_count">
+		count(*) as totalItems
+	</sql>
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and ordersId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND orders_id=#{ordersId}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.ordersId != null and model.ordersId.length()>0">
+					AND orders_id=#{model.ordersId}
+				</if>
+				<if test="model.userId != null and model.userId.length()>0">
+					AND user_id=#{model.userId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ordersResultMap">
+		select * from orders
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+</mapper>

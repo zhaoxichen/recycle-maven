@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.product.ProductExcellentMapper">
+	<resultMap id="productExcellentResultMap" type="com.lianjiu.model.ProductExcellent">
+		<id column="excellent_id" property="excellentId" jdbcType="VARCHAR" />
+		<result column="excellent_name" property="excellentName"
+			jdbcType="VARCHAR" />
+		<result column="excellent_price" property="excellentPrice"
+			jdbcType="VARCHAR" />
+		<result column="excellent_retri_price" property="excellentRetriPrice"
+			jdbcType="VARCHAR" />
+		<result column="excellent_status" property="excellentStatus"
+			jdbcType="INTEGER" />
+		<result column="excellent_barcode" property="excellentBarcode"
+			jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="excellent_stock" property="excellentStock"
+			jdbcType="BIGINT" />
+		<result column="sold_count" property="soldCount" jdbcType="BIGINT" />
+		<result column="excellent_master_picture" property="excellentMasterPicture"
+			jdbcType="VARCHAR" />
+		<result column="excellent_sub_picture" property="excellentSubPicture"
+			jdbcType="VARCHAR" />
+		<result column="excellent_param_data_choose" property="excellentAttributePicture"
+			jdbcType="VARCHAR" />
+		<result column="excellent_created" property="excellentCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="excellent_updated" property="excellentUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="excellent_param_data" property="excellentParamData"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="productExcellentSearchResultMap" type="com.lianjiu.rest.model.ProductInfo">
+		<id column="excellent_id" property="id" jdbcType="VARCHAR" />
+		<result column="excellent_name" property="name" jdbcType="VARCHAR" />
+		<result column="excellent_master_picture" property="image"
+			jdbcType="VARCHAR" />
+		<result column="excellent_price" property="firstPrice"
+			jdbcType="VARCHAR" />
+		<result column="excellent_retri_price" property="secondPrice"
+			jdbcType="VARCHAR" />
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="productExcellentResultMap"
+		parameterType="java.lang.String">
+		select
+		excellent_id,category_id,excellent_name,excellent_stock,excellent_price,sold_count,excellent_master_picture,excellent_sub_picture,
+		excellent_param_data_choose,excellent_param_data
+		from product_excellent
+		where
+		excellent_id =
+		#{excellentId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" parameterType="java.lang.Long" resultMap="productExcellentResultMap">
+		select
+		excellent_id,excellent_name,excellent_price,excellent_master_picture,excellent_param_data
+		from product_excellent
+	</select>
+	<!-- 多条件查询 -->
+	<select id="selectProductInfoByCategorys" resultMap="productExcellentResultMap">
+		select
+		excellent_id,excellent_name,excellent_price,sold_count,excellent_stock,excellent_param_data_choose,excellent_param_data
+		from product_excellent where category_id
+		in
+		<foreach collection="categoryIdList" item="categoryId" index="index"
+			open="(" close=")" separator=",">
+			#{categoryId}
+		</foreach>
+		<if test="orderBy == 1">
+			order by excellent_price asc
+		</if>
+		<if test="orderBy == 2">
+			order by excellent_price desc
+		</if>
+		<if test="orderBy == 3">
+			order by sold_count asc
+		</if>
+		<if test="orderBy == 4">
+			order by sold_count desc
+		</if>
+		<if test="orderBy == 5">
+			order by excellent_updated asc
+		</if>
+		<if test="orderBy == 6">
+			order by excellent_updated desc
+		</if>
+	</select>
+	<!--加销量 1 -->
+	<update id="updateProductSoldCount" parameterType="java.lang.String">
+		update
+		product_excellent e left join orders_item item
+		on
+		item.or_items_product_id = e.excellent_id set e.sold_count =
+		e.sold_count+1,item.or_items_status=1 where
+		item.or_items_status=0 and
+		item.orders_id = #{value}
+	</update>
+	<!--减库存 -->
+	<update id="updateProductStockReduce" parameterType="java.lang.String">
+		update
+		product_excellent set excellent_stock =
+		excellent_stock-1 where excellent_stock>0 AND
+		excellent_id = #{value}
+	</update>
+	<!--加库存 -->
+	<update id="updateProductStockAdd" parameterType="java.lang.String">
+		update
+		product_excellent set excellent_stock =
+		excellent_stock+1 where
+		excellent_id = #{value}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND excellent_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.excellentId != null">AND excellent_id =#{model.excellentId}</if>
+				<if test="model.excellentName != null">AND excellent_name =#{model.excellentName}</if>
+				<if test="model.excellentPrice != null">AND excellent_price =#{model.excellentPrice}</if>
+				<if test="model.excellentRetriPrice != null">AND excellent_retri_price =#{model.excellentRetriPrice}
+				</if>
+				<if test="model.excellentStatus != null">AND excellent_status =#{model.excellentStatus}</if>
+				<if test="model.excellentBarcode != null">AND excellent_barcode =#{model.excellentBarcode}</if>
+				<if test="model.categoryId != null">AND category_id =#{model.categoryId}</if>
+				<if test="model.excellentStock != null">AND excellent_stock =#{model.excellentStock}</if>
+				<if test="model.excellentMasterPicture != null">AND excellent_master_picture
+					=#{model.excellentMasterPicture}
+				</if>
+				<if test="model.excellentSubPicture != null">AND excellent_sub_picture =#{model.excellentSubPicture}
+				</if>
+				<if test="model.excellentAttributePicture != null">AND excellent_param_data_choose
+					=#{model.excellentAttributePicture}
+				</if>
+				<if test="model.excellentCreated != null">AND excellent_created =#{model.excellentCreated}</if>
+				<if test="model.excellentUpdated != null">AND excellent_updated =#{model.excellentUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="productExcellentResultMap">
+		select * from product_excellent
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		excellent_created
+		DESC
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product_excellent
+		where excellent_id = #{excellentId,jdbcType=VARCHAR}
+	</delete>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductExcellent">
+		update product_excellent
+		<set>
+			<if test="excellentName != null and excellentName != ''">
+				excellent_name = #{excellentName,jdbcType=VARCHAR},
+			</if>
+			<if test="excellentPrice != null and excellentPrice != ''">
+				excellent_price = #{excellentPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="excellentRetriPrice != null and excellentRetriPrice != ''">
+				excellent_retri_price =
+				#{excellentRetriPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="excellentStatus != null">
+				excellent_status = #{excellentStatus,jdbcType=INTEGER},
+			</if>
+			<if test="excellentBarcode != null and excellentBarcode != ''">
+				excellent_barcode = #{excellentBarcode,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null ">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="excellentStock != null">
+				excellent_stock = #{excellentStock,jdbcType=BIGINT},
+			</if>
+			<if
+				test="excellentMasterPicture != null and excellentMasterPicture != '' and excellentMasterPicture != 'null'">
+				excellent_master_picture =
+				#{excellentMasterPicture,jdbcType=VARCHAR},
+			</if>
+			<if
+				test="excellentSubPicture != null and excellentSubPicture != '' and excellentSubPicture != 'null'">
+				excellent_sub_picture =
+				#{excellentSubPicture,jdbcType=VARCHAR},
+			</if>
+			<if
+				test="excellentAttributePicture != null and excellentAttributePicture != '' and excellentAttributePicture != 'null'">
+				excellent_param_data_choose =
+				#{excellentAttributePicture,jdbcType=VARCHAR},
+			</if>
+			<if test="excellentCreated != null">
+				excellent_created =
+				#{excellentCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="excellentUpdated != null">
+				excellent_updated =
+				#{excellentUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="excellentParamData != null and excellentParamData != ''">
+				excellent_param_data =
+				#{excellentParamData,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where excellent_id = #{excellentId,jdbcType=VARCHAR}
+	</update>
+	<insert id="insert" parameterType="com.lianjiu.model.ProductExcellent">
+		insert into product_excellent
+		(excellent_id, excellent_name,
+		excellent_price,
+		excellent_retri_price,
+		excellent_status, excellent_barcode,
+		category_id, excellent_stock,
+		excellent_master_picture,
+		excellent_sub_picture,
+		excellent_param_data_choose,
+		excellent_created, excellent_updated,
+		excellent_param_data,sold_count)
+		values
+		(#{excellentId,jdbcType=VARCHAR},
+		#{excellentName,jdbcType=VARCHAR},
+		#{excellentPrice,jdbcType=VARCHAR},
+		#{excellentRetriPrice,jdbcType=VARCHAR},
+		#{excellentStatus,jdbcType=INTEGER},
+		#{excellentBarcode,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT},
+		#{excellentStock,jdbcType=BIGINT},
+		#{excellentMasterPicture,jdbcType=VARCHAR},
+		#{excellentSubPicture,jdbcType=VARCHAR},
+		#{excellentAttributePicture,jdbcType=VARCHAR},
+		#{excellentCreated,jdbcType=TIMESTAMP},
+		#{excellentUpdated,jdbcType=TIMESTAMP},
+		#{excellentParamData,jdbcType=LONGVARCHAR},
+		#{soldCount,jdbcType=BIGINT})
+	</insert>
+</mapper>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.user.WechatMapper">
+	<resultMap id="wechatResultMap" type="com.lianjiu.model.Wechat">
+		<id column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
+		<result column="wechat_num" property="wechatNum" jdbcType="VARCHAR" />
+		<result column="wechat_nickname" property="wechatNickname"
+			jdbcType="VARCHAR" />
+		<result column="wechat_picture" property="wechatPicture"
+			jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="wechat_created" property="wechatCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="wechat_updated" property="wechatUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="wechatResultMap"
+		parameterType="java.lang.String">select * from wechat where wechat_id =
+		#{wechatId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from wechat
+		where wechat_id = #{wechatId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Wechat">
+		insert into wechat (wechat_id, wechat_num, wechat_nickname,
+		wechat_picture, user_id, wechat_created,
+		wechat_updated)
+		values (#{wechatId,jdbcType=VARCHAR}, #{wechatNum,jdbcType=VARCHAR},
+		#{wechatNickname,jdbcType=VARCHAR},
+		#{wechatPicture,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{wechatCreated,jdbcType=TIMESTAMP},
+		#{wechatUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.Wechat">
+		insert into wechat
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wechatId != null">
+				wechat_id,
+			</if>
+			<if test="wechatNum != null">
+				wechat_num,
+			</if>
+			<if test="wechatNickname != null">
+				wechat_nickname,
+			</if>
+			<if test="wechatPicture != null">
+				wechat_picture,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="wechatCreated != null">
+				wechat_created,
+			</if>
+			<if test="wechatUpdated != null">
+				wechat_updated,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wechatId != null">
+				#{wechatId,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatNum != null">
+				#{wechatNum,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatNickname != null">
+				#{wechatNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatPicture != null">
+				#{wechatPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatCreated != null">
+				#{wechatCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wechatUpdated != null">
+				#{wechatUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Wechat">
+		update wechat
+		<set>
+			<if test="wechatNum != null">
+				wechat_num = #{wechatNum,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatNickname != null">
+				wechat_nickname = #{wechatNickname,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatPicture != null">
+				wechat_picture = #{wechatPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="wechatCreated != null">
+				wechat_created = #{wechatCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wechatUpdated != null">
+				wechat_updated = #{wechatUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where wechat_id = #{wechatId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.Wechat">
+		update wechat
+		set wechat_num = #{wechatNum,jdbcType=VARCHAR},
+		wechat_nickname = #{wechatNickname,jdbcType=VARCHAR},
+		wechat_picture = #{wechatPicture,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		wechat_created = #{wechatCreated,jdbcType=TIMESTAMP},
+		wechat_updated = #{wechatUpdated,jdbcType=TIMESTAMP}
+		where wechat_id = #{wechatId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND wechat_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.wechatId != null">AND wechat_id =#{model.wechatId}</if>
+				<if test="model.wechatNum != null">AND wechat_num =#{model.wechatNum}</if>
+				<if test="model.wechatNickname != null">AND wechat_nickname =#{model.wechatNickname}</if>
+				<if test="model.wechatPicture != null">AND wechat_picture =#{model.wechatPicture}</if>
+				<if test="model.userId != null">AND user_id =#{model.userId}</if>
+				<if test="model.wechatCreated != null">AND wechat_created =#{model.wechatCreated}</if>
+				<if test="model.wechatUpdated != null">AND wechat_updated =#{model.wechatUpdated}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="wechatResultMap">
+		select * from wechat
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<!-- 查微信是否注册过链旧账户 -->
+	<select id="getByNum" parameterType="java.lang.String" resultMap="wechatResultMap">
+		select user_id,wechat_nickname,wechat_picture from wechat where wechat_num = #{wechatNum}
+	</select>
+	<!-- 查昵称头像 -->
+	<select id="getNpByUserId" parameterType="java.lang.String" resultMap="wechatResultMap">
+		select wechat_nickname,wechat_picture from wechat where user_id = #{userId}
+	</select>
+</mapper>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.user.UserAddressMapper">
+	<resultMap id="userAddressResultMap" type="com.lianjiu.model.UserAddress">
+		<id column="user_address_id" property="userAddressId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="user_address_name" property="userAddressName"
+			jdbcType="VARCHAR" />
+		<result column="user_address_phone" property="userAddressPhone"
+			jdbcType="VARCHAR" />
+		<result column="user_province" property="userProvince"
+			jdbcType="VARCHAR" />
+		<result column="user_city" property="userCity" jdbcType="VARCHAR" />
+		<result column="user_district" property="userDistrict"
+			jdbcType="VARCHAR" />
+		<result column="user_location" property="userLocation"
+			jdbcType="VARCHAR" />
+		<result column="user_site" property="userSite" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="VARCHAR" />
+		<result column="longitude" property="longitude" jdbcType="VARCHAR" />
+		<result column="user_created" property="userCreated" jdbcType="TIMESTAMP" />
+		<result column="user_updated" property="userUpdated" jdbcType="TIMESTAMP" />
+		<result column="user_default" property="userDefault" jdbcType="BIT" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">select * from user_address where user_address_id =
+		#{userAddressId,jdbcType=VARCHAR} and user_address_status = 1 order by
+		user_updated desc
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		user_address
+		where user_address_id = #{userAddressId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.UserAddress">
+		insert into user_address
+		(user_address_id, user_id, user_address_name,
+		user_address_phone,
+		user_province, user_city,
+		user_district, user_location, user_site,
+		latitude, longitude, user_created,
+		user_updated, user_default)
+		values
+		(#{userAddressId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{userAddressName,jdbcType=VARCHAR},
+		#{userAddressPhone,jdbcType=VARCHAR},
+		#{userProvince,jdbcType=VARCHAR}, #{userCity,jdbcType=VARCHAR},
+		#{userDistrict,jdbcType=VARCHAR}, #{userLocation,jdbcType=VARCHAR},
+		#{userSite,jdbcType=VARCHAR},
+		#{latitude,jdbcType=VARCHAR},
+		#{longitude,jdbcType=VARCHAR}, #{userCreated,jdbcType=TIMESTAMP},
+		#{userUpdated,jdbcType=TIMESTAMP}, #{userDefault,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.UserAddress">
+		insert into user_address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userAddressId != null">
+				user_address_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userAddressName != null">
+				user_address_name,
+			</if>
+			<if test="userAddressPhone != null">
+				user_address_phone,
+			</if>
+			<if test="userProvince != null">
+				user_province,
+			</if>
+			<if test="userCity != null">
+				user_city,
+			</if>
+			<if test="userDistrict != null">
+				user_district,
+			</if>
+			<if test="userLocation != null">
+				user_location,
+			</if>
+			<if test="userSite != null">
+				user_site,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="userCreated != null">
+				user_created,
+			</if>
+			<if test="userUpdated != null">
+				user_updated,
+			</if>
+			<if test="userDefault != null">
+				user_default,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userAddressId != null">
+				#{userAddressId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userAddressName != null">
+				#{userAddressName,jdbcType=VARCHAR},
+			</if>
+			<if test="userAddressPhone != null">
+				#{userAddressPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userProvince != null">
+				#{userProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="userCity != null">
+				#{userCity,jdbcType=VARCHAR},
+			</if>
+			<if test="userDistrict != null">
+				#{userDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="userLocation != null">
+				#{userLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="userSite != null">
+				#{userSite,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="userCreated != null">
+				#{userCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userUpdated != null">
+				#{userUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userDefault != null">
+				#{userDefault,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.UserAddress">
+		update user_address
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userAddressName != null">
+				user_address_name = #{userAddressName,jdbcType=VARCHAR},
+			</if>
+			<if test="userAddressPhone != null">
+				user_address_phone =
+				#{userAddressPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userProvince != null">
+				user_province = #{userProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="userCity != null">
+				user_city = #{userCity,jdbcType=VARCHAR},
+			</if>
+			<if test="userDistrict != null">
+				user_district = #{userDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="userLocation != null">
+				user_location = #{userLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="userSite != null">
+				user_site = #{userSite,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="userCreated != null">
+				user_created = #{userCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userUpdated != null">
+				user_updated = #{userUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userDefault != null">
+				user_default = #{userDefault,jdbcType=BIT},
+			</if>
+		</set>
+		where user_address_id = #{userAddressId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.UserAddress">
+		update
+		user_address
+		set user_id = #{userId,jdbcType=VARCHAR},
+		user_address_name = #{userAddressName,jdbcType=VARCHAR},
+		user_address_phone = #{userAddressPhone,jdbcType=VARCHAR},
+		user_province = #{userProvince,jdbcType=VARCHAR},
+		user_city =
+		#{userCity,jdbcType=VARCHAR},
+		user_district =
+		#{userDistrict,jdbcType=VARCHAR},
+		user_location =
+		#{userLocation,jdbcType=VARCHAR},
+		user_site =
+		#{userSite,jdbcType=VARCHAR},
+		latitude = #{latitude,jdbcType=VARCHAR},
+		longitude = #{longitude,jdbcType=VARCHAR},
+		user_created =
+		#{userCreated,jdbcType=TIMESTAMP},
+		user_updated =
+		#{userUpdated,jdbcType=TIMESTAMP},
+		user_default =
+		#{userDefault,jdbcType=BIT}
+		where user_address_id =
+		#{userAddressId,jdbcType=VARCHAR}
+	</update>
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">limit #{begin},#{pageTotalNum}</if>
+	</sql>
+	<sql id="sql_where">
+		<if test="model == null and id != null">
+			<where>AND user_address_id=#{id}</where>
+		</if>
+		<if test="model != null">
+			<where>
+				<if test="model.userAddressId != null">AND user_address_id =#{model.userAddressId}</if>
+				<if test="model.userId != null">AND user_id =#{model.userId}</if>
+				<if test="model.userAddressName != null">AND user_address_name =#{model.userAddressName}</if>
+				<if test="model.userAddressPhone != null">AND user_address_phone =#{model.userAddressPhone}</if>
+				<if test="model.userProvince != null">AND user_province =#{model.userProvince}</if>
+				<if test="model.userCity != null">AND user_city =#{model.userCity}</if>
+				<if test="model.userDistrict != null">AND user_district =#{model.userDistrict}</if>
+				<if test="model.userLocation != null">AND user_location =#{model.userLocation}</if>
+				<if test="model.userSite != null">AND user_site =#{model.userSite}</if>
+				<if test="model.latitude != null">AND latitude =#{model.latitude}</if>
+				<if test="model.longitude != null">AND longitude =#{model.longitude}</if>
+				<if test="model.userCreated != null">AND user_created =#{model.userCreated}</if>
+				<if test="model.userUpdated != null">AND user_updated =#{model.userUpdated}</if>
+				<if test="model.userDefault != null">AND user_default =#{model.userDefault}</if>
+			</where>
+		</if>
+	</sql>
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="userAddressResultMap">
+		select * from user_address
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+	</select>
+	<select id="selectAllByUser" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">select *
+		from user_address where user_id =
+		#{userId} and
+		user_address_status = 1 order by user_updated desc
+	</select>
+	<update id="setDefaultFalse" parameterType="com.lianjiu.model.UserAddress">
+		update user_address
+		set user_default = 0 where user_id = #{userId}
+	</update>
+	<update id="setDefaultTrue" parameterType="com.lianjiu.model.UserAddress">
+		update user_address
+		set user_default = 1 ,user_updated = NOW() where user_address_id =
+		#{userAddressId}
+	</update>
+	<select id="selectDefault" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">
+		select * from user_address where user_default = 1 AND
+		user_id =#{userId} and user_address_status = 1 order by user_id desc
+		limit 1
+	</select>
+	<select id="selectByAddressId" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">select *
+		from user_address where user_address_id = #{0}
+		and
+		user_id = #{1}
+		and user_address_status = 1
+		order by user_updated desc
+	</select>
+	<select id="selectAddressByAddressId" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">select *
+		from user_address where user_address_id = #{0}
+		and user_address_status = 1
+	</select>
+	<select id="getAddressDefultByUser" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">select *
+		from user_address where user_id = #{value} and
+		user_default = 1 and user_address_status = 1
+	</select>
+
+	<select id="selectLongLati" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">
+		select
+		user_address_id,latitude,longitude
+		from
+		user_address
+	</select>
+	<select id="getAddressByFaceId" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		u.latitude,
+		u.longitude
+		FROM
+		orders_faceface o
+		RIGHT
+		JOIN user_address u ON u.user_address_id = o.address_id
+		WHERE
+		o.or_faceface_id = #{orderFaceId}
+		and u.user_address_status = 1
+	</select>
+	<update id="deleteById" parameterType="com.lianjiu.model.UserAddress">
+		update user_address set
+		user_address_status = 0,user_default = 0 ,user_updated = NOW() where
+		user_address_id = #{userAddressId}
+	</update>
+	<select id="getLoLaById" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		latitude,
+		longitude
+		FROM
+		user_address
+		WHERE
+		user_address_id = #{addressId}
+	</select>
+	<!--设置最新添加地址为默认地址 -->
+	<update id="modifyDefultByUser" parameterType="com.lianjiu.model.UserAddress">
+		update
+		user_address set user_default = 1 where user_id = #{userId} AND
+		user_address_status = 1 order by user_updated desc limit 1
+	</update>
+	<!--取出订单的地址 -->
+	<select id="getLoLaByOrdersId" resultMap="userAddressResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		a.latitude,
+		a.longitude
+		FROM
+		orders_faceface o LEFT
+		JOIN user_address a
+		ON o.address_id=a.user_address_id
+		WHERE
+		o.or_faceface_id=#{vallue}
+	</select>
+</mapper>

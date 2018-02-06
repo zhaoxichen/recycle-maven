@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lianjiu_order_web:war">
+    <output-path>$PROJECT_DIR$/lianjiu_order/lianjiu_order_web/target</output-path>
+    <root id="archive" name="lianjiu_order_web.war">
+      <element id="artifact" artifact-name="lianjiu_order_web:war exploded" />
+    </root>
+  </artifact>
+</component>

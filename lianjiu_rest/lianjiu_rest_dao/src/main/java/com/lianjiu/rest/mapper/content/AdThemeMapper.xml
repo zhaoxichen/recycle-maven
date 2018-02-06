@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.content.AdThemeMapper">
+	<resultMap id="BaseResultMap" type="com.lianjiu.model.AdTheme">
+		<id column="the_id" property="theId" jdbcType="VARCHAR" />
+		<result column="the_title" property="theTitle" jdbcType="VARCHAR" />
+		<result column="the_content" property="theContent" jdbcType="VARCHAR" />
+		<result column="the_position" property="thePosition" jdbcType="VARCHAR" />
+		<result column="the_picture" property="thePicture" jdbcType="VARCHAR" />
+		<result column="the_pic_link" property="thePicLink" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+		<result column="sec_size" property="secSize" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		the_id, the_title, the_content, the_position, the_picture,
+		the_pic_link,
+		add_time,
+		add_person, sec_size, category_id
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_theme
+		where the_id = #{theId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectAdSecondList" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_theme order by the_position
+	</select>
+
+	<select id="getImageByOrderId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_theme
+		where the_position = #{str,jdbcType=VARCHAR}
+		order by
+		add_time DESC limit 1
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdTheme">
+		update ad_theme
+		<set>
+			<if test="theTitle != null">
+				the_title = #{theTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="theContent != null ">
+				the_content = #{theContent,jdbcType=VARCHAR},
+			</if>
+			<if test="thePosition != null">
+				the_position = #{thePosition,jdbcType=VARCHAR},
+			</if>
+			<if test="thePicture != null ">
+				the_picture = #{thePicture,jdbcType=VARCHAR},
+			</if>
+			<if test="thePicLink != null">
+				the_pic_link = #{thePicLink,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				add_time = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addPerson != null">
+				add_person = #{addPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="secSize != null">
+				sec_size = #{secSize,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where the_id = #{theId,jdbcType=VARCHAR}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ad_theme
+		where the_id = #{theId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insertAdTheme" parameterType="com.lianjiu.model.AdTheme">
+		insert into ad_theme (the_id, the_title, the_content,
+		the_position, the_picture, the_pic_link,
+		add_time, add_person, sec_size,
+		category_id)
+		values (#{theId,jdbcType=VARCHAR}, #{theTitle,jdbcType=VARCHAR},
+		#{theContent,jdbcType=VARCHAR},
+		#{thePosition,jdbcType=VARCHAR}, #{thePicture,jdbcType=VARCHAR}, #{thePicLink,jdbcType=VARCHAR},
+		#{addTime,jdbcType=TIMESTAMP}, #{addPerson,jdbcType=VARCHAR},
+		#{secSize,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=BIGINT})
+	</insert>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.DeptMapper">
+	<resultMap id="deptResultMap" type="com.lianjiu.model.Dept">
+		<id column="dept_id" property="deptId" jdbcType="VARCHAR" />
+		<result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+		<result column="dept_operated" property="deptOperated"
+			jdbcType="VARCHAR" />
+		<result column="dept_created" property="deptCreated" jdbcType="TIMESTAMP" />
+		<result column="dept_updated" property="deptUpdated" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="deptResultMap"
+		parameterType="java.lang.String">select * from dept where dept_id =
+		#{deptId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from dept
+		where dept_id = #{deptId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.Dept">
+		insert into dept (dept_id, dept_name, dept_operated,
+		dept_created, dept_updated)
+		values (#{deptId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR},
+		#{deptOperated,jdbcType=VARCHAR},
+		#{deptCreated,jdbcType=TIMESTAMP}, #{deptUpdated,jdbcType=TIMESTAMP})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.Dept">
+		update dept
+		<set>
+			<if test="deptName != null">
+				dept_name = #{deptName,jdbcType=VARCHAR},
+			</if>
+			<if test="deptOperated != null">
+				dept_operated = #{deptOperated,jdbcType=VARCHAR},
+			</if>
+			<if test="deptCreated != null">
+				dept_created = #{deptCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deptUpdated != null">
+				dept_updated = #{deptUpdated,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where dept_id = #{deptId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="getAll" resultMap="deptResultMap">
+		select * from dept
+	</select>
+	
+</mapper>

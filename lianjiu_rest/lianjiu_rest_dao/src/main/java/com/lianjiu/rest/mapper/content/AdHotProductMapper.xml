@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.content.AdHotProductMapper">
+	<resultMap id="BaseResultMap" type="com.lianjiu.model.AdHotProduct">
+		<id column="hot_id" property="hotId" jdbcType="VARCHAR" />
+		<result column="product_id" property="productId" jdbcType="VARCHAR" />
+		<result column="hot_title" property="hotTitle" jdbcType="VARCHAR" />
+		<result column="pro_price" property="proPrice" jdbcType="VARCHAR" />
+		<result column="hot_position" property="hotPosition" jdbcType="VARCHAR" />
+		<result column="hot_picture" property="hotPicture" jdbcType="VARCHAR" />
+		<result column="hot_pic_link" property="hotPicLink" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="add_person" property="addPerson" jdbcType="VARCHAR" />
+		<result column="hot_size" property="hotSize" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		hot_id, product_id, hot_title, pro_price, hot_position,
+		hot_picture,
+		hot_pic_link,
+		add_time, add_person, hot_size, category_id
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_product
+		where hot_id = #{hotId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectElectronicList" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_product
+	</select>
+
+	<select id="selectHotProductFour" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_product
+		order by hot_position
+		limit 6
+	</select>
+	<select id="selectByProductCategoryId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_product
+		where category_id = #{categoryId}
+		order by add_time
+		desc
+	</select>
+	<select id="selectHotProductTen" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ad_hot_product
+		where category_id = 0
+		order by add_time desc
+		limit 10
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.AdHotProduct">
+		update ad_hot_product
+		<set>
+			<if test="productId != null ">
+				product_id = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="hotTitle != null">
+				hot_title = #{hotTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="proPrice != null ">
+				pro_price = #{proPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="hotPosition != null ">
+				hot_position = #{hotPosition,jdbcType=VARCHAR},
+			</if>
+			<if test="hotPicture != null ">
+				hot_picture = #{hotPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="hotPicLink != null">
+				hot_pic_link = #{hotPicLink,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null ">
+				add_time = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addPerson != null">
+				add_person = #{addPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="hotSize != null">
+				hot_size = #{hotSize,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where hot_id = #{hotId,jdbcType=VARCHAR}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ad_hot_product
+		where hot_id = #{hotId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insertHotProduct" parameterType="com.lianjiu.model.AdHotProduct">
+		insert into ad_hot_product (hot_id, product_id, hot_title,
+		pro_price, hot_position, hot_picture,
+		hot_pic_link, add_time, add_person,
+		hot_size, category_id)
+		values (#{hotId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR},
+		#{hotTitle,jdbcType=VARCHAR},
+		#{proPrice,jdbcType=VARCHAR}, #{hotPosition,jdbcType=VARCHAR}, #{hotPicture,jdbcType=VARCHAR},
+		#{hotPicLink,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
+		#{addPerson,jdbcType=VARCHAR},
+		#{hotSize,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT})
+	</insert>
+</mapper>

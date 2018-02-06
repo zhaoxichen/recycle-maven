@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.mapper.product.ProductRepairMapper">
+	<resultMap id="ProductRepairResultMap" type="com.lianjiu.model.ProductRepair">
+		<id column="repair_id" property="repairId" jdbcType="VARCHAR" />
+		<result column="repair_name" property="repairName" jdbcType="VARCHAR" />
+		<result column="repair_way" property="repairWay" jdbcType="TINYINT" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="repair_param_template" property="repairParamTemplate"
+			jdbcType="LONGVARCHAR" />
+		<result column="repair_created" property="repairCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="repair_updated" property="repairUpdated"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="ProductRepairResultMap"
+		parameterType="java.lang.String">
+		select *
+		from product_repair
+		where repair_id =
+		#{repairId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		product_repair
+		where repair_id = #{repairId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.ProductRepair">
+		insert into product_repair
+		(repair_id, repair_name, repair_way,
+		category_id, repair_created,
+		repair_updated,
+		repair_param_template)
+		values
+		(#{repairId,jdbcType=VARCHAR}, #{repairName,jdbcType=VARCHAR},
+		#{repairWay,jdbcType=TINYINT},
+		#{categoryId,jdbcType=BIGINT},
+		#{repairCreated,jdbcType=TIMESTAMP},
+		#{repairUpdated,jdbcType=TIMESTAMP},
+		#{repairParamTemplate,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lianjiu.model.ProductRepair">
+		insert into product_repair
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="repairId != null">
+				repair_id,
+			</if>
+			<if test="repairName != null">
+				repair_name,
+			</if>
+			<if test="repairWay != null">
+				repair_way,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="repairCreated != null">
+				repair_created,
+			</if>
+			<if test="repairUpdated != null">
+				repair_updated,
+			</if>
+			<if test="repairParamTemplate != null">
+				repair_param_template,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="repairId != null">
+				#{repairId,jdbcType=VARCHAR},
+			</if>
+			<if test="repairName != null">
+				#{repairName,jdbcType=VARCHAR},
+			</if>
+			<if test="repairWay != null">
+				#{repairWay,jdbcType=TINYINT},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="repairCreated != null">
+				#{repairCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="repairUpdated != null">
+				#{repairUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="repairParamTemplate != null">
+				#{repairParamTemplate,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.ProductRepair">
+		update product_repair
+		<set>
+			<if test="repairName != null">
+				repair_name = #{repairName,jdbcType=VARCHAR},
+			</if>
+			<if test="repairWay != null">
+				repair_way = #{repairWay,jdbcType=TINYINT},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="repairCreated != null">
+				repair_created = #{repairCreated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="repairUpdated != null">
+				repair_updated = #{repairUpdated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="repairParamTemplate != null">
+				repair_param_template =
+				#{repairParamTemplate,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where repair_id = #{repairId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lianjiu.model.ProductRepair">
+		update
+		product_repair
+		set repair_name = #{repairName,jdbcType=VARCHAR},
+		repair_way = #{repairWay,jdbcType=TINYINT},
+		category_id =
+		#{categoryId,jdbcType=BIGINT},
+		repair_created =
+		#{repairCreated,jdbcType=TIMESTAMP},
+		repair_updated =
+		#{repairUpdated,jdbcType=TIMESTAMP}
+		where repair_id =
+		#{repairId,jdbcType=VARCHAR}
+	</update>
+	<!--sql片段 -->
+	<!--限制/分页 (该参数是vo类的成员) -->
+	<sql id="sql_limit">
+		<if test="pageTotalNum !=0 and begin != null and pageTotalNum != null">
+			limit #{begin},#{pageTotalNum}
+		</if>
+	</sql>
+	<!-- 条件 -->
+	<sql id="sql_where">
+		<if test="model == null and qqId != null ">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				AND repair_id=#{id}
+			</where>
+		</if>
+		<if test="model != null">
+			<!-- where可以自动去掉条件中的第一个and -->
+			<where>
+				<if test="model.repairId != null and model.repairId.length()>0">
+					AND repair_id=#{model.repairId}
+				</if>
+				<if test="model.repairName != null and model.repairName.length()>0">
+					AND repair_name=#{model.repairName}
+				</if>
+				<if test="model.categoryId != null">
+					AND category_id=#{model.categoryId}
+				</if>
+			</where>
+		</if>
+	</sql>
+	<!--根据公共vo类条件查询 -->
+	<select id="selectBySearchObjecVo" parameterType="com.lianjiu.model.vo.SearchObjecVo"
+		resultMap="ProductRepairResultMap">
+		select * from product_repair
+		<include refid="sql_where" />
+		<include refid="sql_limit" />
+		ORDER BY
+		repair_created
+		DESC
+	</select>
+</mapper>

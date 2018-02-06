@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianjiu.rest.mapper.RolePowerMapper">
+	<resultMap id="rolePowerResultMap" type="com.lianjiu.model.RolePower">
+		<id column="role_power_id" property="rolePowerId" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="power_id" property="powerId" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="rolePowerResultMap"
+		parameterType="java.lang.String">select * from role_power where role_power_id =
+		#{rolePowerId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		role_power
+		where role_power_id = #{rolePowerId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByRoleId" parameterType="java.lang.String">
+		delete from
+		role_power
+		where role_id = #{roleId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByPowerId" parameterType="java.lang.String">
+		delete from
+		role_power
+		where power_id = #{powerId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.RolePower">
+		insert into role_power
+		(role_power_id, role_id, power_id
+		)
+		values
+		(#{rolePowerId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
+		#{powerId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.RolePower">
+		update role_power
+		<set>
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="powerId != null">
+				power_id = #{powerId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where role_power_id = #{rolePowerId,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="addList" >
+		insert into role_power 
+		(role_power_id, role_id, power_id)
+		values
+		<foreach collection="powerList" item="pList" index="index"
+			separator=",">
+			(#{pList.rolePowerId},#{pList.roleId},#{pList.powerId})
+		</foreach>
+	</insert>
+	
+	<select id="getRpListByRoleId" parameterType="java.lang.String" resultMap="rolePowerResultMap">
+		select * from role_power where role_id=#{roleId}
+	</select>
+</mapper>

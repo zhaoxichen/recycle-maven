@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianjiu.rest.mapper.OrdersPaymentMapper">
+	<resultMap id="ordersPaymenResultMap" type="com.lianjiu.model.OrdersPayment">
+		<id column="payment_id" property="paymentId" jdbcType="VARCHAR" />
+		<result column="payment_fee" property="paymentFee" jdbcType="VARCHAR" />
+		<result column="orders_id" property="ordersId" jdbcType="VARCHAR" />
+		<result column="orders_fee" property="ordersFee" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="payment_status" property="paymentStatus"
+			jdbcType="TINYINT" />
+		<result column="payment_type" property="paymentType" jdbcType="TINYINT" />
+		<result column="payment_sign" property="paymentSign" jdbcType="VARCHAR" />
+		<result column="payment_from" property="paymentFrom" jdbcType="TINYINT" />
+		<result column="payment_created" property="paymentCreated"
+			jdbcType="TIMESTAMP" />
+		<result column="payment_updated" property="paymentUpdated"
+			jdbcType="TIMESTAMP" />
+		<result column="payment_message" property="paymentMessage"
+			jdbcType="LONGVARCHAR" />
+		<result column="payment_notify_message" property="paymentNotifyMessage"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete * from
+		orders_payment
+		where payment_id = #{paymentId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.lianjiu.model.OrdersPayment">
+		insert into orders_payment
+		(payment_id, payment_fee, orders_id,
+		orders_fee, user_id,
+		payment_status,
+		payment_type, payment_sign, payment_from,
+		payment_created, payment_updated, payment_message,
+		payment_notify_message)
+		values (#{paymentId,jdbcType=VARCHAR},
+		#{paymentFee,jdbcType=VARCHAR},
+		#{ordersId,jdbcType=VARCHAR},
+		#{ordersFee,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{paymentStatus,jdbcType=TINYINT},
+		#{paymentType,jdbcType=TINYINT},
+		#{paymentSign,jdbcType=VARCHAR},
+		#{paymentFrom,jdbcType=TINYINT},
+		NOW(),
+		NOW(),
+		#{paymentMessage,jdbcType=LONGVARCHAR},
+		#{paymentNotifyMessage,jdbcType=LONGVARCHAR})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lianjiu.model.OrdersPayment">
+		update orders_payment
+		<set>
+			<if test="paymentFee != null">
+				payment_fee = #{paymentFee,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersId != null">
+				orders_id = #{ordersId,jdbcType=VARCHAR},
+			</if>
+			<if test="ordersFee != null">
+				orders_fee = #{ordersFee,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentStatus != null">
+				payment_status = #{paymentStatus,jdbcType=TINYINT},
+			</if>
+			<if test="paymentType != null">
+				payment_type = #{paymentType,jdbcType=TINYINT},
+			</if>
+			<if test="paymentSign != null">
+				payment_sign = #{paymentSign,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentFrom != null">
+				payment_from = #{paymentFrom,jdbcType=TINYINT},
+			</if>
+			payment_updated = NOW(),
+			<if test="paymentMessage != null">
+				payment_message = #{paymentMessage,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="paymentNotifyMessage != null">
+				payment_notify_message =
+				#{paymentNotifyMessage,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where payment_id = #{paymentId,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ordersPaymenResultMap">
+		select * from
+		orders_payment
+		where payment_id =
+		#{paymentId,jdbcType=VARCHAR}
+	</select>
+	<update id="updateOrdersPrice">
+		update
+		set
+		orders_fee= #{price},
+		payment_updated = NOW()
+		where
+		payment_id= #{id}
+	</update>
+</mapper>
