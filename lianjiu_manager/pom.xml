@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>lianjiu_manager</artifactId>
 	<packaging>pom</packaging>
-	<!-- 依赖管理 -->
+	<!-- 依赖管理  -->
 	<dependencies>
 		<dependency>
 			<groupId>com.lianjiu</groupId>

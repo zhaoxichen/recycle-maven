@@ -4,12 +4,14 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/lianjiuWorkspace.iml" filepath="$PROJECT_DIR$/.idea/lianjiuWorkspace.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_common/lianjiu_common.iml" filepath="$PROJECT_DIR$/lianjiu_common/lianjiu_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_common/lianjiu_common.iml" filepath="$PROJECT_DIR$/lianjiu_common/lianjiu_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager.iml" filepath="$PROJECT_DIR$/lianjiu_manager/lianjiu_manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_service/lianjiu_manager_service.iml" filepath="$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_service/lianjiu_manager_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_web/lianjiu_manager_web.iml" filepath="$PROJECT_DIR$/lianjiu_manager/lianjiu_manager_web/lianjiu_manager_web.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order.iml" filepath="$PROJECT_DIR$/lianjiu_order/lianjiu_order.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_service/lianjiu_order_service.iml" filepath="$PROJECT_DIR$/lianjiu_order/lianjiu_order_service/lianjiu_order_service.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_order/lianjiu_order_web/lianjiu_order_web.iml" filepath="$PROJECT_DIR$/lianjiu_order/lianjiu_order_web/lianjiu_order_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lianjiu_parent/lianjiu_parent.iml" filepath="$PROJECT_DIR$/lianjiu_parent/lianjiu_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_parent/lianjiu_parent.iml" filepath="$PROJECT_DIR$/lianjiu_parent/lianjiu_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment.iml" filepath="$PROJECT_DIR$/lianjiu_payment/lianjiu_payment.iml" />
       <module fileurl="file://$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_dao/lianjiu_payment_dao.iml" filepath="$PROJECT_DIR$/lianjiu_payment/lianjiu_payment_dao/lianjiu_payment_dao.iml" />
